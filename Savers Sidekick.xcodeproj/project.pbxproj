@@ -56,15 +56,23 @@
 		494001781D623A2B00E21ADC /* Savers Sidekick */ = {
 			isa = PBXGroup;
 			children = (
-				494001791D623A2B00E21ADC /* AppDelegate.swift */,
+				4940018E1D623AD200E21ADC /* Supporting Files */,
 				4940017B1D623A2B00E21ADC /* ViewController.swift */,
 				4940017D1D623A2B00E21ADC /* Main.storyboard */,
-				494001831D623A2B00E21ADC /* Assets.xcassets */,
-				494001851D623A2B00E21ADC /* LaunchScreen.storyboard */,
-				494001881D623A2B00E21ADC /* Info.plist */,
 				494001801D623A2B00E21ADC /* Savers_Sidekick.xcdatamodeld */,
 			);
 			path = "Savers Sidekick";
+			sourceTree = "<group>";
+		};
+		4940018E1D623AD200E21ADC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				494001791D623A2B00E21ADC /* AppDelegate.swift */,
+				494001831D623A2B00E21ADC /* Assets.xcassets */,
+				494001851D623A2B00E21ADC /* LaunchScreen.storyboard */,
+				494001881D623A2B00E21ADC /* Info.plist */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -99,6 +107,7 @@
 				TargetAttributes = {
 					494001751D623A2A00E21ADC = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = 53N4GUERHD;
 					};
 				};
 			};
@@ -253,6 +262,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "Savers Sidekick/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "edu.umich.alexwass.Savers-Sidekick";
@@ -264,6 +274,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "Savers Sidekick/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "edu.umich.alexwass.Savers-Sidekick";
