@@ -10,6 +10,14 @@ import UIKit
 
 class CreateNewBudgetViewController: UIViewController {
 
+    @IBOutlet weak var enteredName: UITextField!
+    
+    @IBOutlet weak var enteredFunds: UITextField!
+    
+    @IBAction func createButton(sender: UIButton) {
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -22,7 +30,7 @@ class CreateNewBudgetViewController: UIViewController {
     }
     
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -30,6 +38,6 @@ class CreateNewBudgetViewController: UIViewController {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
-    */
+    
 
 }
