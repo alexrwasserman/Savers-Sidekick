@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class CreateNewCategoriesTableViewController: UITableViewController {
     
@@ -18,6 +19,31 @@ class CreateNewCategoriesTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        /* DEBUGGING
+        
+        let context = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
+        let request = NSFetchRequest(entityName: "Budget")
+        
+        let budgets = try? context!.executeFetchRequest(request)
+        
+        if budgets != nil {
+            for tempBudget in budgets! {
+                if let budget = tempBudget as? Budget {
+                    print("Name: \(budget.name)")
+                    print("Most recent expense: \(budget.mostRecentExpense)")
+                    print("Total funds: \(budget.totalFunds)")
+                    print("Total expenses: \(budget.totalExpenses)")
+                    print("Number of categories: \(budget.numberOfCategories)")
+                    print()
+                }
+            }
+        }
+        
+        print("got here")
+        print()
+        
+         END DEBUGGING */
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false

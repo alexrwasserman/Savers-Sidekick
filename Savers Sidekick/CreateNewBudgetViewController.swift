@@ -9,13 +9,18 @@
 import UIKit
 
 class CreateNewBudgetViewController: UIViewController, UITextFieldDelegate {
+    
+    private var context = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
 
     @IBOutlet weak var enteredName: UITextField!
     
     @IBOutlet weak var enteredFunds: UITextField!
 
     @IBAction func buttonPressed(sender: UIButton) {
-        
+        context?.performBlock {
+            _ = Budget.budgetWithInfo(withName: self.enteredName.text, totalFunds: self.enteredFunds.text, inContext: self.context!)
+            try? self.context!.save()
+        }
     }
     
     override func viewDidLoad() {
