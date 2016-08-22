@@ -8,20 +8,20 @@
 
 import UIKit
 
-class CreateNewBudgetViewController: UIViewController {
+class CreateNewBudgetViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var enteredName: UITextField!
     
     @IBOutlet weak var enteredFunds: UITextField!
-    
-    @IBAction func createButton(sender: UIButton) {
+
+    @IBAction func buttonPressed(sender: UIButton) {
         
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        enteredName.delegate = self
+        enteredFunds.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -34,10 +34,24 @@ class CreateNewBudgetViewController: UIViewController {
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
+    /*
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
+    */
     
+    // MARK: - TextField Delegate
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        if (textField == enteredName) {
+            enteredFunds.becomeFirstResponder()
+        }
+        else {
+            enteredFunds.resignFirstResponder()
+        }
+        
+        return true
+    }
 
 }

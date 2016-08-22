@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		492C65521D6969B3007D42BE /* CreateNewCategoriesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492C65511D6969B3007D42BE /* CreateNewCategoriesTableViewController.swift */; };
+		492C65541D696C0E007D42BE /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492C65531D696C0E007D42BE /* CategoryTableViewCell.swift */; };
 		4940017A1D623A2B00E21ADC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494001791D623A2B00E21ADC /* AppDelegate.swift */; };
 		4940017F1D623A2B00E21ADC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4940017D1D623A2B00E21ADC /* Main.storyboard */; };
 		494001821D623A2B00E21ADC /* Savers_Sidekick.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 494001801D623A2B00E21ADC /* Savers_Sidekick.xcdatamodeld */; };
@@ -24,6 +26,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		492C65511D6969B3007D42BE /* CreateNewCategoriesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateNewCategoriesTableViewController.swift; sourceTree = "<group>"; };
+		492C65531D696C0E007D42BE /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
 		494001761D623A2A00E21ADC /* Savers Sidekick.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Savers Sidekick.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		494001791D623A2B00E21ADC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4940017E1D623A2B00E21ADC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -75,9 +79,11 @@
 				4940018E1D623AD200E21ADC /* Supporting Files */,
 				4940019B1D62463700E21ADC /* Model */,
 				4940017D1D623A2B00E21ADC /* Main.storyboard */,
+				492C65511D6969B3007D42BE /* CreateNewCategoriesTableViewController.swift */,
 				494001A01D626E9100E21ADC /* CreateNewBudgetViewController.swift */,
 				4940019C1D624C2D00E21ADC /* BudgetScreenTableViewController.swift */,
 				4940019E1D6252D900E21ADC /* BudgetTableViewCell.swift */,
+				492C65531D696C0E007D42BE /* CategoryTableViewCell.swift */,
 			);
 			path = "Savers Sidekick";
 			sourceTree = "<group>";
@@ -186,10 +192,12 @@
 				494001821D623A2B00E21ADC /* Savers_Sidekick.xcdatamodeld in Sources */,
 				4940019D1D624C2D00E21ADC /* BudgetScreenTableViewController.swift in Sources */,
 				4940019A1D62461200E21ADC /* Category.swift in Sources */,
+				492C65521D6969B3007D42BE /* CreateNewCategoriesTableViewController.swift in Sources */,
 				4940019F1D6252D900E21ADC /* BudgetTableViewCell.swift in Sources */,
 				494001A11D626E9100E21ADC /* CreateNewBudgetViewController.swift in Sources */,
 				494001981D62461200E21ADC /* Budget.swift in Sources */,
 				494001961D62461200E21ADC /* Expense.swift in Sources */,
+				492C65541D696C0E007D42BE /* CategoryTableViewCell.swift in Sources */,
 				494001991D62461200E21ADC /* Category+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -342,6 +350,7 @@
 				4940018D1D623A2B00E21ADC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

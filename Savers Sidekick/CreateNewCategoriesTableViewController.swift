@@ -1,26 +1,23 @@
 //
-//  BudgetScreenTableViewController.swift
+//  CreateNewCategoriesTableViewController.swift
 //  Savers Sidekick
 //
-//  Created by Alex Wasserman on 8/15/16.
+//  Created by Alex Wasserman on 8/20/16.
 //  Copyright © 2016 Alex Wasserman. All rights reserved.
 //
 
 import UIKit
 
-class BudgetScreenTableViewController: UITableViewController {
+class CreateNewCategoriesTableViewController: UITableViewController {
     
-    var budgets = [Budget]() {
+    var categories = [Category]() {
         didSet {
             tableView.reloadData()
         }
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        tableView.estimatedRowHeight = tableView.rowHeight
-        tableView.rowHeight = UITableViewAutomaticDimension
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -41,19 +38,21 @@ class BudgetScreenTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return budgets.count
+        return categories.count
     }
 
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Budget", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("Category", forIndexPath: indexPath)
 
-        if let budgetCell = cell as? BudgetTableViewCell {
-            budgetCell.budget = budgets[indexPath.row]
+        if let categoryCell = cell as? CategoryTableViewCell {
+            categoryCell.category = categories[indexPath.row]
         }
 
         return cell
     }
- 
+    
+
     /*
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
