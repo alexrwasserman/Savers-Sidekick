@@ -20,7 +20,7 @@ class CategoryTableViewCell: UITableViewCell {
         }
     }
 
-    private func updateUI() {
+    func updateUI() {
         mostRecentEntry?.text = nil
         categoryName?.text = nil
         categoryStatus?.text = nil
@@ -35,14 +35,19 @@ class CategoryTableViewCell: UITableViewCell {
             let expenses = category.totalExpenses
             categoryStatus?.text = "$\(expenses)/$\(funds)"
             
-            let formatter = NSDateFormatter()
-            if NSDate().timeIntervalSinceDate(category.mostRecentExpense!) > 24*60*60 {
-                formatter.dateStyle = NSDateFormatterStyle.ShortStyle
+            if let validDate = category.mostRecentExpense {
+                let formatter = NSDateFormatter()
+                if NSDate().timeIntervalSinceDate(validDate) > 24*60*60 {
+                    formatter.dateStyle = NSDateFormatterStyle.ShortStyle
+                }
+                else {
+                    formatter.timeStyle = NSDateFormatterStyle.ShortStyle
+                }
+                mostRecentEntry?.text = "Most recent entry: \(formatter.stringFromDate(validDate))"
             }
             else {
-                formatter.timeStyle = NSDateFormatterStyle.ShortStyle
+                mostRecentEntry?.text = nil
             }
-            mostRecentEntry?.text = "Most recent entry: \(formatter.stringFromDate(category.mostRecentExpense!))"
         }
     }
 }

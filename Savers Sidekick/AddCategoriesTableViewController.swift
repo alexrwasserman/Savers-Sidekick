@@ -1,34 +1,39 @@
 //
-//  BudgetScreenTableViewController.swift
+//  CreateNewCategoriesTableViewController.swift
 //  Savers Sidekick
 //
-//  Created by Alex Wasserman on 8/15/16.
+//  Created by Alex Wasserman on 8/20/16.
 //  Copyright © 2016 Alex Wasserman. All rights reserved.
 //
 
 import UIKit
 import CoreData
 
-class BudgetScreenTableViewController: CoreDataTableViewController {
+class AddCategoriesTableViewController: CoreDataTableViewController {
     
-    var context = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
+    var context: NSManagedObjectContext?
+    
+    var budgetContainedIn: Budget?
     
     func updateUI() {
         if let currentContext = context {
-            let request = NSFetchRequest(entityName: "Budget")
-            request.sortDescriptors = [NSSortDescriptor(key: "name",
-                                                        ascending: true,
-                                                        selector: #selector(NSString.localizedCaseInsensitiveCompare(_:)))]
-            fetchedResultsController = NSFetchedResultsController(fetchRequest: request,
-                                                                  managedObjectContext: currentContext,
-                                                                  sectionNameKeyPath: nil,
-                                                                  cacheName: nil)
+            if let validBudget = budgetContainedIn {
+                let request = NSFetchRequest(entityName: "Category")
+                request.predicate = NSPredicate(format: "parentBudget.name = %@", validBudget.name!)
+                request.sortDescriptors = [NSSortDescriptor(key: "name",
+                    ascending: true,
+                    selector: #selector(NSString.localizedCaseInsensitiveCompare(_:)))]
+                fetchedResultsController = NSFetchedResultsController(fetchRequest: request,
+                                                                      managedObjectContext: currentContext,
+                                                                      sectionNameKeyPath: nil,
+                                                                      cacheName: nil)
+            }
         }
         else {
             fetchedResultsController = nil
         }
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -41,19 +46,20 @@ class BudgetScreenTableViewController: CoreDataTableViewController {
     // MARK: - Table view data source
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("BudgetCell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("CategoryCell", forIndexPath: indexPath)
 
-        if let budgetCell = cell as? BudgetTableViewCell {
-            if let budgetToBeDisplayed = fetchedResultsController?.objectAtIndexPath(indexPath) as? Budget {
+        if let categoryCell = cell as? CategoryTableViewCell {
+            if let categoryToBeDisplayed = fetchedResultsController?.objectAtIndexPath(indexPath) as? Category {
                 context?.performBlockAndWait {
-                    budgetCell.budget = budgetToBeDisplayed
+                    categoryCell.category = categoryToBeDisplayed
                 }
             }
         }
 
         return cell
     }
- 
+    
+
     /*
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -89,13 +95,17 @@ class BudgetScreenTableViewController: CoreDataTableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "createCategory" {
+            if let categoriesController = segue.destinationViewController as? CreateNewCategoryViewController {
+                categoriesController.context = context
+                categoriesController.budgetContainedIn = budgetContainedIn
+            }
+        }
     }
-    */
+    
 
 }

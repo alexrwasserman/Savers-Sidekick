@@ -12,7 +12,7 @@ import CoreData
 
 class Budget: NSManagedObject {
 
-    class func budgetWithInfo(withName enteredName: String?, totalFunds enteredFunds: String?, inContext context: NSManagedObjectContext) -> Budget?{
+    class func budgetWithInfo(name enteredName: String?, totalFunds enteredFunds: String?, inContext context: NSManagedObjectContext) -> Budget? {
         
         let request = NSFetchRequest(entityName: "Budget")
         if let validName = enteredName {
