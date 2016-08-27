@@ -35,8 +35,8 @@ class CreateNewBudgetViewController: UIViewController, UITextFieldDelegate {
     // MARK: - Navigation
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "addCategories" {
-            if let categoriesController = segue.destinationViewController as? AddCategoriesTableViewController {
+        if segue.identifier == "displayCategories" {
+            if let categoriesController = segue.destinationViewController as? CategoryScreenTableViewController {
                 categoriesController.context = context
                 categoriesController.budgetContainedIn = budget
             }

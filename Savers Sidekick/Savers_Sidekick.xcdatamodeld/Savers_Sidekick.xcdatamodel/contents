@@ -6,7 +6,7 @@
         <attribute name="numberOfCategories" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="totalExpenses" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="totalFunds" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
-        <relationship name="categories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Category" inverseName="parentBudget" inverseEntity="Category" syncable="YES"/>
+        <relationship name="categories" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Category" inverseName="parentBudget" inverseEntity="Category" syncable="YES"/>
     </entity>
     <entity name="Category" representedClassName=".Category" syncable="YES">
         <attribute name="mostRecentExpense" optional="YES" attributeType="Date" syncable="YES"/>
@@ -14,7 +14,7 @@
         <attribute name="numberOfExpenses" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="totalExpenses" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="totalFunds" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
-        <relationship name="expenses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Expense" inverseName="parentCategory" inverseEntity="Expense" syncable="YES"/>
+        <relationship name="expenses" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Expense" inverseName="parentCategory" inverseEntity="Expense" syncable="YES"/>
         <relationship name="parentBudget" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Budget" inverseName="categories" inverseEntity="Budget" syncable="YES"/>
     </entity>
     <entity name="Expense" representedClassName=".Expense" syncable="YES">

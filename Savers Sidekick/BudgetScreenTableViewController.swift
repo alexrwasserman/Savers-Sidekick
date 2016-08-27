@@ -22,7 +22,7 @@ class BudgetScreenTableViewController: CoreDataTableViewController {
             fetchedResultsController = NSFetchedResultsController(fetchRequest: request,
                                                                   managedObjectContext: currentContext,
                                                                   sectionNameKeyPath: nil,
-                                                                  cacheName: nil)
+                                                                  cacheName: "BudgetScreenCache")
         }
         else {
             fetchedResultsController = nil
@@ -32,11 +32,14 @@ class BudgetScreenTableViewController: CoreDataTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationItem.leftBarButtonItem = self.editButtonItem()
+        
         tableView.estimatedRowHeight = tableView.rowHeight
         tableView.rowHeight = UITableViewAutomaticDimension
         
         updateUI()
     }
+
 
     // MARK: - Table view data source
     
@@ -53,33 +56,17 @@ class BudgetScreenTableViewController: CoreDataTableViewController {
 
         return cell
     }
- 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
 
-    /*
-    // Override to support editing the table view.
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+            if let budgetToBeDeleted = fetchedResultsController?.objectAtIndexPath(indexPath) as? Budget {
+                context?.performBlock {
+                    self.context?.deleteObject(budgetToBeDeleted)
+                    try? self.context!.save()
+                }
+            }
+        }
     }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
 
     /*
     // Override to support conditional rearranging of the table view.

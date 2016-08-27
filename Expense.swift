@@ -11,7 +11,10 @@ import CoreData
 
 
 class Expense: NSManagedObject {
-
-// Insert code here to add functionality to your managed object subclass
-
+    override func prepareForDeletion() {
+        parentCategory?.totalExpenses = (parentCategory?.totalExpenses?.floatValue)! - (cost?.floatValue)!
+        parentCategory?.numberOfExpenses = NSNumber(int: (parentCategory?.numberOfExpenses?.intValue)! - 1)
+        
+        // ADD CODE TO RECALCULATE MOST RECENT EXPENSE
+    }
 }

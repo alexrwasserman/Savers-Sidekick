@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class AddCategoriesTableViewController: CoreDataTableViewController {
+class CategoryScreenTableViewController: CoreDataTableViewController {
     
     var context: NSManagedObjectContext?
     
@@ -26,7 +26,7 @@ class AddCategoriesTableViewController: CoreDataTableViewController {
                 fetchedResultsController = NSFetchedResultsController(fetchRequest: request,
                                                                       managedObjectContext: currentContext,
                                                                       sectionNameKeyPath: nil,
-                                                                      cacheName: nil)
+                                                                      cacheName: "CategoryScreenCache")
             }
         }
         else {
@@ -99,7 +99,7 @@ class AddCategoriesTableViewController: CoreDataTableViewController {
     // MARK: - Navigation
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "createCategory" {
+        if segue.identifier == "addCategory" {
             if let categoriesController = segue.destinationViewController as? CreateNewCategoryViewController {
                 categoriesController.context = context
                 categoriesController.budgetContainedIn = budgetContainedIn

@@ -56,5 +56,12 @@ class Category: NSManagedObject {
         
         return nil
     }
+    
+    override func prepareForDeletion() {
+        parentBudget?.totalExpenses = (parentBudget?.totalExpenses?.floatValue)! - (totalExpenses?.floatValue)!
+        parentBudget?.numberOfCategories = NSNumber(int: (parentBudget?.numberOfCategories?.intValue)! - 1)
+        
+        // ADD CODE TO RECALCULATE MOST RECENT EXPENSE
+    }
 
 }

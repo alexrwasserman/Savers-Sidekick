@@ -37,8 +37,8 @@ class CreateNewCategoryViewController: UIViewController, UITextFieldDelegate {
     // MARK: - Navigation
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "returnToCategoryTable" {
-            if let categoriesController = segue.destinationViewController as? AddCategoriesTableViewController {
+        if segue.identifier == "returnToCategories" {
+            if let categoriesController = segue.destinationViewController as? CategoryScreenTableViewController {
                 categoriesController.context = context
                 categoriesController.budgetContainedIn = budgetContainedIn
             }
