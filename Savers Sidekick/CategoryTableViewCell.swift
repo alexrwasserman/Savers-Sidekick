@@ -20,7 +20,7 @@ class CategoryTableViewCell: UITableViewCell {
         }
     }
 
-    func updateUI() {
+    private func updateUI() {
         mostRecentEntry?.text = nil
         categoryName?.text = nil
         categoryStatus?.text = nil
@@ -29,7 +29,7 @@ class CategoryTableViewCell: UITableViewCell {
         if let category = self.category {
             categoryName?.text = category.name
             
-            numberOfEntries?.text = "\(category.numberOfExpenses) expenses:"
+            numberOfEntries?.text = "\(category.expenses?.count) expenses:"
             
             let funds = category.totalFunds
             let expenses = category.totalExpenses

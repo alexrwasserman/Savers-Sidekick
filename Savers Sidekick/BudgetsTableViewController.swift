@@ -9,11 +9,11 @@
 import UIKit
 import CoreData
 
-class BudgetScreenTableViewController: CoreDataTableViewController {
+class BudgetsTableViewController: CoreDataTableViewController {
     
     var context = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
     
-    func updateUI() {
+    private func updateUI() {
         if let currentContext = context {
             let request = NSFetchRequest(entityName: "Budget")
             request.sortDescriptors = [NSSortDescriptor(key: "name",
@@ -32,7 +32,7 @@ class BudgetScreenTableViewController: CoreDataTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.leftBarButtonItem = self.editButtonItem()
+        self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
         tableView.estimatedRowHeight = tableView.rowHeight
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -67,22 +67,25 @@ class BudgetScreenTableViewController: CoreDataTableViewController {
             }
         }
     }
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
+    
+    
     // MARK: - Navigation
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "addBudget" {
+            if let createBudgetController = segue.destinationViewController as? CreateNewBudgetViewController {
+                createBudgetController.context = context
+            }
+        }
+        else if segue.identifier == "categoriesOfSelectedBudget" {
+            if let categoriesController = segue.destinationViewController as? CategoriesTableViewController {
+                if let budgetSelected = sender as? BudgetTableViewCell {
+                    categoriesController.context = context
+                    categoriesController.budgetContainedIn = budgetSelected.budget
+                }
+            }
+        }
     }
-    */
+    
 
 }

@@ -19,7 +19,7 @@ class BudgetTableViewCell: UITableViewCell {
         }
     }
     
-    func updateUI() {
+    private func updateUI() {
         mostRecentEntry?.text = nil
         budgetName?.text = nil
         budgetStatus?.text = nil

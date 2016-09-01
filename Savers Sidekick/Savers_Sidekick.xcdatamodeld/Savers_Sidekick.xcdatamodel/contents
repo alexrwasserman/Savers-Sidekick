@@ -3,7 +3,6 @@
     <entity name="Budget" representedClassName=".Budget" syncable="YES">
         <attribute name="mostRecentExpense" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="numberOfCategories" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="totalExpenses" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="totalFunds" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <relationship name="categories" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Category" inverseName="parentBudget" inverseEntity="Category" syncable="YES"/>
@@ -11,7 +10,6 @@
     <entity name="Category" representedClassName=".Category" syncable="YES">
         <attribute name="mostRecentExpense" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="numberOfExpenses" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="totalExpenses" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="totalFunds" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <relationship name="expenses" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Expense" inverseName="parentCategory" inverseEntity="Expense" syncable="YES"/>
@@ -25,8 +23,8 @@
         <relationship name="parentCategory" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="expenses" inverseEntity="Category" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Budget" positionX="-288" positionY="15" width="128" height="133"/>
-        <element name="Category" positionX="-29" positionY="15" width="128" height="148"/>
+        <element name="Budget" positionX="-288" positionY="15" width="128" height="118"/>
+        <element name="Category" positionX="-29" positionY="15" width="128" height="133"/>
         <element name="Expense" positionX="232" positionY="30" width="128" height="118"/>
     </elements>
 </model>

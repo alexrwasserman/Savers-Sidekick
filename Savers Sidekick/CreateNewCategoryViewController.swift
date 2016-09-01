@@ -16,7 +16,6 @@ class CreateNewCategoryViewController: UIViewController, UITextFieldDelegate {
     var budgetContainedIn: Budget?
 
     @IBOutlet weak var enteredName: UITextField!
-    
     @IBOutlet weak var enteredFunds: UITextField!
     
     @IBAction func buttonPressed(sender: UIButton) {
@@ -24,6 +23,8 @@ class CreateNewCategoryViewController: UIViewController, UITextFieldDelegate {
             _ = Category.categoryWithInfo(name: self.enteredName.text, totalFunds: self.enteredFunds.text, inBudget: self.budgetContainedIn, inContext: self.context!)
             try? self.context!.save()
         }
+        
+        performSegueWithIdentifier("returnToCategoriesFromCreateCategory", sender: sender)
     }
     
     override func viewDidLoad() {
@@ -37,8 +38,8 @@ class CreateNewCategoryViewController: UIViewController, UITextFieldDelegate {
     // MARK: - Navigation
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "returnToCategories" {
-            if let categoriesController = segue.destinationViewController as? CategoryScreenTableViewController {
+        if segue.identifier == "returnToCategoriesFromCreateCategory" {
+            if let categoriesController = segue.destinationViewController as? CategoriesTableViewController {
                 categoriesController.context = context
                 categoriesController.budgetContainedIn = budgetContainedIn
             }

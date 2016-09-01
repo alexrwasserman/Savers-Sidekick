@@ -44,8 +44,6 @@ class Budget: NSManagedObject {
             
             budget.mostRecentExpense = nil
             
-            budget.numberOfCategories = 0
-            
             budget.totalExpenses = 0.00
             
             return budget

@@ -7,26 +7,27 @@
 //
 
 import UIKit
+import CoreData
 
 class CreateNewBudgetViewController: UIViewController, UITextFieldDelegate {
     
-    var context = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
-    
-    var budget: Budget?
+    var context: NSManagedObjectContext?
 
     @IBOutlet weak var enteredName: UITextField!
-    
     @IBOutlet weak var enteredFunds: UITextField!
 
     @IBAction func buttonPressed(sender: UIButton) {
         context?.performBlockAndWait {
-            self.budget = Budget.budgetWithInfo(name: self.enteredName.text, totalFunds: self.enteredFunds.text, inContext: self.context!)
+            _ = Budget.budgetWithInfo(name: self.enteredName.text, totalFunds: self.enteredFunds.text, inContext: self.context!)
             try? self.context!.save()
         }
+        
+        performSegueWithIdentifier("returnToBudgetsFromCreateBudget", sender: sender)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         enteredName.delegate = self
         enteredFunds.delegate = self
     }
@@ -35,13 +36,13 @@ class CreateNewBudgetViewController: UIViewController, UITextFieldDelegate {
     // MARK: - Navigation
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "displayCategories" {
-            if let categoriesController = segue.destinationViewController as? CategoryScreenTableViewController {
-                categoriesController.context = context
-                categoriesController.budgetContainedIn = budget
+        if segue.identifier == "returnToBudgetsFromCreateBudget" {
+            if let budgetsController = segue.destinationViewController as? BudgetsTableViewController {
+                budgetsController.context = context
             }
         }
     }
+    
     
     
     // MARK: - TextField Delegate

@@ -11,7 +11,7 @@ import CoreData
 
 
 class Category: NSManagedObject {
-
+        
     class func categoryWithInfo(name enteredName: String?, totalFunds enteredFunds: String?, inBudget budget: Budget?, inContext context: NSManagedObjectContext) -> Category?{
         
         let request = NSFetchRequest(entityName: "Category")
@@ -44,8 +44,6 @@ class Category: NSManagedObject {
             
             category.mostRecentExpense = nil
             
-            category.numberOfExpenses = 0
-            
             category.totalExpenses = 0.00
             
             let budgetFunds = String(budget?.totalFunds)
@@ -59,7 +57,6 @@ class Category: NSManagedObject {
     
     override func prepareForDeletion() {
         parentBudget?.totalExpenses = (parentBudget?.totalExpenses?.floatValue)! - (totalExpenses?.floatValue)!
-        parentBudget?.numberOfCategories = NSNumber(int: (parentBudget?.numberOfCategories?.intValue)! - 1)
         
         // ADD CODE TO RECALCULATE MOST RECENT EXPENSE
     }

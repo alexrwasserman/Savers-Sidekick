@@ -9,13 +9,13 @@
 import UIKit
 import CoreData
 
-class CategoryScreenTableViewController: CoreDataTableViewController {
+class CategoriesTableViewController: CoreDataTableViewController {
     
     var context: NSManagedObjectContext?
     
     var budgetContainedIn: Budget?
     
-    func updateUI() {
+    private func updateUI() {
         if let currentContext = context {
             if let validBudget = budgetContainedIn {
                 let request = NSFetchRequest(entityName: "Category")
@@ -36,6 +36,8 @@ class CategoryScreenTableViewController: CoreDataTableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
         tableView.estimatedRowHeight = tableView.rowHeight
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -58,18 +60,7 @@ class CategoryScreenTableViewController: CoreDataTableViewController {
 
         return cell
     }
-    
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             // Delete the row from the data source
@@ -78,31 +69,28 @@ class CategoryScreenTableViewController: CoreDataTableViewController {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
 
     
     // MARK: - Navigation
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "addCategory" {
-            if let categoriesController = segue.destinationViewController as? CreateNewCategoryViewController {
-                categoriesController.context = context
-                categoriesController.budgetContainedIn = budgetContainedIn
+            if let createCategoryController = segue.destinationViewController as? CreateNewCategoryViewController {
+                createCategoryController.context = context
+                createCategoryController.budgetContainedIn = budgetContainedIn
+            }
+        }
+        else if segue.identifier == "returnToBudgetsFromCategories" {
+            if let budgetController = segue.destinationViewController as? BudgetsTableViewController {
+                budgetController.context = context
+            }
+        }
+        else if segue.identifier == "expensesOfSelectedCategory" {
+            if let expensesController = segue.destinationViewController as? ExpensesTableViewController {
+                if let categorySelected = sender as? CategoryTableViewCell {
+                    expensesController.context = context
+                    expensesController.categoryContainedIn = categorySelected.category
+                }
             }
         }
     }
