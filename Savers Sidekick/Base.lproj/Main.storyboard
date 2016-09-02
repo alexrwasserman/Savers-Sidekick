@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="dgM-tI-YxI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="RWM-KQ-6t0">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -14,17 +14,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <toolbar key="tableFooterView" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="f1K-nK-Fb8">
-                            <rect key="frame" x="0.0" y="289" width="600" height="44"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                            <items>
-                                <barButtonItem systemItem="add" id="XGV-b5-rsQ">
-                                    <connections>
-                                        <segue destination="nCq-lR-7Yt" kind="show" identifier="addBudget" id="rwu-qY-vJB"/>
-                                    </connections>
-                                </barButtonItem>
-                            </items>
-                        </toolbar>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="BudgetCell" rowHeight="197" id="XrA-Wd-j3G" customClass="BudgetTableViewCell" customModule="Savers_Sidekick" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="92" width="600" height="197"/>
@@ -53,7 +42,7 @@
                                                         </label>
                                                     </subviews>
                                                 </stackView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="budgetStatus" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2CC-dj-w7T">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="budgetStatus" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2CC-dj-w7T">
                                                     <rect key="frame" x="281" y="0.0" width="270" height="180"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -82,7 +71,16 @@
                             <outlet property="delegate" destination="dgM-tI-YxI" id="jfF-tN-6qS"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Budgets" id="4PY-UM-iVC"/>
+                    <toolbarItems>
+                        <barButtonItem systemItem="add" id="QTx-QJ-iW2">
+                            <connections>
+                                <segue destination="nCq-lR-7Yt" kind="show" identifier="addBudget" id="068-kJ-Hk1"/>
+                            </connections>
+                        </barButtonItem>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" title="Budgets" id="4PY-UM-iVC">
+                        <barButtonItem key="leftBarButtonItem" title="                              " id="CST-xa-r8R"/>
+                    </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
@@ -103,7 +101,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="oSf-Pd-iet">
-                                <rect key="frame" x="20" y="72" width="560" height="476"/>
+                                <rect key="frame" x="20" y="72" width="560" height="520"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="HSI-cF-wJz">
                                         <rect key="frame" x="0.0" y="0.0" width="560" height="60"/>
@@ -122,7 +120,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="v0b-mT-dda">
-                                        <rect key="frame" x="0.0" y="213" width="560" height="60"/>
+                                        <rect key="frame" x="0.0" y="235" width="560" height="60"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Funds" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="74m-O6-JvA">
                                                 <rect key="frame" x="0.0" y="0.0" width="560" height="30"/>
@@ -138,7 +136,7 @@
                                         </subviews>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QLh-JQ-Vp9">
-                                        <rect key="frame" x="0.0" y="434" width="560" height="42"/>
+                                        <rect key="frame" x="0.0" y="478" width="560" height="42"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                         <state key="normal" title="Create"/>
                                         <connections>
@@ -159,11 +157,12 @@
                     <navigationItem key="navigationItem" title="Create Budget" id="fmd-lV-7gS">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Z09-qR-rlH">
                             <connections>
-                                <segue destination="dgM-tI-YxI" kind="show" identifier="returnToBudgetsFromCreateBudget" id="sQh-YF-GTa"/>
+                                <segue destination="dgM-tI-YxI" kind="show" identifier="returnToBudgetsFromCreateBudget" id="FqP-HZ-OUh"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="enteredFunds" destination="QWc-te-XDx" id="xXH-Qa-Gls"/>
                         <outlet property="enteredName" destination="46u-b9-IvM" id="dYg-nR-uPs"/>
@@ -181,17 +180,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <toolbar key="tableFooterView" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="dQy-5T-tKf">
-                            <rect key="frame" x="0.0" y="215" width="600" height="44"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                            <items>
-                                <barButtonItem systemItem="add" id="AIz-z1-ukI">
-                                    <connections>
-                                        <segue destination="cFq-y4-4ZL" kind="show" identifier="addCategory" id="sKt-Mf-b2i"/>
-                                    </connections>
-                                </barButtonItem>
-                            </items>
-                        </toolbar>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="CategoryCell" rowHeight="123" id="hj9-T9-0cY" customClass="CategoryTableViewCell" customModule="Savers_Sidekick" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="92" width="600" height="123"/>
@@ -226,7 +214,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="categoryStatus" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jg3-5L-W8N">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="categoryStatus" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jg3-5L-W8N">
                                                     <rect key="frame" x="367" y="0.0" width="184" height="106"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -256,14 +244,22 @@
                             <outlet property="delegate" destination="gNo-5N-ap2" id="gjd-Ms-SEG"/>
                         </connections>
                     </tableView>
+                    <toolbarItems>
+                        <barButtonItem systemItem="add" id="TcI-mE-Njl">
+                            <connections>
+                                <segue destination="cFq-y4-4ZL" kind="show" identifier="addCategory" id="ZBs-TO-0Vi"/>
+                            </connections>
+                        </barButtonItem>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" title="Categories" id="uXU-06-jrl">
                         <barButtonItem key="leftBarButtonItem" title="Budgets" id="nJh-qg-99c">
                             <connections>
-                                <segue destination="dgM-tI-YxI" kind="show" identifier="returnToBudgetsFromCategories" id="idC-FG-hUF"/>
+                                <segue destination="dgM-tI-YxI" kind="show" identifier="returnToBudgetsFromCategories" id="Fbb-3K-mzO"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jAh-pz-MRm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -277,17 +273,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <toolbar key="tableFooterView" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="WvA-Bi-S4w">
-                            <rect key="frame" x="0.0" y="221" width="600" height="44"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                            <items>
-                                <barButtonItem systemItem="add" id="39j-pD-9RI">
-                                    <connections>
-                                        <segue destination="r7c-z2-88F" kind="show" identifier="addExpense" id="BaP-p1-LCU"/>
-                                    </connections>
-                                </barButtonItem>
-                            </items>
-                        </toolbar>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ExpenseCell" rowHeight="129" id="hMB-68-qng" customClass="ExpenseTableViewCell" customModule="Savers_Sidekick" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="92" width="600" height="129"/>
@@ -319,14 +304,14 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="kUQ-Hf-auw">
                                                     <rect key="frame" x="422" y="0.0" width="129" height="112"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="cost" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Keh-mZ-gzv">
-                                                            <rect key="frame" x="0.0" y="0.0" width="129" height="95"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="cost" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Keh-mZ-gzv">
+                                                            <rect key="frame" x="0.0" y="0.0" width="129" height="17"/>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="expenseDescription" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7y6-yq-9Cs">
-                                                            <rect key="frame" x="0.0" y="95" width="129" height="17"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="expenseDescription" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7y6-yq-9Cs">
+                                                            <rect key="frame" x="0.0" y="17" width="129" height="95"/>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -356,6 +341,13 @@
                             <outlet property="delegate" destination="0F4-QT-JUQ" id="tTY-DD-a9u"/>
                         </connections>
                     </tableView>
+                    <toolbarItems>
+                        <barButtonItem systemItem="add" id="nXB-zc-Pbo">
+                            <connections>
+                                <segue destination="r7c-z2-88F" kind="show" identifier="addExpense" id="PJd-Nf-1vD"/>
+                            </connections>
+                        </barButtonItem>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" title="Expenses" id="LwS-G8-sdX">
                         <barButtonItem key="leftBarButtonItem" title="Categories" id="cVS-66-oZQ">
                             <connections>
@@ -364,6 +356,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2b8-Zg-Ggc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -381,8 +374,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="ONI-Q5-f4K">
-                                <rect key="frame" x="20" y="72" width="560" height="476"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="ONI-Q5-f4K">
+                                <rect key="frame" x="20" y="72" width="560" height="520"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Ggg-6I-gPg">
                                         <rect key="frame" x="0.0" y="0.0" width="560" height="51"/>
@@ -400,8 +393,8 @@
                                             </textField>
                                         </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="1za-d3-kYX">
-                                        <rect key="frame" x="0.0" y="215" width="560" height="51"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="1za-d3-kYX">
+                                        <rect key="frame" x="0.0" y="237" width="560" height="51"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Funds For Category" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5DO-sO-Wg7">
                                                 <rect key="frame" x="0.0" y="0.0" width="560" height="21"/>
@@ -416,8 +409,8 @@
                                             </textField>
                                         </subviews>
                                     </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GoX-Eq-Jwg">
-                                        <rect key="frame" x="0.0" y="434" width="560" height="42"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GoX-Eq-Jwg">
+                                        <rect key="frame" x="0.0" y="478" width="560" height="42"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                         <state key="normal" title="Create"/>
                                         <connections>
@@ -442,6 +435,8 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="enteredFunds" destination="HMO-n8-TFS" id="VJY-u2-Uzj"/>
                         <outlet property="enteredName" destination="y60-eu-5Sr" id="bBZ-rP-dac"/>
@@ -463,8 +458,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="meX-Y7-sSV">
-                                <rect key="frame" x="20" y="72" width="560" height="476"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="meX-Y7-sSV">
+                                <rect key="frame" x="20" y="72" width="560" height="520"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="fct-RU-7LK">
                                         <rect key="frame" x="0.0" y="0.0" width="560" height="51"/>
@@ -482,8 +477,8 @@
                                             </textField>
                                         </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="uzV-VW-mNc">
-                                        <rect key="frame" x="0.0" y="143" width="560" height="51"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="uzV-VW-mNc">
+                                        <rect key="frame" x="0.0" y="158" width="560" height="51"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cost" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fiO-M3-uEv">
                                                 <rect key="frame" x="0.0" y="0.0" width="560" height="21"/>
@@ -498,8 +493,8 @@
                                             </textField>
                                         </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="T7D-fg-4r5">
-                                        <rect key="frame" x="0.0" y="286" width="560" height="51"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="T7D-fg-4r5">
+                                        <rect key="frame" x="0.0" y="316" width="560" height="51"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Expense Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ciN-ux-Eda">
                                                 <rect key="frame" x="0.0" y="0.0" width="560" height="21"/>
@@ -514,8 +509,8 @@
                                             </textField>
                                         </subviews>
                                     </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pSl-LV-VGl">
-                                        <rect key="frame" x="0.0" y="434" width="560" height="42"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pSl-LV-VGl">
+                                        <rect key="frame" x="0.0" y="478" width="560" height="42"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                         <state key="normal" title="Create"/>
                                         <connections>
@@ -541,6 +536,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="enteredCost" destination="R1x-eZ-eIA" id="8kC-IY-4rp"/>
                         <outlet property="enteredDescription" destination="GZy-Xk-r66" id="Jen-5a-7Hr"/>
@@ -551,10 +547,32 @@
             </objects>
             <point key="canvasLocation" x="2488" y="867"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="IZ7-Hd-ArU">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="RWM-KQ-6t0" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="v2g-bx-7Uy">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="SYf-6h-H3z">
+                        <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
+                    <connections>
+                        <segue destination="dgM-tI-YxI" kind="relationship" relationship="rootViewController" id="yXz-Kb-QdF"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mhf-yy-fFI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="912" y="-764"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="Fbb-3K-mzO"/>
+        <segue reference="TF2-4K-D3k"/>
         <segue reference="16t-Sb-zhl"/>
-        <segue reference="WOj-6O-FFI"/>
-        <segue reference="idC-FG-hUF"/>
     </inferredMetricsTieBreakers>
 </document>

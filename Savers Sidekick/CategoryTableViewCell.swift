@@ -27,12 +27,23 @@ class CategoryTableViewCell: UITableViewCell {
         numberOfEntries?.text = nil
         
         if let category = self.category {
-            categoryName?.text = category.name
+            categoryName?.text = category.name!
             
+            if let count = category.expenses?.count {
+                if count != 1 {
+                    numberOfEntries?.text = "\(count) expenses:"
+                }
+                else {
+                    numberOfEntries?.text = "1 expense:"
+                }
+            }
+            else {
+                numberOfEntries?.text = ""
+            }
             numberOfEntries?.text = "\(category.expenses?.count) expenses:"
             
-            let funds = category.totalFunds
-            let expenses = category.totalExpenses
+            let funds = category.totalFunds!
+            let expenses = category.totalExpenses!
             categoryStatus?.text = "$\(expenses)/$\(funds)"
             
             if let validDate = category.mostRecentExpense {

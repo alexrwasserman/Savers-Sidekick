@@ -25,10 +25,10 @@ class BudgetTableViewCell: UITableViewCell {
         budgetStatus?.text = nil
         
         if let budget = self.budget {
-            budgetName?.text = budget.name
+            budgetName?.text = budget.name!
             
-            let funds = budget.totalFunds
-            let expenses = budget.totalExpenses
+            let funds = budget.totalFunds!
+            let expenses = budget.totalExpenses!
             budgetStatus?.text = "$\(expenses)/$\(funds)"
             
             if let validDate = budget.mostRecentExpense {

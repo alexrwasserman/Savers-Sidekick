@@ -28,11 +28,11 @@ class ExpenseTableViewCell: UITableViewCell {
         expenseDescription?.text = nil
         
         if let expense = self.expense {
-            expenseName?.text = expense.name
+            expenseName?.text = expense.name!
             
-            cost?.text = "$\(expense.cost)"
+            cost?.text = "$\(expense.cost!)"
             
-            expenseDescription?.text = expense.expenseDescription
+            expenseDescription?.text = expense.expenseDescription!
             
             if let validDate = expense.date {
                 let formatter = NSDateFormatter()
