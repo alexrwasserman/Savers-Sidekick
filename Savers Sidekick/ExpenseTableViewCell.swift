@@ -35,14 +35,14 @@ class ExpenseTableViewCell: UITableViewCell {
             expenseDescription?.text = expense.expenseDescription!
             
             if let validDate = expense.date {
-                let formatter = NSDateFormatter()
-                if NSDate().timeIntervalSinceDate(validDate) > 24*60*60 {
-                    formatter.dateStyle = NSDateFormatterStyle.ShortStyle
+                let formatter = DateFormatter()
+                if Date().timeIntervalSince(validDate as Date) > 24*60*60 {
+                    formatter.dateStyle = DateFormatter.Style.short
                 }
                 else {
-                    formatter.timeStyle = NSDateFormatterStyle.ShortStyle
+                    formatter.timeStyle = DateFormatter.Style.short
                 }
-                date?.text = "\(formatter.stringFromDate(validDate))"
+                date?.text = "\(formatter.string(from: validDate as Date))"
             }
             else {
                 date?.text = nil

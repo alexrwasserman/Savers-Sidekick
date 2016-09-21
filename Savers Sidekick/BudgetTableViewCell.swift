@@ -19,7 +19,7 @@ class BudgetTableViewCell: UITableViewCell {
         }
     }
     
-    private func updateUI() {
+    fileprivate func updateUI() {
         mostRecentEntry?.text = nil
         budgetName?.text = nil
         budgetStatus?.text = nil
@@ -32,14 +32,14 @@ class BudgetTableViewCell: UITableViewCell {
             budgetStatus?.text = "$\(expenses)/$\(funds)"
             
             if let validDate = budget.mostRecentExpense {
-                let formatter = NSDateFormatter()
-                if NSDate().timeIntervalSinceDate(validDate) > 24*60*60 {
-                    formatter.dateStyle = NSDateFormatterStyle.ShortStyle
+                let formatter = DateFormatter()
+                if Date().timeIntervalSince(validDate as Date) > 24*60*60 {
+                    formatter.dateStyle = DateFormatter.Style.short
                 }
                 else {
-                    formatter.timeStyle = NSDateFormatterStyle.ShortStyle
+                    formatter.timeStyle = DateFormatter.Style.short
                 }
-                mostRecentEntry?.text = "Most recent entry: \(formatter.stringFromDate(validDate))"
+                mostRecentEntry?.text = "Most recent entry: \(formatter.string(from: validDate as Date))"
             }
             else {
                 mostRecentEntry?.text = nil

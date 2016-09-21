@@ -19,13 +19,13 @@ class CreateNewExpenseViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var enteredCost: UITextField!
     @IBOutlet weak var enteredDescription: UITextField!
     
-    @IBAction func buttonPressed(sender: UIButton) {
-        context?.performBlockAndWait {
+    @IBAction func buttonPressed(_ sender: UIButton) {
+        context?.performAndWait {
             _ = Expense.expenseWithInfo(name: self.enteredName.text, cost: self.enteredCost.text, description: self.enteredDescription.text, inCategory: self.categoryContainedIn, inContext: self.context!)
             try? self.context!.save()
         }
         
-        performSegueWithIdentifier("returnToExpensesFromCreateExpense", sender: sender)
+        performSegue(withIdentifier: "returnToExpensesFromCreateExpense", sender: sender)
     }
     
     override func viewDidLoad() {
@@ -39,9 +39,9 @@ class CreateNewExpenseViewController: UIViewController, UITextFieldDelegate {
 
     // MARK: - Navigation
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "returnToExpensesFromCreateExpense" {
-            if let expensesController = segue.destinationViewController as? ExpensesTableViewController {
+            if let expensesController = segue.destination as? ExpensesTableViewController {
                 expensesController.context = context
                 expensesController.categoryContainedIn = categoryContainedIn
             }
@@ -51,7 +51,7 @@ class CreateNewExpenseViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: - TextField Delegate
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if (textField == enteredName) {
             enteredCost.becomeFirstResponder()
         }

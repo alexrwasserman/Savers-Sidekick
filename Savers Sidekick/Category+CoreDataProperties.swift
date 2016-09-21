@@ -14,7 +14,7 @@ import CoreData
 
 extension Category {
 
-    @NSManaged var mostRecentExpense: NSDate?
+    @NSManaged var mostRecentExpense: Date?
     @NSManaged var name: String?
     @NSManaged var totalExpenses: NSNumber?
     @NSManaged var totalFunds: NSNumber?

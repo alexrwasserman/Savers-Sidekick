@@ -18,13 +18,13 @@ class CreateNewCategoryViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var enteredName: UITextField!
     @IBOutlet weak var enteredFunds: UITextField!
     
-    @IBAction func buttonPressed(sender: UIButton) {
-        context?.performBlockAndWait {
+    @IBAction func buttonPressed(_ sender: UIButton) {
+        context?.performAndWait {
             _ = Category.categoryWithInfo(name: self.enteredName.text, totalFunds: self.enteredFunds.text, inBudget: self.budgetContainedIn, inContext: self.context!)
             try? self.context!.save()
         }
         
-        performSegueWithIdentifier("returnToCategoriesFromCreateCategory", sender: sender)
+        performSegue(withIdentifier: "returnToCategoriesFromCreateCategory", sender: sender)
     }
     
     override func viewDidLoad() {
@@ -37,9 +37,9 @@ class CreateNewCategoryViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: - Navigation
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "returnToCategoriesFromCreateCategory" {
-            if let categoriesController = segue.destinationViewController as? CategoriesTableViewController {
+            if let categoriesController = segue.destination as? CategoriesTableViewController {
                 categoriesController.context = context
                 categoriesController.budgetContainedIn = budgetContainedIn
             }
@@ -49,7 +49,7 @@ class CreateNewCategoryViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: - TextField Delegate
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if (textField == enteredName) {
             enteredFunds.becomeFirstResponder()
         }

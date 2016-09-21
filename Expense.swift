@@ -14,7 +14,7 @@ class Expense: NSManagedObject {
     
     class func expenseWithInfo(name enteredName: String?, cost enteredCost: String?, description enteredDescription: String?, inCategory category: Category?, inContext context: NSManagedObjectContext) -> Expense?{
         
-        if let expense = NSEntityDescription.insertNewObjectForEntityForName("Expense", inManagedObjectContext: context) as? Expense {
+        if let expense = NSEntityDescription.insertNewObject(forEntityName: "Expense", into: context) as? Expense {
             if enteredName != nil {
                 expense.name = enteredName
             }
@@ -23,14 +23,14 @@ class Expense: NSManagedObject {
             }
             if enteredCost != nil {
                 if let cost = Float(enteredCost!) {
-                    expense.cost = cost
+                    expense.cost = cost as NSNumber?
                 }
             }
             else {
                 expense.cost = 0.00
             }
             
-            expense.date = NSDate()
+            expense.date = Date()
             
             if enteredDescription != nil {
                 expense.expenseDescription = enteredDescription
@@ -39,7 +39,7 @@ class Expense: NSManagedObject {
                 expense.expenseDescription = ""
             }
             
-            let categoryFunds = String(category?.totalFunds)
+            let categoryFunds = String(describing: category?.totalFunds)
             expense.parentCategory = Category.categoryWithInfo(name: category?.name, totalFunds: categoryFunds, inBudget: category?.parentBudget, inContext: context)
             
             return expense

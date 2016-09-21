@@ -11,9 +11,9 @@ import CoreData
 
 class BudgetsTableViewController: CoreDataTableViewController {
     
-    var context = (UIApplication.sharedApplication().delegate as? AppDelegate)?.managedObjectContext
+    var context = (UIApplication.shared.delegate as? AppDelegate)?.managedObjectContext
     
-    private func updateUI() {
+    fileprivate func updateUI() {
         if let currentContext = context {
             let request = NSFetchRequest(entityName: "Budget")
             request.sortDescriptors = [NSSortDescriptor(key: "name",
@@ -32,7 +32,7 @@ class BudgetsTableViewController: CoreDataTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        self.navigationItem.rightBarButtonItem = self.editButtonItem
         
         tableView.estimatedRowHeight = tableView.rowHeight
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -43,12 +43,12 @@ class BudgetsTableViewController: CoreDataTableViewController {
 
     // MARK: - Table view data source
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("BudgetCell", forIndexPath: indexPath)
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "BudgetCell", for: indexPath)
 
         if let budgetCell = cell as? BudgetTableViewCell {
-            if let budgetToBeDisplayed = fetchedResultsController?.objectAtIndexPath(indexPath) as? Budget {
-                context?.performBlockAndWait {
+            if let budgetToBeDisplayed = fetchedResultsController?.object(at: indexPath) as? Budget {
+                context?.performAndWait {
                     budgetCell.budget = budgetToBeDisplayed
                 }
             }
@@ -57,11 +57,11 @@ class BudgetsTableViewController: CoreDataTableViewController {
         return cell
     }
 
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            if let budgetToBeDeleted = fetchedResultsController?.objectAtIndexPath(indexPath) as? Budget {
-                context?.performBlock {
-                    self.context?.deleteObject(budgetToBeDeleted)
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            if let budgetToBeDeleted = fetchedResultsController?.object(at: indexPath) as? Budget {
+                context?.perform {
+                    self.context?.delete(budgetToBeDeleted)
                     try? self.context!.save()
                 }
             }
@@ -71,14 +71,14 @@ class BudgetsTableViewController: CoreDataTableViewController {
     
     // MARK: - Navigation
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "addBudget" {
-            if let createBudgetController = segue.destinationViewController as? CreateNewBudgetViewController {
+            if let createBudgetController = segue.destination as? CreateNewBudgetViewController {
                 createBudgetController.context = context
             }
         }
         else if segue.identifier == "categoriesOfSelectedBudget" {
-            if let categoriesController = segue.destinationViewController as? CategoriesTableViewController {
+            if let categoriesController = segue.destination as? CategoriesTableViewController {
                 if let budgetSelected = sender as? BudgetTableViewCell {
                     categoriesController.context = context
                     categoriesController.budgetContainedIn = budgetSelected.budget

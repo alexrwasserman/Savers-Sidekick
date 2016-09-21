@@ -15,7 +15,7 @@ import CoreData
 extension Expense {
 
     @NSManaged var cost: NSNumber?
-    @NSManaged var date: NSDate?
+    @NSManaged var date: Date?
     @NSManaged var expenseDescription: String?
     @NSManaged var name: String?
     @NSManaged var parentCategory: Category?

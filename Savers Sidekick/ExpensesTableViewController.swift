@@ -15,7 +15,7 @@ class ExpensesTableViewController: CoreDataTableViewController {
     
     var categoryContainedIn: Category?
     
-    private func updateUI() {
+    fileprivate func updateUI() {
         if let currentContext = context {
             if let validCategory = categoryContainedIn {
                 let request = NSFetchRequest(entityName: "Expense")
@@ -37,7 +37,7 @@ class ExpensesTableViewController: CoreDataTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        self.navigationItem.rightBarButtonItem = self.editButtonItem
         
         tableView.estimatedRowHeight = tableView.rowHeight
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -48,12 +48,12 @@ class ExpensesTableViewController: CoreDataTableViewController {
     
     // MARK: - Table view data source
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("ExpenseCell", forIndexPath: indexPath)
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ExpenseCell", for: indexPath)
         
         if let expenseCell = cell as? ExpenseTableViewCell {
-            if let expenseToBeDisplayed = fetchedResultsController?.objectAtIndexPath(indexPath) as? Expense {
-                context?.performBlockAndWait {
+            if let expenseToBeDisplayed = fetchedResultsController?.object(at: indexPath) as? Expense {
+                context?.performAndWait {
                     expenseCell.expense = expenseToBeDisplayed
                 }
             }
@@ -62,11 +62,11 @@ class ExpensesTableViewController: CoreDataTableViewController {
         return cell
     }
     
-     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
+     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
             // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }
      }
@@ -74,15 +74,15 @@ class ExpensesTableViewController: CoreDataTableViewController {
     
     // MARK: - Navigation
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "addExpense" {
-            if let createExpenseController = segue.destinationViewController as? CreateNewExpenseViewController {
+            if let createExpenseController = segue.destination as? CreateNewExpenseViewController {
                 createExpenseController.context = context
                 createExpenseController.categoryContainedIn = categoryContainedIn
             }
         }
         else if segue.identifier == "returnToCategoriesFromExpenses" {
-            if let categoriesController = segue.destinationViewController as? CategoriesTableViewController {
+            if let categoriesController = segue.destination as? CategoriesTableViewController {
                 categoriesController.context = context
                 categoriesController.budgetContainedIn = categoryContainedIn?.parentBudget
             }

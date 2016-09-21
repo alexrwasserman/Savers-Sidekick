@@ -15,7 +15,7 @@ class CategoriesTableViewController: CoreDataTableViewController {
     
     var budgetContainedIn: Budget?
     
-    private func updateUI() {
+    fileprivate func updateUI() {
         if let currentContext = context {
             if let validBudget = budgetContainedIn {
                 let request = NSFetchRequest(entityName: "Category")
@@ -37,7 +37,7 @@ class CategoriesTableViewController: CoreDataTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        self.navigationItem.rightBarButtonItem = self.editButtonItem
         
         tableView.estimatedRowHeight = tableView.rowHeight
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -47,12 +47,12 @@ class CategoriesTableViewController: CoreDataTableViewController {
 
     // MARK: - Table view data source
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("CategoryCell", forIndexPath: indexPath)
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath)
 
         if let categoryCell = cell as? CategoryTableViewCell {
-            if let categoryToBeDisplayed = fetchedResultsController?.objectAtIndexPath(indexPath) as? Category {
-                context?.performBlockAndWait {
+            if let categoryToBeDisplayed = fetchedResultsController?.object(at: indexPath) as? Category {
+                context?.performAndWait {
                     categoryCell.category = categoryToBeDisplayed
                 }
             }
@@ -61,11 +61,11 @@ class CategoriesTableViewController: CoreDataTableViewController {
         return cell
     }
 
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
             // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
@@ -73,20 +73,20 @@ class CategoriesTableViewController: CoreDataTableViewController {
     
     // MARK: - Navigation
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "addCategory" {
-            if let createCategoryController = segue.destinationViewController as? CreateNewCategoryViewController {
+            if let createCategoryController = segue.destination as? CreateNewCategoryViewController {
                 createCategoryController.context = context
                 createCategoryController.budgetContainedIn = budgetContainedIn
             }
         }
         else if segue.identifier == "returnToBudgetsFromCategories" {
-            if let budgetController = segue.destinationViewController as? BudgetsTableViewController {
+            if let budgetController = segue.destination as? BudgetsTableViewController {
                 budgetController.context = context
             }
         }
         else if segue.identifier == "expensesOfSelectedCategory" {
-            if let expensesController = segue.destinationViewController as? ExpensesTableViewController {
+            if let expensesController = segue.destination as? ExpensesTableViewController {
                 if let categorySelected = sender as? CategoryTableViewCell {
                     expensesController.context = context
                     expensesController.categoryContainedIn = categorySelected.category

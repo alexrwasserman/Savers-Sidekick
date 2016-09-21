@@ -16,13 +16,13 @@ class CreateNewBudgetViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var enteredName: UITextField!
     @IBOutlet weak var enteredFunds: UITextField!
 
-    @IBAction func buttonPressed(sender: UIButton) {
-        context?.performBlockAndWait {
+    @IBAction func buttonPressed(_ sender: UIButton) {
+        context?.performAndWait {
             _ = Budget.budgetWithInfo(name: self.enteredName.text, totalFunds: self.enteredFunds.text, inContext: self.context!)
             try? self.context!.save()
         }
         
-        performSegueWithIdentifier("returnToBudgetsFromCreateBudget", sender: sender)
+        performSegue(withIdentifier: "returnToBudgetsFromCreateBudget", sender: sender)
     }
     
     override func viewDidLoad() {
@@ -35,9 +35,9 @@ class CreateNewBudgetViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: - Navigation
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "returnToBudgetsFromCreateBudget" {
-            if let budgetsController = segue.destinationViewController as? BudgetsTableViewController {
+            if let budgetsController = segue.destination as? BudgetsTableViewController {
                 budgetsController.context = context
             }
         }
@@ -47,7 +47,7 @@ class CreateNewBudgetViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: - TextField Delegate
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if (textField == enteredName) {
             enteredFunds.becomeFirstResponder()
         }

@@ -22,10 +22,10 @@ class Category: NSManagedObject {
             request.predicate = NSPredicate(format: "name = %@", "")
         }
         
-        if let category = (try? context.executeFetchRequest(request))?.first as? Category {
+        if let category = (try? context.fetch(request))?.first as? Category {
             return category
         }
-        else if let category = NSEntityDescription.insertNewObjectForEntityForName("Category", inManagedObjectContext: context) as? Category {
+        else if let category = NSEntityDescription.insertNewObject(forEntityName: "Category", into: context) as? Category {
             if enteredName != nil {
                 category.name = enteredName
             }
@@ -35,7 +35,7 @@ class Category: NSManagedObject {
             
             if enteredFunds != nil {
                 if let funds = Float(enteredFunds!) {
-                    category.totalFunds = funds
+                    category.totalFunds = funds as NSNumber?
                 }
             }
             else {
@@ -46,7 +46,7 @@ class Category: NSManagedObject {
             
             category.totalExpenses = 0.00
             
-            let budgetFunds = String(budget?.totalFunds)
+            let budgetFunds = String(describing: budget?.totalFunds)
             category.parentBudget = Budget.budgetWithInfo(name: budget?.name, totalFunds: budgetFunds, inContext: context)
             
             return category
