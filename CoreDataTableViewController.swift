@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 
 class CoreDataTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
-    var fetchedResultsController: NSFetchedResultsController<AnyObject>? {
+    var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>? {
         didSet {
             if let frc = fetchedResultsController {
                 frc.delegate = self

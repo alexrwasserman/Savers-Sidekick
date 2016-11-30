@@ -15,7 +15,7 @@ class BudgetsTableViewController: CoreDataTableViewController {
     
     fileprivate func updateUI() {
         if let currentContext = context {
-            let request = NSFetchRequest(entityName: "Budget")
+            let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Budget")
             request.sortDescriptors = [NSSortDescriptor(key: "name",
                                                         ascending: true,
                                                         selector: #selector(NSString.localizedCaseInsensitiveCompare(_:)))]
