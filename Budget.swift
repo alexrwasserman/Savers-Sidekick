@@ -14,7 +14,7 @@ class Budget: NSManagedObject {
 
     class func budgetWithInfo(name enteredName: String?, totalFunds enteredFunds: String?, inContext context: NSManagedObjectContext) -> Budget? {
         
-        let request = NSFetchRequest(entityName: "Budget")
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Budget")
         if let validName = enteredName {
             request.predicate = NSPredicate(format: "name = %@", validName)
         }

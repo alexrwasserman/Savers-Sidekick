@@ -18,7 +18,7 @@ class ExpensesTableViewController: CoreDataTableViewController {
     fileprivate func updateUI() {
         if let currentContext = context {
             if let validCategory = categoryContainedIn {
-                let request = NSFetchRequest(entityName: "Expense")
+                let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Expense")
                 request.predicate = NSPredicate(format: "parentCategory.name = %@", validCategory.name!)
                 request.sortDescriptors = [NSSortDescriptor(key: "name",
                     ascending: true,

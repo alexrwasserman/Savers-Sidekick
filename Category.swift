@@ -11,10 +11,10 @@ import CoreData
 
 
 class Category: NSManagedObject {
+    
+    class func categoryWithInfo(name enteredName: String?, totalFunds enteredFunds: String?, inBudget budget: Budget?, inContext context: NSManagedObjectContext) -> Category? {
         
-    class func categoryWithInfo(name enteredName: String?, totalFunds enteredFunds: String?, inBudget budget: Budget?, inContext context: NSManagedObjectContext) -> Category?{
-        
-        let request = NSFetchRequest(entityName: "Category")
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Category")
         if let validName = enteredName {
             request.predicate = NSPredicate(format: "name = %@", validName)
         }
@@ -56,9 +56,22 @@ class Category: NSManagedObject {
     }
     
     override func prepareForDeletion() {
-        parentBudget?.totalExpenses = (parentBudget?.totalExpenses?.floatValue)! - (totalExpenses?.floatValue)!
+        // Update total expenses of parent budget
+        parentBudget?.totalExpenses = (parentBudget?.totalExpenses?.floatValue)! - (totalExpenses?.floatValue)! as NSNumber
         
-        // ADD CODE TO RECALCULATE MOST RECENT EXPENSE
+        // Update mostRecentExpense for parent budget if necessary
+        if mostRecentExpense == parentBudget?.mostRecentExpense {
+            let budgetIterator = parentBudget?.categories?.makeIterator()
+            var updatedMostRecentExpense = Date(timeIntervalSinceReferenceDate: 0)
+            
+            while let category = budgetIterator?.next() as? Category {
+                if category.mostRecentExpense != mostRecentExpense && category.mostRecentExpense! > updatedMostRecentExpense {
+                    updatedMostRecentExpense = category.mostRecentExpense!
+                }
+            }
+            
+            parentBudget?.mostRecentExpense = updatedMostRecentExpense
+        }
     }
 
 }
