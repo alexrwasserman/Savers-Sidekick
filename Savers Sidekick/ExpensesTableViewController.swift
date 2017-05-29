@@ -64,10 +64,12 @@ class ExpensesTableViewController: CoreDataTableViewController {
     
      override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+            if let expenseToBeDeleted = fetchedResultsController?.object(at: indexPath) as? Expense {
+                context?.perform {
+                    self.context?.delete(expenseToBeDeleted)
+                    try? self.context!.save()
+                }
+            }
         }
      }
     
