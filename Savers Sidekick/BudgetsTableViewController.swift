@@ -22,7 +22,7 @@ class BudgetsTableViewController: CoreDataTableViewController {
             fetchedResultsController = NSFetchedResultsController(fetchRequest: request,
                                                                   managedObjectContext: currentContext,
                                                                   sectionNameKeyPath: nil,
-                                                                  cacheName: "BudgetScreenCache")
+                                                                  cacheName: nil)
         }
         else {
             fetchedResultsController = nil

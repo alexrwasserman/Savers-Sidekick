@@ -26,7 +26,7 @@ class ExpensesTableViewController: CoreDataTableViewController {
                 fetchedResultsController = NSFetchedResultsController(fetchRequest: request,
                                                                       managedObjectContext: currentContext,
                                                                       sectionNameKeyPath: nil,
-                                                                      cacheName: "ExpenseScreenCache")
+                                                                      cacheName: nil)
             }
         }
         else {

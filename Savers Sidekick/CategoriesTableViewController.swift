@@ -26,7 +26,7 @@ class CategoriesTableViewController: CoreDataTableViewController {
                 fetchedResultsController = NSFetchedResultsController(fetchRequest: request,
                                                                       managedObjectContext: currentContext,
                                                                       sectionNameKeyPath: nil,
-                                                                      cacheName: "CategoryScreenCache")
+                                                                      cacheName: nil)
             }
         }
         else {
