@@ -97,5 +97,43 @@ class CategoriesTableViewController: CoreDataTableViewController {
         }
     }
     
-
+    
+    // MARK: - File creation
+    
+    fileprivate func createCSVFile() -> Bool {
+        let fileName = "SaversSidekickBudget.csv"
+        let path = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(fileName, isDirectory: false)
+        
+        var fileContent = "Category,Expense,Amount,Date,Description\n"
+        
+        if let categories = budgetContainedIn?.categories {
+            for categoryItem in categories {
+                let category = categoryItem as! Category
+                fileContent += "\(String(describing: category.name)),,,,\n"
+                
+                if let expenses = category.expenses {
+                    for expenseItem in expenses {
+                        let expense = expenseItem as! Expense
+                        fileContent += ",\(String(describing: expense.name)),\(String(describing: expense.cost)),\(String(describing: expense.date)),\(expense.description)\n"
+                    }
+                }
+                
+                fileContent += ",TOTAL:,\(String(describing: category.totalExpenses)),,\n"
+                fileContent += ",ALLOTTED:,\(String(describing: category.totalFunds)),,\n"
+                fileContent += ",DIFFERENCE:,\((category.totalFunds?.floatValue)! - (category.totalExpenses?.floatValue)!),,\n"
+                fileContent += ",,,,\n"
+            }
+        }
+        
+        do {
+            try fileContent.write(to: path!, atomically: true, encoding: String.Encoding.utf8)
+        }
+        catch {
+            NSLog("%@", "Failed to create the file")
+            NSLog("%@", "\(error)")
+            return false
+        }
+        
+        return true
+    }
 }
