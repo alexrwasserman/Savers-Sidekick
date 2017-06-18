@@ -19,12 +19,18 @@ class CreateNewCategoryViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var enteredFunds: UITextField!
     
     @IBAction func buttonPressed(_ sender: UIButton) {
-        context?.performAndWait {
-            _ = Category.categoryWithInfo(name: self.enteredName.text, totalFunds: self.enteredFunds.text, inBudget: self.budgetContainedIn, inContext: self.context!)
-            try? self.context!.save()
+        if let name = self.enteredName.text, let funds = self.enteredFunds.text {
+            context?.performAndWait {
+                _ = Category.categoryWithInfo(name: name, totalFunds: funds, inBudget: self.budgetContainedIn!, inContext: self.context!)
+                try? self.context!.save()
+            }
+            
+            performSegue(withIdentifier: "returnToCategoriesFromCreateCategory", sender: sender)
+        }
+        else {
+            invalidInput()
         }
         
-        performSegue(withIdentifier: "returnToCategoriesFromCreateCategory", sender: sender)
     }
     
     override func viewDidLoad() {
@@ -58,6 +64,14 @@ class CreateNewCategoryViewController: UIViewController, UITextFieldDelegate {
         }
         
         return true
+    }
+    
+    
+    // MARK: - Input validation
+    
+    fileprivate func invalidInput() {
+        //TODO: implement this function, should trigger an alert to the user
+        //      that they left required fields blank
     }
 
 }

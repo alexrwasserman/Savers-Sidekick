@@ -17,12 +17,17 @@ class CreateNewBudgetViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var enteredFunds: UITextField!
 
     @IBAction func buttonPressed(_ sender: UIButton) {
-        context?.performAndWait {
-            _ = Budget.budgetWithInfo(name: self.enteredName.text, totalFunds: self.enteredFunds.text, inContext: self.context!)
-            try? self.context!.save()
+        if let name = self.enteredName.text, let funds = self.enteredFunds.text {
+            context?.performAndWait {
+                _ = Budget.budgetWithInfo(name: name, totalFunds: funds, inContext: self.context!)
+                try? self.context!.save()
+            }
+            
+            performSegue(withIdentifier: "returnToBudgetsFromCreateBudget", sender: sender)
         }
-        
-        performSegue(withIdentifier: "returnToBudgetsFromCreateBudget", sender: sender)
+        else {
+            invalidInput()
+        }
     }
     
     override func viewDidLoad() {
@@ -56,6 +61,14 @@ class CreateNewBudgetViewController: UIViewController, UITextFieldDelegate {
         }
         
         return true
+    }
+    
+    
+    // MARK: - Input validation
+    
+    fileprivate func invalidInput() {
+        //TODO: implement this function, should trigger an alert to the user
+        //      that they left required fields blank
     }
 
 }

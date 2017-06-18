@@ -12,20 +12,13 @@ import CoreData
 
 class Expense: NSManagedObject {
     
-    class func expenseWithInfo(name enteredName: String?, cost enteredCost: String?, description enteredDescription: String?, inCategory category: Category?, inContext context: NSManagedObjectContext) -> Expense? {
+    class func expenseWithInfo(name enteredName: String, cost enteredCost: String, description enteredDescription: String?, inCategory category: Category, inContext context: NSManagedObjectContext) -> Expense? {
         
         if let expense = NSEntityDescription.insertNewObject(forEntityName: "Expense", into: context) as? Expense {
-            if enteredName != nil {
-                expense.name = enteredName
-            }
-            else {
-                expense.name = ""
-            }
+            expense.name = enteredName
             
-            if enteredCost != nil {
-                if let cost = Float(enteredCost!) {
-                    expense.cost = cost as NSNumber?
-                }
+            if let cost = Float(enteredCost) {
+                expense.cost = cost as NSNumber?
             }
             else {
                 expense.cost = 0.00
@@ -40,8 +33,8 @@ class Expense: NSManagedObject {
                 expense.expenseDescription = ""
             }
             
-            let categoryFunds = String(describing: category?.totalFunds)
-            expense.parentCategory = Category.categoryWithInfo(name: category?.name, totalFunds: categoryFunds, inBudget: category?.parentBudget, inContext: context)
+            let categoryFunds = String(describing: category.totalFunds)
+            expense.parentCategory = Category.categoryWithInfo(name: category.name!, totalFunds: categoryFunds, inBudget: category.parentBudget!, inContext: context)
             
             expense.parentCategory?.totalExpenses = (expense.parentCategory?.totalExpenses?.floatValue)! + (expense.cost?.floatValue)! as NSNumber
             expense.parentCategory?.parentBudget?.totalExpenses = (expense.parentCategory?.parentBudget?.totalExpenses?.floatValue)! + (expense.cost?.floatValue)! as NSNumber

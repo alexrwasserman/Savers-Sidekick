@@ -20,12 +20,17 @@ class CreateNewExpenseViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var enteredDescription: UITextField!
     
     @IBAction func buttonPressed(_ sender: UIButton) {
-        context?.performAndWait {
-            _ = Expense.expenseWithInfo(name: self.enteredName.text, cost: self.enteredCost.text, description: self.enteredDescription.text, inCategory: self.categoryContainedIn, inContext: self.context!)
-            try? self.context!.save()
+        if let name = self.enteredName.text, let cost = self.enteredCost.text {
+            context?.performAndWait {
+                _ = Expense.expenseWithInfo(name: name, cost: cost, description: self.enteredDescription.text, inCategory: self.categoryContainedIn!, inContext: self.context!)
+                try? self.context!.save()
+            }
+            
+            performSegue(withIdentifier: "returnToExpensesFromCreateExpense", sender: sender)
         }
-        
-        performSegue(withIdentifier: "returnToExpensesFromCreateExpense", sender: sender)
+        else {
+            invalidInput()
+        }
     }
     
     override func viewDidLoad() {
@@ -63,6 +68,14 @@ class CreateNewExpenseViewController: UIViewController, UITextFieldDelegate {
         }
         
         return true
+    }
+    
+    
+    // MARK: - Input validation
+    
+    fileprivate func invalidInput() {
+        //TODO: implement this function, should trigger an alert to the user
+        //      that they left required fields blank
     }
 
 }

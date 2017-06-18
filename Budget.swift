@@ -12,31 +12,19 @@ import CoreData
 
 class Budget: NSManagedObject {
 
-    class func budgetWithInfo(name enteredName: String?, totalFunds enteredFunds: String?, inContext context: NSManagedObjectContext) -> Budget? {
+    class func budgetWithInfo(name enteredName: String, totalFunds enteredFunds: String, inContext context: NSManagedObjectContext) -> Budget? {
         
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Budget")
-        if let validName = enteredName {
-            request.predicate = NSPredicate(format: "name = %@", validName)
-        }
-        else {
-            request.predicate = NSPredicate(format: "name = %@", "")
-        }
+        request.predicate = NSPredicate(format: "name = %@ AND totalFunds.stringValue = %@", enteredName, enteredFunds)
         
         if let budget = (try? context.fetch(request))?.first as? Budget {
             return budget
         }
         else if let budget = NSEntityDescription.insertNewObject(forEntityName: "Budget", into: context) as? Budget {
-            if enteredName != nil {
-                budget.name = enteredName
-            }
-            else {
-                budget.name = ""
-            }
+            budget.name = enteredName
             
-            if enteredFunds != nil {
-                if let funds = Float(enteredFunds!) {
-                    budget.totalFunds = funds as NSNumber?
-                }
+            if let funds = Float(enteredFunds) {
+                budget.totalFunds = funds as NSNumber?
             }
             else {
                 budget.totalFunds = 0.00
