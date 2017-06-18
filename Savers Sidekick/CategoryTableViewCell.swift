@@ -40,7 +40,6 @@ class CategoryTableViewCell: UITableViewCell {
             else {
                 numberOfEntries?.text = ""
             }
-            numberOfEntries?.text = "\(category.expenses?.count) expenses:"
             
             let funds = category.totalFunds!
             let expenses = category.totalExpenses!
