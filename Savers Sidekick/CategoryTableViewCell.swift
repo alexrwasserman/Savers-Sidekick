@@ -16,47 +16,41 @@ class CategoryTableViewCell: UITableViewCell {
     
     var category: Category? {
         didSet {
-            updateUI()
-        }
-    }
-
-    fileprivate func updateUI() {
-        mostRecentEntry?.text = nil
-        categoryName?.text = nil
-        categoryStatus?.text = nil
-        numberOfEntries?.text = nil
-        
-        if let category = self.category {
-            categoryName?.text = category.name!
+            mostRecentEntry?.text = nil
+            categoryName?.text = nil
+            categoryStatus?.text = nil
+            numberOfEntries?.text = nil
             
-            if let count = category.expenses?.count {
-                if count != 1 {
-                    numberOfEntries?.text = "\(count) expenses:"
+            if let category = self.category {
+                categoryName?.text = category.name!
+                
+                if let count = category.expenses?.count {
+                    if count != 1 {
+                        numberOfEntries?.text = "\(count) expenses:"
+                    }
+                    else {
+                        numberOfEntries?.text = "1 expense:"
+                    }
                 }
                 else {
-                    numberOfEntries?.text = "1 expense:"
+                    numberOfEntries?.text = ""
                 }
-            }
-            else {
-                numberOfEntries?.text = ""
-            }
-            
-            let funds = category.totalFunds!
-            let expenses = category.totalExpenses!
-            categoryStatus?.text = "$\(expenses)/$\(funds)"
-            
-            if let validDate = category.mostRecentExpense {
-                let formatter = DateFormatter()
-                if Date().timeIntervalSince(validDate as Date) > 24*60*60 {
-                    formatter.dateStyle = DateFormatter.Style.short
+                
+                categoryStatus?.text = "$\(category.totalExpensesDescription)/$\(category.totalFundsDescription)"
+                
+                if let validDate = category.mostRecentExpense {
+                    let formatter = DateFormatter()
+                    if Date().timeIntervalSince(validDate as Date) > 24*60*60 {
+                        formatter.dateStyle = DateFormatter.Style.short
+                    }
+                    else {
+                        formatter.timeStyle = DateFormatter.Style.short
+                    }
+                    mostRecentEntry?.text = "Most recent entry: \(formatter.string(from: validDate as Date))"
                 }
                 else {
-                    formatter.timeStyle = DateFormatter.Style.short
+                    mostRecentEntry?.text = nil
                 }
-                mostRecentEntry?.text = "Most recent entry: \(formatter.string(from: validDate as Date))"
-            }
-            else {
-                mostRecentEntry?.text = nil
             }
         }
     }

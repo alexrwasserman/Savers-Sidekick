@@ -13,44 +13,55 @@ class CreateNewExpenseViewController: UIViewController, UITextFieldDelegate {
     
     var context: NSManagedObjectContext?
     
-    var categoryContainedIn: Category?
+    var currentCategory: Category?
 
     @IBOutlet weak var enteredName: UITextField!
     @IBOutlet weak var enteredCost: UITextField!
     @IBOutlet weak var enteredDescription: UITextField!
     
     @IBAction func buttonPressed(_ sender: UIButton) {
+        print("buttonPressed() - CNEVC")
         if let name = self.enteredName.text, let cost = self.enteredCost.text {
-            context?.performAndWait {
-                _ = Expense.expenseWithInfo(name: name, cost: cost, description: self.enteredDescription.text, inCategory: self.categoryContainedIn!, inContext: self.context!)
-                try? self.context!.save()
+            if name != "" && cost != "" {
+                let parsedDollars = Int(cost.components(separatedBy: ".")[0])
+                let parsedCents = Int(cost.components(separatedBy: ".")[1])
+                
+                if parsedDollars == nil || parsedCents == nil {
+                    invalidInput()
+                }
+                
+                let dollars = NSNumber(value: parsedDollars!)
+                let cents = NSNumber(value: parsedCents!)
+                
+                context?.performAndWait {
+                    _ = Expense.expenseWithInfo(name: name,
+                                                costDollars: dollars,
+                                                costCents: cents,
+                                                description: self.enteredDescription.text,
+                                                inCategory: self.currentCategory!,
+                                                inContext: self.context!)
+                    try? self.context!.save()
+                }
+                dismissView()
             }
-            
-            performSegue(withIdentifier: "returnToExpensesFromCreateExpense", sender: sender)
-        }
-        else {
-            invalidInput()
+            else {
+                invalidInput()
+            }
         }
     }
     
+    @IBAction func dismissView() {
+        print("dismissView() - CNEVC")
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     override func viewDidLoad() {
+        print("viewDidLoad() - CNEVC")
         super.viewDidLoad()
         
         enteredName.delegate = self
         enteredCost.delegate = self
         enteredDescription.delegate = self
-    }
-    
-
-    // MARK: - Navigation
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "returnToExpensesFromCreateExpense" {
-            if let expensesController = segue.destination as? ExpensesTableViewController {
-                expensesController.context = context
-                expensesController.categoryContainedIn = categoryContainedIn
-            }
-        }
     }
     
     
@@ -75,7 +86,9 @@ class CreateNewExpenseViewController: UIViewController, UITextFieldDelegate {
     
     fileprivate func invalidInput() {
         //TODO: implement this function, should trigger an alert to the user
-        //      that they left required fields blank
+        //      that they either left required fields blank or passed a value
+        //      that doesn't parse to a valid number. Create an enum and pass
+        //      it to this function to determine which kind of error it was
     }
 
 }

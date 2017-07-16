@@ -10,19 +10,28 @@ import UIKit
 import CoreData
 
 class ExpensesTableViewController: CoreDataTableViewController {
-
-    var context: NSManagedObjectContext?
     
-    var categoryContainedIn: Category?
+    @IBAction func dismissView() {
+        print("dismissView() - ETVC")
+        self.navigationController?.popViewController(animated: true)
+    }
     
-    fileprivate func updateUI() {
-        if let currentContext = context {
-            if let validCategory = categoryContainedIn {
+    override func viewDidLoad() {
+        print("viewDidLoad() - ETVC")
+        super.viewDidLoad()
+        
+        self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
+        tableView.estimatedRowHeight = tableView.rowHeight
+        tableView.rowHeight = UITableViewAutomaticDimension
+        
+        if let currentContext = CoreDataTableViewController.context {
+            if let validCategory = currentCategory {
                 let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Expense")
                 request.predicate = NSPredicate(format: "parentCategory.name = %@", validCategory.name!)
                 request.sortDescriptors = [NSSortDescriptor(key: "name",
-                    ascending: true,
-                    selector: #selector(NSString.localizedCaseInsensitiveCompare(_:)))]
+                                                            ascending: true,
+                                                            selector: #selector(NSString.localizedCaseInsensitiveCompare(_:)))]
                 fetchedResultsController = NSFetchedResultsController(fetchRequest: request,
                                                                       managedObjectContext: currentContext,
                                                                       sectionNameKeyPath: nil,
@@ -34,26 +43,16 @@ class ExpensesTableViewController: CoreDataTableViewController {
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        self.navigationItem.rightBarButtonItem = self.editButtonItem
-        
-        tableView.estimatedRowHeight = tableView.rowHeight
-        tableView.rowHeight = UITableViewAutomaticDimension
-        
-        updateUI()
-    }
-    
     
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        print("tableView(cellForRowAt() - ETVC")
         let cell = tableView.dequeueReusableCell(withIdentifier: "ExpenseCell", for: indexPath)
         
         if let expenseCell = cell as? ExpenseTableViewCell {
             if let expenseToBeDisplayed = fetchedResultsController?.object(at: indexPath) as? Expense {
-                context?.performAndWait {
+                CoreDataTableViewController.context?.performAndWait {
                     expenseCell.expense = expenseToBeDisplayed
                 }
             }
@@ -63,11 +62,12 @@ class ExpensesTableViewController: CoreDataTableViewController {
     }
     
      override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        print("tableView(editingStyle) - ETVC")
         if editingStyle == .delete {
             if let expenseToBeDeleted = fetchedResultsController?.object(at: indexPath) as? Expense {
-                context?.perform {
-                    self.context?.delete(expenseToBeDeleted)
-                    try? self.context!.save()
+                CoreDataTableViewController.context?.perform {
+                    CoreDataTableViewController.context?.delete(expenseToBeDeleted)
+                    try? CoreDataTableViewController.context!.save()
                 }
             }
         }
@@ -77,16 +77,11 @@ class ExpensesTableViewController: CoreDataTableViewController {
     // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        print("prepareForSegue() - ETVC")
         if segue.identifier == "addExpense" {
             if let createExpenseController = segue.destination as? CreateNewExpenseViewController {
-                createExpenseController.context = context
-                createExpenseController.categoryContainedIn = categoryContainedIn
-            }
-        }
-        else if segue.identifier == "returnToCategoriesFromExpenses" {
-            if let categoriesController = segue.destination as? CategoriesTableViewController {
-                categoriesController.context = context
-                categoriesController.budgetContainedIn = categoryContainedIn?.parentBudget
+                createExpenseController.context = CoreDataTableViewController.context
+                createExpenseController.currentCategory = currentCategory
             }
         }
     }

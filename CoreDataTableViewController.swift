@@ -10,8 +10,13 @@ import UIKit
 import CoreData
 
 class CoreDataTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+    
+    static var context = (UIApplication.shared.delegate as? AppDelegate)?.managedObjectContext
+    
     var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>? {
         didSet {
+            print("didSet(fetchedResultsController) - CDTVC")
+            
             if let frc = fetchedResultsController {
                 frc.delegate = self
                 try? frc.performFetch()
@@ -19,6 +24,14 @@ class CoreDataTableViewController: UITableViewController, NSFetchedResultsContro
             tableView.reloadData()
         }
     }
+
+    var currentBudget: Budget?
+    var currentCategory: Category?
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        isEditing = false
+    }
+    
     
     // MARK: UITableViewDataSource
     
@@ -55,11 +68,15 @@ class CoreDataTableViewController: UITableViewController, NSFetchedResultsContro
     // MARK: NSFetchedResultsControllerDelegate
     
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        print("controllerWillChangeContent() - CDTVC")
+        
         tableView.beginUpdates()
     }
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo,
                     atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
+        print("controller(didChange sectionInfo) - CDTVC")
+        
         switch type {
             case .insert: tableView.insertSections(IndexSet(integer: sectionIndex), with: .fade)
             case .delete: tableView.deleteSections(IndexSet(integer: sectionIndex), with: .fade)
@@ -69,6 +86,8 @@ class CoreDataTableViewController: UITableViewController, NSFetchedResultsContro
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any,
                     at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        print("controller(didChange anObject) - CDTVC")
+        
         switch type {
             case .insert: tableView.insertRows(at: [newIndexPath!], with: .fade)
             case .delete: tableView.deleteRows(at: [indexPath!], with: .fade)
@@ -79,6 +98,8 @@ class CoreDataTableViewController: UITableViewController, NSFetchedResultsContro
     }
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        print("controllerDidChangeContent() - CDTVC")
+        
         tableView.endUpdates()
     }
 }

@@ -11,18 +11,27 @@ import CoreData
 
 class CategoriesTableViewController: CoreDataTableViewController {
     
-    var context: NSManagedObjectContext?
-    
-    var budgetContainedIn: Budget?
-    
-    fileprivate func updateUI() {
-        if let currentContext = context {
-            if let validBudget = budgetContainedIn {
+    @IBAction func dismissView() {
+        print("dismissView() - CTVC")
+        self.navigationController?.popViewController(animated: true)
+    }
+
+    override func viewDidLoad() {
+        print("viewDidLoad() - CTVC")
+        super.viewDidLoad()
+        
+        self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
+        tableView.estimatedRowHeight = tableView.rowHeight
+        tableView.rowHeight = UITableViewAutomaticDimension
+        
+        if let currentContext = CoreDataTableViewController.context {
+            if let validBudget = currentBudget {
                 let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Category")
                 request.predicate = NSPredicate(format: "parentBudget.name = %@", validBudget.name!)
                 request.sortDescriptors = [NSSortDescriptor(key: "name",
-                    ascending: true,
-                    selector: #selector(NSString.localizedCaseInsensitiveCompare(_:)))]
+                                                            ascending: true,
+                                                            selector: #selector(NSString.localizedCaseInsensitiveCompare(_:)))]
                 fetchedResultsController = NSFetchedResultsController(fetchRequest: request,
                                                                       managedObjectContext: currentContext,
                                                                       sectionNameKeyPath: nil,
@@ -33,26 +42,17 @@ class CategoriesTableViewController: CoreDataTableViewController {
             fetchedResultsController = nil
         }
     }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        self.navigationItem.rightBarButtonItem = self.editButtonItem
-        
-        tableView.estimatedRowHeight = tableView.rowHeight
-        tableView.rowHeight = UITableViewAutomaticDimension
-        
-        updateUI()
-    }
+    
 
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        print("tableView(cellForRowAt) - CTVC")
         let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath)
 
         if let categoryCell = cell as? CategoryTableViewCell {
             if let categoryToBeDisplayed = fetchedResultsController?.object(at: indexPath) as? Category {
-                context?.performAndWait {
+                CoreDataTableViewController.context?.performAndWait {
                     categoryCell.category = categoryToBeDisplayed
                 }
             }
@@ -62,11 +62,12 @@ class CategoriesTableViewController: CoreDataTableViewController {
     }
 
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        print("tableView(editingStyle) - CTVC")
         if editingStyle == .delete {
             if let categoryToBeDeleted = fetchedResultsController?.object(at: indexPath) as? Category {
-                context?.perform {
-                    self.context?.delete(categoryToBeDeleted)
-                    try? self.context!.save()
+                CoreDataTableViewController.context?.perform {
+                    CoreDataTableViewController.context?.delete(categoryToBeDeleted)
+                    try? CoreDataTableViewController.context!.save()
                 }
             }
         }
@@ -76,22 +77,17 @@ class CategoriesTableViewController: CoreDataTableViewController {
     // MARK: - Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        print("prepareForSegue() - CTVC")
         if segue.identifier == "addCategory" {
             if let createCategoryController = segue.destination as? CreateNewCategoryViewController {
-                createCategoryController.context = context
-                createCategoryController.budgetContainedIn = budgetContainedIn
-            }
-        }
-        else if segue.identifier == "returnToBudgetsFromCategories" {
-            if let budgetController = segue.destination as? BudgetsTableViewController {
-                budgetController.context = context
+                createCategoryController.context = CoreDataTableViewController.context
+                createCategoryController.currentBudget = currentBudget
             }
         }
         else if segue.identifier == "expensesOfSelectedCategory" {
             if let expensesController = segue.destination as? ExpensesTableViewController {
                 if let categorySelected = sender as? CategoryTableViewCell {
-                    expensesController.context = context
-                    expensesController.categoryContainedIn = categorySelected.category
+                    expensesController.currentCategory = categorySelected.category
                 }
             }
         }
@@ -106,7 +102,7 @@ class CategoriesTableViewController: CoreDataTableViewController {
         
         var fileContent = "Category,Expense,Amount,Date,Description\n"
         
-        if let categories = budgetContainedIn?.categories {
+        if let categories = currentBudget?.categories {
             for categoryItem in categories {
                 let category = categoryItem as! Category
                 fileContent += "\(String(describing: category.name)),,,,\n"
@@ -114,13 +110,22 @@ class CategoriesTableViewController: CoreDataTableViewController {
                 if let expenses = category.expenses {
                     for expenseItem in expenses {
                         let expense = expenseItem as! Expense
-                        fileContent += ",\(String(describing: expense.name)),\(String(describing: expense.cost)),\(String(describing: expense.date)),\(expense.description)\n"
+                        fileContent += ",\(String(describing: expense.name)),\(expense.description),"
+                        fileContent += "\(String(describing: expense.date)),\(String(describing: expense.humanDescription))\n"
                     }
                 }
                 
-                fileContent += ",TOTAL:,\(String(describing: category.totalExpenses)),,\n"
-                fileContent += ",ALLOTTED:,\(String(describing: category.totalFunds)),,\n"
-                fileContent += ",DIFFERENCE:,\((category.totalFunds?.floatValue)! - (category.totalExpenses?.floatValue)!),,\n"
+                fileContent += ",TOTAL:,\(category.totalExpensesDescription),,\n"
+                fileContent += ",ALLOTTED:,\(category.totalFundsDescription),,\n"
+                
+                let difference = performArithmetic(firstTermDollars: (category.totalFundsDollars)!,
+                                                   firstTermCents: (category.totalFundsCents)!,
+                                                   secondTermDollars: (category.totalExpensesDollars)!,
+                                                   secondTermCents: (category.totalExpensesCents)!,
+                                                   operation: Operation.subtraction)
+                let differenceStr = "\(difference.0)" + "." + "\(difference.1)"
+                
+                fileContent += ",DIFFERENCE:,\(differenceStr),,\n"
                 fileContent += ",,,,\n"
             }
         }

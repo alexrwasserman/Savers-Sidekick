@@ -1,30 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10171" systemVersion="15G31" minimumToolsVersion="Automatic">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16F73" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Budget" representedClassName=".Budget" syncable="YES">
-        <attribute name="mostRecentExpense" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="mostRecentExpense" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="totalExpenses" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="totalFunds" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="totalExpensesCents" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="totalExpensesDollars" optional="YES" attributeType="Integer 32" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="totalFundsCents" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="totalFundsDollars" optional="YES" attributeType="Integer 32" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="categories" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Category" inverseName="parentBudget" inverseEntity="Category" syncable="YES"/>
     </entity>
     <entity name="Category" representedClassName=".Category" syncable="YES">
-        <attribute name="mostRecentExpense" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="mostRecentExpense" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="totalExpenses" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="totalFunds" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="totalExpensesCents" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="totalExpensesDollars" optional="YES" attributeType="Integer 32" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="totalFundsCents" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="totalFundsDollars" optional="YES" attributeType="Integer 32" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="expenses" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Expense" inverseName="parentCategory" inverseEntity="Expense" syncable="YES"/>
         <relationship name="parentBudget" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Budget" inverseName="categories" inverseEntity="Budget" syncable="YES"/>
     </entity>
     <entity name="Expense" representedClassName=".Expense" syncable="YES">
-        <attribute name="cost" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
-        <attribute name="expenseDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="costCents" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="costDollars" optional="YES" attributeType="Integer 32" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="humanDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="parentCategory" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="expenses" inverseEntity="Category" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Budget" positionX="-288" positionY="15" width="128" height="118"/>
-        <element name="Category" positionX="-29" positionY="15" width="128" height="133"/>
-        <element name="Expense" positionX="232" positionY="30" width="128" height="118"/>
+        <element name="Budget" positionX="-288" positionY="15" width="128" height="150"/>
+        <element name="Category" positionX="-29" positionY="15" width="128" height="165"/>
+        <element name="Expense" positionX="232" positionY="30" width="128" height="133"/>
     </elements>
 </model>

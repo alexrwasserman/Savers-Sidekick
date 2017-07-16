@@ -14,9 +14,6 @@
 		493B2A421D73BF2100179ED3 /* ExpensesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493B2A411D73BF2100179ED3 /* ExpensesTableViewController.swift */; };
 		493B2A441D73C04900179ED3 /* CreateNewExpenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493B2A431D73C04900179ED3 /* CreateNewExpenseViewController.swift */; };
 		493B2A461D73C17F00179ED3 /* ExpenseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493B2A451D73C17F00179ED3 /* ExpenseTableViewCell.swift */; };
-		493B2A501D73DFCA00179ED3 /* Budget+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493B2A4A1D73DFCA00179ED3 /* Budget+CoreDataProperties.swift */; };
-		493B2A521D73DFCA00179ED3 /* Category+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493B2A4C1D73DFCA00179ED3 /* Category+CoreDataProperties.swift */; };
-		493B2A541D73DFCA00179ED3 /* Expense+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493B2A4E1D73DFCA00179ED3 /* Expense+CoreDataProperties.swift */; };
 		4940017A1D623A2B00E21ADC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494001791D623A2B00E21ADC /* AppDelegate.swift */; };
 		4940017F1D623A2B00E21ADC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4940017D1D623A2B00E21ADC /* Main.storyboard */; };
 		494001821D623A2B00E21ADC /* Savers_Sidekick.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 494001801D623A2B00E21ADC /* Savers_Sidekick.xcdatamodeld */; };
@@ -25,9 +22,13 @@
 		4940019D1D624C2D00E21ADC /* BudgetsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4940019C1D624C2D00E21ADC /* BudgetsTableViewController.swift */; };
 		4940019F1D6252D900E21ADC /* BudgetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4940019E1D6252D900E21ADC /* BudgetTableViewCell.swift */; };
 		494001A11D626E9100E21ADC /* CreateNewBudgetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494001A01D626E9100E21ADC /* CreateNewBudgetViewController.swift */; };
-		494366B21D6AB59900B3D6B1 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494366AC1D6AB59900B3D6B1 /* Category.swift */; };
-		494366B41D6AB59900B3D6B1 /* Budget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494366AE1D6AB59900B3D6B1 /* Budget.swift */; };
-		494366B61D6AB59900B3D6B1 /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494366B01D6AB59900B3D6B1 /* Expense.swift */; };
+		9D2308AB1F1BC22F001130BB /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2308A51F1BC22F001130BB /* Category.swift */; };
+		9D2308AC1F1BC22F001130BB /* Category+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2308A61F1BC22F001130BB /* Category+CoreDataProperties.swift */; };
+		9D2308AD1F1BC22F001130BB /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2308A71F1BC22F001130BB /* Expense.swift */; };
+		9D2308AE1F1BC22F001130BB /* Expense+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2308A81F1BC22F001130BB /* Expense+CoreDataProperties.swift */; };
+		9D2308AF1F1BC22F001130BB /* Budget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2308A91F1BC22F001130BB /* Budget.swift */; };
+		9D2308B01F1BC22F001130BB /* Budget+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2308AA1F1BC22F001130BB /* Budget+CoreDataProperties.swift */; };
+		9D25EEF21F1AE9DB00D4200C /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D25EEF11F1AE9DB00D4200C /* Utilities.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,9 +39,6 @@
 		493B2A411D73BF2100179ED3 /* ExpensesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpensesTableViewController.swift; sourceTree = "<group>"; };
 		493B2A431D73C04900179ED3 /* CreateNewExpenseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateNewExpenseViewController.swift; sourceTree = "<group>"; };
 		493B2A451D73C17F00179ED3 /* ExpenseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpenseTableViewCell.swift; sourceTree = "<group>"; };
-		493B2A4A1D73DFCA00179ED3 /* Budget+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Budget+CoreDataProperties.swift"; path = "Savers Sidekick/Budget+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		493B2A4C1D73DFCA00179ED3 /* Category+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Category+CoreDataProperties.swift"; path = "Savers Sidekick/Category+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		493B2A4E1D73DFCA00179ED3 /* Expense+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Expense+CoreDataProperties.swift"; path = "Savers Sidekick/Expense+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		494001761D623A2A00E21ADC /* Savers Sidekick.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Savers Sidekick.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		494001791D623A2B00E21ADC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4940017E1D623A2B00E21ADC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -51,9 +49,13 @@
 		4940019C1D624C2D00E21ADC /* BudgetsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BudgetsTableViewController.swift; sourceTree = "<group>"; };
 		4940019E1D6252D900E21ADC /* BudgetTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BudgetTableViewCell.swift; sourceTree = "<group>"; };
 		494001A01D626E9100E21ADC /* CreateNewBudgetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateNewBudgetViewController.swift; sourceTree = "<group>"; };
-		494366AC1D6AB59900B3D6B1 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
-		494366AE1D6AB59900B3D6B1 /* Budget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Budget.swift; sourceTree = "<group>"; };
-		494366B01D6AB59900B3D6B1 /* Expense.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Expense.swift; sourceTree = "<group>"; };
+		9D2308A51F1BC22F001130BB /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		9D2308A61F1BC22F001130BB /* Category+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		9D2308A71F1BC22F001130BB /* Expense.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Expense.swift; sourceTree = "<group>"; };
+		9D2308A81F1BC22F001130BB /* Expense+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Expense+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		9D2308A91F1BC22F001130BB /* Budget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Budget.swift; sourceTree = "<group>"; };
+		9D2308AA1F1BC22F001130BB /* Budget+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Budget+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		9D25EEF11F1AE9DB00D4200C /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +135,7 @@
 				494001831D623A2B00E21ADC /* Assets.xcassets */,
 				494001851D623A2B00E21ADC /* LaunchScreen.storyboard */,
 				494001881D623A2B00E21ADC /* Info.plist */,
+				9D25EEF11F1AE9DB00D4200C /* Utilities.swift */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -141,12 +144,12 @@
 			isa = PBXGroup;
 			children = (
 				492E7C6D1D6B75C5002DF6B5 /* CoreDataTableViewController.swift */,
-				493B2A4A1D73DFCA00179ED3 /* Budget+CoreDataProperties.swift */,
-				494366AE1D6AB59900B3D6B1 /* Budget.swift */,
-				493B2A4C1D73DFCA00179ED3 /* Category+CoreDataProperties.swift */,
-				494366AC1D6AB59900B3D6B1 /* Category.swift */,
-				493B2A4E1D73DFCA00179ED3 /* Expense+CoreDataProperties.swift */,
-				494366B01D6AB59900B3D6B1 /* Expense.swift */,
+				9D2308AA1F1BC22F001130BB /* Budget+CoreDataProperties.swift */,
+				9D2308A91F1BC22F001130BB /* Budget.swift */,
+				9D2308A61F1BC22F001130BB /* Category+CoreDataProperties.swift */,
+				9D2308A51F1BC22F001130BB /* Category.swift */,
+				9D2308A81F1BC22F001130BB /* Expense+CoreDataProperties.swift */,
+				9D2308A71F1BC22F001130BB /* Expense.swift */,
 				494001801D623A2B00E21ADC /* Savers_Sidekick.xcdatamodeld */,
 			);
 			name = "Core Data";
@@ -186,7 +189,7 @@
 					494001751D623A2A00E21ADC = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = 53N4GUERHD;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0830;
 					};
 				};
 			};
@@ -226,24 +229,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				493B2A501D73DFCA00179ED3 /* Budget+CoreDataProperties.swift in Sources */,
-				493B2A521D73DFCA00179ED3 /* Category+CoreDataProperties.swift in Sources */,
+				9D2308B01F1BC22F001130BB /* Budget+CoreDataProperties.swift in Sources */,
+				9D2308AD1F1BC22F001130BB /* Expense.swift in Sources */,
 				492E7C701D6B8816002DF6B5 /* CreateNewCategoryViewController.swift in Sources */,
+				9D2308AF1F1BC22F001130BB /* Budget.swift in Sources */,
 				492E7C6E1D6B75C5002DF6B5 /* CoreDataTableViewController.swift in Sources */,
 				4940017A1D623A2B00E21ADC /* AppDelegate.swift in Sources */,
 				494001821D623A2B00E21ADC /* Savers_Sidekick.xcdatamodeld in Sources */,
 				4940019D1D624C2D00E21ADC /* BudgetsTableViewController.swift in Sources */,
+				9D2308AC1F1BC22F001130BB /* Category+CoreDataProperties.swift in Sources */,
 				492C65521D6969B3007D42BE /* CategoriesTableViewController.swift in Sources */,
 				493B2A441D73C04900179ED3 /* CreateNewExpenseViewController.swift in Sources */,
+				9D2308AE1F1BC22F001130BB /* Expense+CoreDataProperties.swift in Sources */,
 				4940019F1D6252D900E21ADC /* BudgetTableViewCell.swift in Sources */,
 				493B2A421D73BF2100179ED3 /* ExpensesTableViewController.swift in Sources */,
 				493B2A461D73C17F00179ED3 /* ExpenseTableViewCell.swift in Sources */,
 				494001A11D626E9100E21ADC /* CreateNewBudgetViewController.swift in Sources */,
-				494366B41D6AB59900B3D6B1 /* Budget.swift in Sources */,
-				493B2A541D73DFCA00179ED3 /* Expense+CoreDataProperties.swift in Sources */,
-				494366B21D6AB59900B3D6B1 /* Category.swift in Sources */,
+				9D2308AB1F1BC22F001130BB /* Category.swift in Sources */,
+				9D25EEF21F1AE9DB00D4200C /* Utilities.swift in Sources */,
 				492C65541D696C0E007D42BE /* CategoryTableViewCell.swift in Sources */,
-				494366B61D6AB59900B3D6B1 /* Expense.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -361,12 +365,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = 53N4GUERHD;
 				INFOPLIST_FILE = "Savers Sidekick/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "edu.umich.alexwass.Savers-Sidekick";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Savers Sidekick-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -375,12 +382,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = 53N4GUERHD;
 				INFOPLIST_FILE = "Savers Sidekick/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "edu.umich.alexwass.Savers-Sidekick";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Savers Sidekick-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

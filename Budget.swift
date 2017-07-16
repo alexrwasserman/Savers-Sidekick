@@ -1,42 +1,51 @@
 //
-//  Budget.swift
+//  Budget+CoreDataClass.swift
 //  Savers Sidekick
 //
-//  Created by Alex Wasserman on 8/21/16.
-//  Copyright © 2016 Alex Wasserman. All rights reserved.
+//  Created by Alex Wasserman on 7/16/17.
+//  Copyright © 2017 Alex Wasserman. All rights reserved.
 //
 
 import Foundation
 import CoreData
 
 
-class Budget: NSManagedObject {
-
-    class func budgetWithInfo(name enteredName: String, totalFunds enteredFunds: String, inContext context: NSManagedObjectContext) -> Budget? {
+public class Budget: NSManagedObject {
+    
+    class func budgetWithInfo(name enteredName: String,
+                              totalFundsDollars enteredFundsDollars: NSNumber,
+                              totalFundsCents enteredFundsCents: NSNumber,
+                              inContext context: NSManagedObjectContext) -> Budget? {
+        print("budgetWithInfo - B")
         
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Budget")
-        request.predicate = NSPredicate(format: "name = %@ AND totalFunds.stringValue = %@", enteredName, enteredFunds)
+        request.predicate = NSPredicate(format: "name = %@ AND totalFundsDollars = %@ AND totalFundsCents = %@",
+                                        enteredName,
+                                        enteredFundsDollars,
+                                        enteredFundsCents)
         
         if let budget = (try? context.fetch(request))?.first as? Budget {
             return budget
         }
         else if let budget = NSEntityDescription.insertNewObject(forEntityName: "Budget", into: context) as? Budget {
             budget.name = enteredName
-            
-            if let funds = Float(enteredFunds) {
-                budget.totalFunds = funds as NSNumber?
-            }
-            else {
-                budget.totalFunds = 0.00
-            }
-            
+            budget.totalFundsDollars = enteredFundsDollars
+            budget.totalFundsCents = enteredFundsCents
             budget.mostRecentExpense = nil
-            
-            budget.totalExpenses = 0.00
-            
+            budget.totalExpensesDollars = 0
+            budget.totalExpensesCents = 0
             return budget
         }
         
         return nil
     }
+    
+    public var totalExpensesDescription: String {
+        return String(describing: totalExpensesDollars) + "." + String(describing: totalExpensesCents)
+    }
+    
+    public var totalFundsDescription: String {
+        return String(describing: totalFundsDollars) + "." + String(describing: totalFundsCents)
+    }
+    
 }

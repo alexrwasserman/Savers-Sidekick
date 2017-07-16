@@ -1,43 +1,61 @@
 //
-//  Expense.swift
+//  Expense+CoreDataClass.swift
 //  Savers Sidekick
 //
-//  Created by Alex Wasserman on 8/21/16.
-//  Copyright © 2016 Alex Wasserman. All rights reserved.
+//  Created by Alex Wasserman on 7/16/17.
+//  Copyright © 2017 Alex Wasserman. All rights reserved.
 //
 
 import Foundation
 import CoreData
 
 
-class Expense: NSManagedObject {
-    
-    class func expenseWithInfo(name enteredName: String, cost enteredCost: String, description enteredDescription: String?, inCategory category: Category, inContext context: NSManagedObjectContext) -> Expense? {
+public class Expense: NSManagedObject {
+
+    class func expenseWithInfo(name enteredName: String,
+                               costDollars enteredCostDollars: NSNumber,
+                               costCents enteredCostCents: NSNumber,
+                               description enteredDescription: String?,
+                               inCategory category: Category,
+                               inContext context: NSManagedObjectContext) -> Expense? {
+        print("expenseWithInfo - E")
         
         if let expense = NSEntityDescription.insertNewObject(forEntityName: "Expense", into: context) as? Expense {
             expense.name = enteredName
-            
-            if let cost = Float(enteredCost) {
-                expense.cost = cost as NSNumber?
-            }
-            else {
-                expense.cost = 0.00
-            }
-            
-            expense.date = Date()
+            expense.costDollars = enteredCostDollars
+            expense.costCents = enteredCostCents
+            expense.date = NSDate()
             
             if enteredDescription != nil {
-                expense.expenseDescription = enteredDescription
+                expense.humanDescription = enteredDescription
             }
             else {
-                expense.expenseDescription = ""
+                expense.humanDescription = ""
             }
             
-            let categoryFunds = String(describing: category.totalFunds)
-            expense.parentCategory = Category.categoryWithInfo(name: category.name!, totalFunds: categoryFunds, inBudget: category.parentBudget!, inContext: context)
+            expense.parentCategory = Category.categoryWithInfo(name: category.name!,
+                                                               totalFundsDollars: category.totalFundsDollars!,
+                                                               totalFundsCents: category.totalFundsCents!,
+                                                               inBudget: category.parentBudget!,
+                                                               inContext: context)
             
-            expense.parentCategory?.totalExpenses = (expense.parentCategory?.totalExpenses?.floatValue)! + (expense.cost?.floatValue)! as NSNumber
-            expense.parentCategory?.parentBudget?.totalExpenses = (expense.parentCategory?.parentBudget?.totalExpenses?.floatValue)! + (expense.cost?.floatValue)! as NSNumber
+            let updatedParentCategoryExpenses = performArithmetic(firstTermDollars: enteredCostDollars,
+                                                                  firstTermCents: enteredCostCents,
+                                                                  secondTermDollars: (expense.parentCategory?.totalExpensesDollars)!,
+                                                                  secondTermCents: (expense.parentCategory?.totalExpensesCents)!,
+                                                                  operation: Operation.addition)
+            
+            expense.parentCategory?.totalExpensesDollars = updatedParentCategoryExpenses.0
+            expense.parentCategory?.totalExpensesCents = updatedParentCategoryExpenses.1
+            
+            let updatedParentBudgetExpenses = performArithmetic(firstTermDollars: enteredCostDollars,
+                                                                firstTermCents: enteredCostCents,
+                                                                secondTermDollars: (expense.parentCategory?.parentBudget?.totalExpensesDollars)!,
+                                                                secondTermCents: (expense.parentCategory?.parentBudget?.totalExpensesCents)!,
+                                                                operation: Operation.addition)
+            
+            expense.parentCategory?.parentBudget?.totalExpensesDollars = updatedParentBudgetExpenses.0
+            expense.parentCategory?.parentBudget?.totalExpensesCents = updatedParentBudgetExpenses.1
             
             expense.parentCategory?.mostRecentExpense = expense.date
             expense.parentCategory?.parentBudget?.mostRecentExpense = expense.date
@@ -48,36 +66,63 @@ class Expense: NSManagedObject {
         return nil
     }
     
-    override func prepareForDeletion() {
+    override public func prepareForDeletion() {
         // Update total expenses of parent category and budget
-        parentCategory?.totalExpenses = (parentCategory?.totalExpenses?.floatValue)! - (cost?.floatValue)! as NSNumber
-        parentCategory?.parentBudget?.totalExpenses = (parentCategory?.parentBudget?.totalExpenses?.floatValue)! - (cost?.floatValue)! as NSNumber
+        let updatedParentCategoryExpenses = performArithmetic(firstTermDollars: costDollars!,
+                                                              firstTermCents: costCents!,
+                                                              secondTermDollars: (parentCategory?.totalExpensesDollars)!,
+                                                              secondTermCents: (parentCategory?.totalExpensesCents)!,
+                                                              operation: Operation.subtraction)
+        
+        parentCategory?.totalExpensesDollars = updatedParentCategoryExpenses.0
+        parentCategory?.totalExpensesCents = updatedParentCategoryExpenses.1
+        
+        let updatedParentBudgetExpenses = performArithmetic(firstTermDollars: costDollars!,
+                                                            firstTermCents: costCents!,
+                                                            secondTermDollars: (parentCategory?.parentBudget?.totalExpensesDollars)!,
+                                                            secondTermCents: (parentCategory?.parentBudget?.totalExpensesCents)!,
+                                                            operation: Operation.addition)
+        
+        parentCategory?.parentBudget?.totalExpensesDollars = updatedParentBudgetExpenses.0
+        parentCategory?.parentBudget?.totalExpensesCents = updatedParentBudgetExpenses.1
         
         // Update mostRecentExpense for parent category and budget if necessary
         if date == parentCategory?.mostRecentExpense {
             let categoryIterator = parentCategory?.expenses?.makeIterator()
-            var mostRecentExpense = Date(timeIntervalSinceReferenceDate: 0)
+            var mostRecentExpense = NSDate(timeIntervalSinceReferenceDate: 0)
+            
+            var foundAReplacement = false
             
             while let expense = categoryIterator?.next() as? Expense {
-                if expense.date != date && expense.date! > mostRecentExpense {
+                if expense.date != date && expense.date?.compare(mostRecentExpense as Date) == .orderedDescending {
                     mostRecentExpense = expense.date!
+                    foundAReplacement = true
                 }
             }
             
-            parentCategory?.mostRecentExpense = mostRecentExpense
+            parentCategory?.mostRecentExpense = foundAReplacement ? mostRecentExpense : nil
             
             if date == parentCategory?.parentBudget?.mostRecentExpense {
                 let budgetIterator = parentCategory?.parentBudget?.categories?.makeIterator()
-                mostRecentExpense = Date(timeIntervalSinceReferenceDate: 0)
+                mostRecentExpense = NSDate(timeIntervalSinceReferenceDate: 0)
+                
+                foundAReplacement = false
                 
                 while let category = budgetIterator?.next() as? Category {
-                    if category.mostRecentExpense != date && category.mostRecentExpense! > mostRecentExpense {
+                    if category.mostRecentExpense != date &&
+                        category.mostRecentExpense?.compare(mostRecentExpense as Date) == .orderedDescending {
                         mostRecentExpense = category.mostRecentExpense!
+                        foundAReplacement = true
                     }
                 }
                 
-                parentCategory?.parentBudget?.mostRecentExpense = mostRecentExpense
+                parentCategory?.parentBudget?.mostRecentExpense = foundAReplacement ? mostRecentExpense : nil
             }
         }
     }
+    
+    override public var description: String {
+        return String(describing: costDollars) + "." + String(describing: costCents)
+    }
+    
 }

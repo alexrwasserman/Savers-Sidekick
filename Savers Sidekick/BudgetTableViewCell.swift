@@ -15,34 +15,27 @@ class BudgetTableViewCell: UITableViewCell {
     
     var budget: Budget? {
         didSet {
-            updateUI()
-        }
-    }
-    
-    fileprivate func updateUI() {
-        mostRecentEntry?.text = nil
-        budgetName?.text = nil
-        budgetStatus?.text = nil
-        
-        if let budget = self.budget {
-            budgetName?.text = budget.name!
+            mostRecentEntry?.text = nil
+            budgetName?.text = nil
+            budgetStatus?.text = nil
             
-            let funds = budget.totalFunds!
-            let expenses = budget.totalExpenses!
-            budgetStatus?.text = "$\(expenses)/$\(funds)"
-            
-            if let validDate = budget.mostRecentExpense {
-                let formatter = DateFormatter()
-                if Date().timeIntervalSince(validDate as Date) > 24*60*60 {
-                    formatter.dateStyle = DateFormatter.Style.short
+            if let budget = self.budget {
+                budgetName?.text = budget.name!
+                budgetStatus?.text = "$\(budget.totalExpensesDescription)/$\(budget.totalFundsDescription)"
+                
+                if let validDate = budget.mostRecentExpense {
+                    let formatter = DateFormatter()
+                    if Date().timeIntervalSince(validDate as Date) > 24*60*60 {
+                        formatter.dateStyle = DateFormatter.Style.short
+                    }
+                    else {
+                        formatter.timeStyle = DateFormatter.Style.short
+                    }
+                    mostRecentEntry?.text = "Most recent entry: \(formatter.string(from: validDate as Date))"
                 }
                 else {
-                    formatter.timeStyle = DateFormatter.Style.short
+                    mostRecentEntry?.text = nil
                 }
-                mostRecentEntry?.text = "Most recent entry: \(formatter.string(from: validDate as Date))"
-            }
-            else {
-                mostRecentEntry?.text = nil
             }
         }
     }
