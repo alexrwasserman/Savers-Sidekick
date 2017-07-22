@@ -17,13 +17,13 @@ extension Category {
     }
 
     @NSManaged public var mostRecentExpense: NSDate?
-    @NSManaged public var name: String?
-    @NSManaged public var totalExpensesCents: NSNumber?
-    @NSManaged public var totalExpensesDollars: NSNumber?
-    @NSManaged public var totalFundsCents: NSNumber?
-    @NSManaged public var totalFundsDollars: NSNumber?
-    @NSManaged public var expenses: NSSet?
-    @NSManaged public var parentBudget: Budget?
+    @NSManaged public var name: String
+    @NSManaged public var totalExpensesCents: NSNumber
+    @NSManaged public var totalExpensesDollars: NSNumber
+    @NSManaged public var totalFundsCents: NSNumber
+    @NSManaged public var totalFundsDollars: NSNumber
+    @NSManaged public var expenses: NSSet
+    @NSManaged public var parentBudget: Budget
 
 }
 

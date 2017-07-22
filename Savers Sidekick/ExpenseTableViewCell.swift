@@ -23,25 +23,20 @@ class ExpenseTableViewCell: UITableViewCell {
             humanDescription?.text = nil
             
             if let expense = self.expense {
-                expenseName?.text = expense.name!
+                expenseName?.text = expense.name
                 
                 cost?.text = "$\(expense.description)"
                 
                 humanDescription?.text = expense.humanDescription!
                 
-                if let validDate = expense.date {
-                    let formatter = DateFormatter()
-                    if Date().timeIntervalSince(validDate as Date) > 24*60*60 {
-                        formatter.dateStyle = DateFormatter.Style.short
-                    }
-                    else {
-                        formatter.timeStyle = DateFormatter.Style.short
-                    }
-                    date?.text = "\(formatter.string(from: validDate as Date))"
+                let formatter = DateFormatter()
+                if Date().timeIntervalSince(expense.date as Date) > 24*60*60 {
+                    formatter.dateStyle = DateFormatter.Style.short
                 }
                 else {
-                    date?.text = nil
+                    formatter.timeStyle = DateFormatter.Style.short
                 }
+                date?.text = "\(formatter.string(from: expense.date as Date))"
             }
         }
     }

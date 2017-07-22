@@ -16,13 +16,13 @@ public class Category: NSManagedObject {
                                 totalFundsDollars enteredFundsDollars: NSNumber,
                                 totalFundsCents enteredFundsCents: NSNumber,
                                 inBudget budget: Budget,
-                                inContext context: NSManagedObjectContext) -> Category? {
+                                inContext context: NSManagedObjectContext) -> Category {
         print("categoryWithInfo - E")
         
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Category")
         request.predicate = NSPredicate(format: "name = %@ AND parentBudget.name = %@ AND totalFundsDollars = %@ AND totalFundsCents = %@",
                                         enteredName,
-                                        budget.name!,
+                                        budget.name,
                                         enteredFundsDollars,
                                         enteredFundsCents)
         
@@ -36,34 +36,35 @@ public class Category: NSManagedObject {
             category.mostRecentExpense = nil
             category.totalExpensesDollars = 0
             category.totalExpensesCents = 0
-            category.parentBudget = Budget.budgetWithInfo(name: budget.name!,
-                                                          totalFundsDollars: budget.totalFundsDollars!,
-                                                          totalFundsCents: budget.totalFundsCents!,
+            category.parentBudget = Budget.budgetWithInfo(name: budget.name,
+                                                          totalFundsDollars: budget.totalFundsDollars,
+                                                          totalFundsCents: budget.totalFundsCents,
                                                           inContext: context)
             return category
         }
-        
-        return nil
+        else {
+            return Category()
+        }
     }
     
     override public func prepareForDeletion() {
         // Update total expenses of parent budget
-        let updatedParentBudgetExpenses = performArithmetic(firstTermDollars: (parentBudget?.totalExpensesDollars)!,
-                                                            firstTermCents: (parentBudget?.totalExpensesCents)!,
-                                                            secondTermDollars: totalExpensesDollars!,
-                                                            secondTermCents: totalExpensesCents!,
+        let updatedParentBudgetExpenses = performArithmetic(firstTermDollars: parentBudget.totalExpensesDollars,
+                                                            firstTermCents: parentBudget.totalExpensesCents,
+                                                            secondTermDollars: totalExpensesDollars,
+                                                            secondTermCents: totalExpensesCents,
                                                             operation: Operation.subtraction)
-        parentBudget?.totalExpensesDollars = updatedParentBudgetExpenses.0
-        parentBudget?.totalExpensesCents = updatedParentBudgetExpenses.1
+        parentBudget.totalExpensesDollars = updatedParentBudgetExpenses.0
+        parentBudget.totalExpensesCents = updatedParentBudgetExpenses.1
         
         // Update mostRecentExpense for parent budget if necessary
-        if mostRecentExpense == parentBudget?.mostRecentExpense {
-            let budgetIterator = parentBudget?.categories?.makeIterator()
+        if mostRecentExpense == parentBudget.mostRecentExpense {
+            let budgetIterator = parentBudget.categories.makeIterator()
             var updatedMostRecentExpense = NSDate(timeIntervalSince1970: 0)
             
             var foundAReplacement = false
             
-            while let category = budgetIterator?.next() as? Category {
+            while let category = budgetIterator.next() as? Category {
                 if category.mostRecentExpense != mostRecentExpense &&
                     category.mostRecentExpense?.compare(updatedMostRecentExpense as Date) == .orderedDescending {
                     
@@ -72,7 +73,7 @@ public class Category: NSManagedObject {
                 }
             }
             
-            parentBudget?.mostRecentExpense = foundAReplacement ? updatedMostRecentExpense : nil
+            parentBudget.mostRecentExpense = foundAReplacement ? updatedMostRecentExpense : nil
         }
     }
     

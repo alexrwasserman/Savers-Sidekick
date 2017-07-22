@@ -16,11 +16,11 @@ extension Expense {
         return NSFetchRequest<Expense>(entityName: "Expense")
     }
 
-    @NSManaged public var costCents: NSNumber?
-    @NSManaged public var costDollars: NSNumber?
-    @NSManaged public var date: NSDate?
+    @NSManaged public var costCents: NSNumber
+    @NSManaged public var costDollars: NSNumber
+    @NSManaged public var date: NSDate
     @NSManaged public var humanDescription: String?
-    @NSManaged public var name: String?
-    @NSManaged public var parentCategory: Category?
+    @NSManaged public var name: String
+    @NSManaged public var parentCategory: Category
 
 }

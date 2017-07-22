@@ -17,12 +17,12 @@ extension Budget {
     }
 
     @NSManaged public var mostRecentExpense: NSDate?
-    @NSManaged public var name: String?
-    @NSManaged public var totalExpensesCents: NSNumber?
-    @NSManaged public var totalExpensesDollars: NSNumber?
-    @NSManaged public var totalFundsCents: NSNumber?
-    @NSManaged public var totalFundsDollars: NSNumber?
-    @NSManaged public var categories: NSSet?
+    @NSManaged public var name: String
+    @NSManaged public var totalExpensesCents: NSNumber
+    @NSManaged public var totalExpensesDollars: NSNumber
+    @NSManaged public var totalFundsCents: NSNumber
+    @NSManaged public var totalFundsDollars: NSNumber
+    @NSManaged public var categories: NSSet
 
 }
 

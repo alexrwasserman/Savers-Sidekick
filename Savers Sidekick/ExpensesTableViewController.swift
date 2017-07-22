@@ -28,7 +28,7 @@ class ExpensesTableViewController: CoreDataTableViewController {
         if let currentContext = CoreDataTableViewController.context {
             if let validCategory = currentCategory {
                 let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Expense")
-                request.predicate = NSPredicate(format: "parentCategory.name = %@", validCategory.name!)
+                request.predicate = NSPredicate(format: "parentCategory.name = %@", validCategory.name)
                 request.sortDescriptors = [NSSortDescriptor(key: "name",
                                                             ascending: true,
                                                             selector: #selector(NSString.localizedCaseInsensitiveCompare(_:)))]

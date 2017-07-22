@@ -28,7 +28,7 @@ class CategoriesTableViewController: CoreDataTableViewController {
         if let currentContext = CoreDataTableViewController.context {
             if let validBudget = currentBudget {
                 let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Category")
-                request.predicate = NSPredicate(format: "parentBudget.name = %@", validBudget.name!)
+                request.predicate = NSPredicate(format: "parentBudget.name = %@", validBudget.name)
                 request.sortDescriptors = [NSSortDescriptor(key: "name",
                                                             ascending: true,
                                                             selector: #selector(NSString.localizedCaseInsensitiveCompare(_:)))]
@@ -107,21 +107,19 @@ class CategoriesTableViewController: CoreDataTableViewController {
                 let category = categoryItem as! Category
                 fileContent += "\(String(describing: category.name)),,,,\n"
                 
-                if let expenses = category.expenses {
-                    for expenseItem in expenses {
-                        let expense = expenseItem as! Expense
-                        fileContent += ",\(String(describing: expense.name)),\(expense.description),"
-                        fileContent += "\(String(describing: expense.date)),\(String(describing: expense.humanDescription))\n"
-                    }
+                for expenseItem in category.expenses {
+                    let expense = expenseItem as! Expense
+                    fileContent += ",\(String(describing: expense.name)),\(expense.description),"
+                    fileContent += "\(String(describing: expense.date)),\(String(describing: expense.humanDescription))\n"
                 }
                 
                 fileContent += ",TOTAL:,\(category.totalExpensesDescription),,\n"
                 fileContent += ",ALLOTTED:,\(category.totalFundsDescription),,\n"
                 
-                let difference = performArithmetic(firstTermDollars: (category.totalFundsDollars)!,
-                                                   firstTermCents: (category.totalFundsCents)!,
-                                                   secondTermDollars: (category.totalExpensesDollars)!,
-                                                   secondTermCents: (category.totalExpensesCents)!,
+                let difference = performArithmetic(firstTermDollars: category.totalFundsDollars,
+                                                   firstTermCents: category.totalFundsCents,
+                                                   secondTermDollars: category.totalExpensesDollars,
+                                                   secondTermCents: category.totalExpensesCents,
                                                    operation: Operation.subtraction)
                 let differenceStr = "\(difference.0)" + "." + "\(difference.1)"
                 

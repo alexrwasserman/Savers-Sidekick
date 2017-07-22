@@ -15,7 +15,7 @@ public class Budget: NSManagedObject {
     class func budgetWithInfo(name enteredName: String,
                               totalFundsDollars enteredFundsDollars: NSNumber,
                               totalFundsCents enteredFundsCents: NSNumber,
-                              inContext context: NSManagedObjectContext) -> Budget? {
+                              inContext context: NSManagedObjectContext) -> Budget {
         print("budgetWithInfo - B")
         
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Budget")
@@ -36,8 +36,9 @@ public class Budget: NSManagedObject {
             budget.totalExpensesCents = 0
             return budget
         }
-        
-        return nil
+        else {
+            return Budget()
+        }
     }
     
     public var totalExpensesDescription: String {
