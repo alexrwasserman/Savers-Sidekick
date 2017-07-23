@@ -12,12 +12,10 @@ import CoreData
 class ExpensesTableViewController: CoreDataTableViewController {
     
     @IBAction func dismissView() {
-        print("dismissView() - ETVC")
         self.navigationController?.popViewController(animated: true)
     }
     
     override func viewDidLoad() {
-        print("viewDidLoad() - ETVC")
         super.viewDidLoad()
         
         self.navigationItem.rightBarButtonItem = self.editButtonItem
@@ -47,7 +45,6 @@ class ExpensesTableViewController: CoreDataTableViewController {
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("tableView(cellForRowAt() - ETVC")
         let cell = tableView.dequeueReusableCell(withIdentifier: "ExpenseCell", for: indexPath)
         
         if let expenseCell = cell as? ExpenseTableViewCell {
@@ -62,7 +59,6 @@ class ExpensesTableViewController: CoreDataTableViewController {
     }
     
      override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        print("tableView(editingStyle) - ETVC")
         if editingStyle == .delete {
             if let expenseToBeDeleted = fetchedResultsController?.object(at: indexPath) as? Expense {
                 CoreDataTableViewController.context?.perform {
@@ -77,7 +73,6 @@ class ExpensesTableViewController: CoreDataTableViewController {
     // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        print("prepareForSegue() - ETVC")
         if segue.identifier == "addExpense" {
             if let createExpenseController = segue.destination as? CreateNewExpenseViewController {
                 createExpenseController.context = CoreDataTableViewController.context

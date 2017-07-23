@@ -20,13 +20,37 @@ class CreateNewExpenseViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var enteredDescription: UITextField!
     
     @IBAction func buttonPressed(_ sender: UIButton) {
-        print("buttonPressed() - CNEVC")
         if let name = self.enteredName.text, let cost = self.enteredCost.text {
             if name != "" && cost != "" {
-                let parsedDollars = Int(cost.components(separatedBy: ".")[0])
-                let parsedCents = Int(cost.components(separatedBy: ".")[1])
+                let parsedDollars: Int?
+                let parsedCents: Int?
+                let components = cost.components(separatedBy: ".")
                 
-                if parsedDollars == nil || parsedCents == nil {
+                if components.count == 2 {
+                    let wasRounded: Bool
+                    
+                    parsedDollars = Int(components[0])
+                    (parsedCents, wasRounded) = roundCents(components[1])
+                    
+                    if parsedDollars == nil || parsedCents == nil {
+                        invalidInput()
+                    }
+                    
+                    if wasRounded {
+                        parsedDollars! += 1
+                    }
+                }
+                else if components.count == 1 {
+                    parsedDollars = Int(components[0])
+                    parsedCents = 0
+                    
+                    if parsedDollars == nil {
+                        invalidInput()
+                    }
+                }
+                else {
+                    parsedDollars = nil
+                    parsedCents = nil
                     invalidInput()
                 }
                 
@@ -51,12 +75,10 @@ class CreateNewExpenseViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func dismissView() {
-        print("dismissView() - CNEVC")
         self.navigationController?.popViewController(animated: true)
     }
     
     override func viewDidLoad() {
-        print("viewDidLoad() - CNEVC")
         super.viewDidLoad()
         
         enteredName.delegate = self

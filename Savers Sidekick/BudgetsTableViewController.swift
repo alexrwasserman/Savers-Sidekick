@@ -12,7 +12,6 @@ import CoreData
 class BudgetsTableViewController: CoreDataTableViewController {
     
     override func viewDidLoad() {
-        print("viewDidLoad() - BTVC")
         
         super.viewDidLoad()
         
@@ -40,7 +39,6 @@ class BudgetsTableViewController: CoreDataTableViewController {
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("tableView(cellForRowAt) - BTVC")
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "BudgetCell", for: indexPath)
 
@@ -56,7 +54,6 @@ class BudgetsTableViewController: CoreDataTableViewController {
     }
 
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        print("editingStyle() - BTVC")
         
         if editingStyle == .delete {
             if let budgetToBeDeleted = fetchedResultsController?.object(at: indexPath) as? Budget {
@@ -72,7 +69,6 @@ class BudgetsTableViewController: CoreDataTableViewController {
     // MARK: - Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        print("prepareForSegue() - BTVC")
         
         if segue.identifier == "addBudget" {
             if let createBudgetController = segue.destination as? CreateNewBudgetViewController {

@@ -17,7 +17,6 @@ public class Category: NSManagedObject {
                                 totalFundsCents enteredFundsCents: NSNumber,
                                 inBudget budget: Budget,
                                 inContext context: NSManagedObjectContext) -> Category {
-        print("categoryWithInfo - E")
         
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Category")
         request.predicate = NSPredicate(format: "name = %@ AND parentBudget.name = %@ AND totalFundsDollars = %@ AND totalFundsCents = %@",
@@ -78,11 +77,27 @@ public class Category: NSManagedObject {
     }
     
     public var totalExpensesDescription: String {
-        return String(describing: totalExpensesDollars) + "." + String(describing: totalExpensesCents)
+        let dollars = String(describing: totalExpensesDollars)
+        let cents = String(describing: totalExpensesCents)
+        
+        if cents.characters.count == 1 {
+            return dollars + "." + cents + "0"
+        }
+        else {
+            return dollars + "." + cents
+        }
     }
     
     public var totalFundsDescription: String {
-        return String(describing: totalFundsDollars) + "." + String(describing: totalFundsCents)
+        let dollars = String(describing: totalFundsDollars)
+        let cents = String(describing: totalFundsCents)
+        
+        if cents.characters.count == 1 {
+            return dollars + "." + cents + "0"
+        }
+        else {
+            return dollars + "." + cents
+        }
     }
     
 }

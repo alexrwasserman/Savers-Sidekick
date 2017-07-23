@@ -43,7 +43,60 @@ public func performArithmetic(firstTermDollars: NSNumber,
         return (NSNumber(value: differenceDollars!), NSNumber(value: differenceCents!))
         
     default:
-        print("Multiplication and division are not supported yet")
+        NSLog("Multiplication and division are not supported yet")
         return(0,0)
     }
+}
+
+public func roundCents(_ cents: String) -> (Int?, Bool) {
+    if !cents.isIntegerRepresentation() {
+        return (nil, false)
+    }
+    
+    let numberOfDigits = cents.characters.count
+    
+    if numberOfDigits == 2 {
+        return (Int(cents), false)
+    }
+    else if numberOfDigits == 1 {
+        return (Int(cents + "0"), false)
+    }
+    else if numberOfDigits > 2 {
+        let firstTwoDigits = cents.substring(to: cents.index(cents.startIndex, offsetBy: 2))
+        let thirdDigit = cents[cents.index(cents.startIndex, offsetBy: 2)]
+        
+        let unroundedValue = Int(firstTwoDigits)!
+        let roundedValue = Int(String(thirdDigit))! >= 5 ? unroundedValue + 1 : unroundedValue
+        
+        if roundedValue == 100 {
+            return (0, true)
+        }
+        else {
+            return (roundedValue, false)
+        }
+    }
+    else {
+        return (nil, false)
+    }
+}
+
+extension String {
+    
+    func isIntegerRepresentation() -> Bool {
+        let numericCharacters = CharacterSet.decimalDigits
+        let scalars = self.unicodeScalars
+        
+        if scalars.isEmpty {
+            return false
+        }
+        
+        for val in scalars {
+            if !numericCharacters.contains(val) {
+                return false
+            }
+        }
+        
+        return true
+    }
+    
 }

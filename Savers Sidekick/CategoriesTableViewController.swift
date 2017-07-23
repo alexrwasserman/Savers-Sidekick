@@ -12,12 +12,10 @@ import CoreData
 class CategoriesTableViewController: CoreDataTableViewController {
     
     @IBAction func dismissView() {
-        print("dismissView() - CTVC")
         self.navigationController?.popViewController(animated: true)
     }
 
     override func viewDidLoad() {
-        print("viewDidLoad() - CTVC")
         super.viewDidLoad()
         
         self.navigationItem.rightBarButtonItem = self.editButtonItem
@@ -47,7 +45,6 @@ class CategoriesTableViewController: CoreDataTableViewController {
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("tableView(cellForRowAt) - CTVC")
         let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath)
 
         if let categoryCell = cell as? CategoryTableViewCell {
@@ -62,7 +59,6 @@ class CategoriesTableViewController: CoreDataTableViewController {
     }
 
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        print("tableView(editingStyle) - CTVC")
         if editingStyle == .delete {
             if let categoryToBeDeleted = fetchedResultsController?.object(at: indexPath) as? Category {
                 CoreDataTableViewController.context?.perform {
@@ -77,7 +73,6 @@ class CategoriesTableViewController: CoreDataTableViewController {
     // MARK: - Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        print("prepareForSegue() - CTVC")
         if segue.identifier == "addCategory" {
             if let createCategoryController = segue.destination as? CreateNewCategoryViewController {
                 createCategoryController.context = CoreDataTableViewController.context

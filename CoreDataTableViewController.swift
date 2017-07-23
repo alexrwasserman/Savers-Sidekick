@@ -15,7 +15,6 @@ class CoreDataTableViewController: UITableViewController, NSFetchedResultsContro
     
     var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>? {
         didSet {
-            print("didSet(fetchedResultsController) - CDTVC")
             
             if let frc = fetchedResultsController {
                 frc.delegate = self
@@ -68,14 +67,12 @@ class CoreDataTableViewController: UITableViewController, NSFetchedResultsContro
     // MARK: NSFetchedResultsControllerDelegate
     
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        print("controllerWillChangeContent() - CDTVC")
         
         tableView.beginUpdates()
     }
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo,
                     atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
-        print("controller(didChange sectionInfo) - CDTVC")
         
         switch type {
             case .insert: tableView.insertSections(IndexSet(integer: sectionIndex), with: .fade)
@@ -86,7 +83,6 @@ class CoreDataTableViewController: UITableViewController, NSFetchedResultsContro
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any,
                     at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        print("controller(didChange anObject) - CDTVC")
         
         switch type {
             case .insert: tableView.insertRows(at: [newIndexPath!], with: .fade)
@@ -98,7 +94,6 @@ class CoreDataTableViewController: UITableViewController, NSFetchedResultsContro
     }
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        print("controllerDidChangeContent() - CDTVC")
         
         tableView.endUpdates()
     }

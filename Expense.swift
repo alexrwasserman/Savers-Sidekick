@@ -18,7 +18,6 @@ public class Expense: NSManagedObject {
                                description enteredDescription: String?,
                                inCategory category: Category,
                                inContext context: NSManagedObjectContext) -> Expense {
-        print("expenseWithInfo - E")
         
         if let expense = NSEntityDescription.insertNewObject(forEntityName: "Expense", into: context) as? Expense {
             expense.name = enteredName
@@ -123,7 +122,15 @@ public class Expense: NSManagedObject {
     }
     
     override public var description: String {
-        return String(describing: costDollars) + "." + String(describing: costCents)
+        let dollars = String(describing: costDollars)
+        let cents = String(describing: costCents)
+        
+        if cents.characters.count == 1 {
+            return dollars + "." + cents + "0"
+        }
+        else {
+            return dollars + "." + cents
+        }
     }
     
 }

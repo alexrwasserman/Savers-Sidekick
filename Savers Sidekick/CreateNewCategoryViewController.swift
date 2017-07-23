@@ -19,13 +19,37 @@ class CreateNewCategoryViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var enteredFunds: UITextField!
     
     @IBAction func buttonPressed(_ sender: UIButton) {
-        print("buttonPressed() - CNCVC")
         if let name = self.enteredName.text, let funds = self.enteredFunds.text {
             if name != "" && funds != "" {
-                let parsedDollars = Int(funds.components(separatedBy: ".")[0])
-                let parsedCents = Int(funds.components(separatedBy: ".")[1])
+                let parsedDollars: Int?
+                let parsedCents: Int?
+                let components = funds.components(separatedBy: ".")
                 
-                if parsedDollars == nil || parsedCents == nil {
+                if components.count == 2 {
+                    let wasRounded: Bool
+                    
+                    parsedDollars = Int(components[0])
+                    (parsedCents, wasRounded) = roundCents(components[1])
+                    
+                    if parsedDollars == nil || parsedCents == nil {
+                        invalidInput()
+                    }
+                    
+                    if wasRounded {
+                        parsedDollars! += 1
+                    }
+                }
+                else if components.count == 1 {
+                    parsedDollars = Int(components[0])
+                    parsedCents = 0
+                    
+                    if parsedDollars == nil {
+                        invalidInput()
+                    }
+                }
+                else {
+                    parsedDollars = nil
+                    parsedCents = nil
                     invalidInput()
                 }
 
@@ -49,12 +73,10 @@ class CreateNewCategoryViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func dismissView() {
-        print("dismissView() - CNCVC")
         self.navigationController?.popViewController(animated: true)
     }
     
     override func viewDidLoad() {
-        print("viewDidLoad() - CNCVC")
         super.viewDidLoad()
         
         enteredName.delegate = self
