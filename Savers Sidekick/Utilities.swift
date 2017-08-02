@@ -66,7 +66,7 @@ public func roundCents(_ cents: String) -> (Int?, Bool) {
         let thirdDigit = cents[cents.index(cents.startIndex, offsetBy: 2)]
         
         let unroundedValue = Int(firstTwoDigits)!
-        let roundedValue = Int(String(thirdDigit))! >= 5 ? unroundedValue + 1 : unroundedValue
+        let roundedValue = Int(thirdDigit.description)! >= 5 ? unroundedValue + 1 : unroundedValue
         
         if roundedValue == 100 {
             return (0, true)
@@ -81,6 +81,30 @@ public func roundCents(_ cents: String) -> (Int?, Bool) {
 }
 
 extension String {
+    
+    static func monetaryRepresentation(dollars: NSNumber, cents: NSNumber) -> String {
+        let formattedDollars: String
+        let formattedCents: String
+        
+        if dollars.description.characters.count > 3 {
+            var original = dollars.description
+            var formatted = ""
+            
+            while original.characters.count > 3 {
+                formatted = "," + original.substring(with: original.index(original.endIndex, offsetBy: -3)..<original.endIndex) + formatted
+                original.removeSubrange(original.index(original.endIndex, offsetBy: -3)..<original.endIndex)
+            }
+            
+            formattedDollars = original + formatted
+        }
+        else {
+            formattedDollars = dollars.description
+        }
+        
+        formattedCents = cents.description.characters.count == 1 ? "0" + cents.description : cents.description
+        
+        return "$" + formattedDollars + "." + formattedCents
+    }
     
     func isIntegerRepresentation() -> Bool {
         let numericCharacters = CharacterSet.decimalDigits

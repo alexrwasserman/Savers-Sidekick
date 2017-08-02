@@ -41,27 +41,57 @@ public class Budget: NSManagedObject {
     }
     
     public var totalExpensesDescription: String {
-        let dollars = String(describing: totalExpensesDollars)
-        let cents = String(describing: totalExpensesCents)
-        
-        if cents.characters.count == 1 {
-            return dollars + "." + cents + "0"
-        }
-        else {
-            return dollars + "." + cents
-        }
+        return String.monetaryRepresentation(dollars: totalExpensesDollars, cents: totalExpensesCents)
     }
     
     public var totalFundsDescription: String {
-        let dollars = String(describing: totalFundsDollars)
-        let cents = String(describing: totalFundsCents)
+        return String.monetaryRepresentation(dollars: totalFundsDollars, cents: totalFundsCents)
+    }
+    
+    public func createCSVFile(path: URL) -> Bool {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM dd yyyy 'at' h:mm:ss a"
         
-        if cents.characters.count == 1 {
-            return dollars + "." + cents + "0"
+        var fileContent = "Category,Expense,Amount,Date,Description\n"
+        
+        for categoryItem in categories {
+            if let category = categoryItem as? Category {
+                fileContent += "\(String(describing: category.name)),,,,\n"
+                
+                for expenseItem in category.expenses {
+                    if let expense = expenseItem as? Expense {
+                        fileContent += ",\(String(describing: expense.name)),\(expense.csvDescription),"
+                        fileContent += "\(formatter.string(from: expense.date as Date)),\(String(describing: expense.humanDescription))\n"
+                    }
+                }
+                
+                fileContent += ",,,,\n"
+                fileContent += ",TOTAL:,\(category.totalExpensesCSVDescription),,\n"
+                fileContent += ",ALLOTTED:,\(category.totalFundsCSVDescription),,\n"
+                
+                let difference = performArithmetic(firstTermDollars: category.totalFundsDollars,
+                                                   firstTermCents: category.totalFundsCents,
+                                                   secondTermDollars: category.totalExpensesDollars,
+                                                   secondTermCents: category.totalExpensesCents,
+                                                   operation: Operation.subtraction)
+                let differenceStr = "\(difference.0)" + "." + "\(difference.1)"
+                
+                fileContent += ",DIFFERENCE:,\(differenceStr),,\n"
+                fileContent += ",,,,\n"
+            }
         }
-        else {
-            return dollars + "." + cents
+        
+        do {
+            try fileContent.write(to: path, atomically: true, encoding: String.Encoding.utf8)
+            NSLog("Successfully created file: %@", path.lastPathComponent)
         }
+        catch {
+            NSLog("Failed to create file: %@", path.lastPathComponent)
+            NSLog("%@", "\(error)")
+            return false
+        }
+        
+        return true
     }
     
 }

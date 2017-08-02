@@ -34,6 +34,54 @@ class BudgetsTableViewController: CoreDataTableViewController {
             fetchedResultsController = nil
         }
     }
+    
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        if(!editing && tableView.allowsMultipleSelectionDuringEditing == true) {
+            if tableView.indexPathsForSelectedRows == nil {
+                tableView.allowsMultipleSelectionDuringEditing = false
+                super.setEditing(editing, animated: animated)
+                return
+            }
+            
+            var fileURLs: [URL] = []
+            for index in tableView.indexPathsForSelectedRows! {
+                let selectedCell = tableView.cellForRow(at: index)
+                if let selectedBudget = selectedCell as? BudgetTableViewCell {
+                    let budget = selectedBudget.budget!
+                    
+                    let fileName = budget.name + ".csv"
+                    let path = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(fileName, isDirectory: false)
+                    
+                    if budget.createCSVFile(path: path) {
+                        fileURLs.append(path)
+                    }
+                }
+                else {
+                    NSLog("Could not cast UITableViewCell to BudgetTableViewCell")
+                    NSLog("%@", selectedCell.debugDescription)
+                }
+            }
+            
+            let activityVC = UIActivityViewController(activityItems: fileURLs, applicationActivities: nil)
+            activityVC.completionWithItemsHandler = { activityType, completed, returnedItems, activityError in
+                for fileURL in fileURLs {
+                    do {
+                        try FileManager.default.removeItem(at: fileURL)
+                        NSLog("Successfully deleted file: %@", fileURL.lastPathComponent)
+                    }
+                    catch {
+                        NSLog("Failed to delete file: %@", fileURL.lastPathComponent)
+                        NSLog("%@", "\(error)")
+                    }
+                }
+            }
+            present(activityVC, animated: true, completion: nil)
+            
+            tableView.allowsMultipleSelectionDuringEditing = false
+        }
+        
+        super.setEditing(editing, animated: animated)
+    }
 
 
     // MARK: - Table view data source
@@ -84,5 +132,17 @@ class BudgetsTableViewController: CoreDataTableViewController {
         }
     }
     
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        return !tableView.allowsMultipleSelectionDuringEditing
+    }
 
+
+    // MARK: - CSV File Creation
+    
+    @IBAction func exportBudget(_ sender: UIBarButtonItem) {
+        tableView.allowsMultipleSelectionDuringEditing = true
+        self.setEditing(true, animated: true)
+        self.editButtonItem.title = "Export"
+    }
+    
 }

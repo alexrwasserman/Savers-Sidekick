@@ -25,9 +25,9 @@ class ExpenseTableViewCell: UITableViewCell {
             if let expense = self.expense {
                 expenseName?.text = expense.name
                 
-                cost?.text = "$\(expense.description)"
+                cost?.text = "\(expense.description)"
                 
-                humanDescription?.text = expense.humanDescription!
+                humanDescription?.text = expense.humanDescription
                 
                 let formatter = DateFormatter()
                 if Date().timeIntervalSince(expense.date as Date) > 24*60*60 {

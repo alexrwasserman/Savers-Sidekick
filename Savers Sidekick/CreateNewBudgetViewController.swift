@@ -18,6 +18,8 @@ class CreateNewBudgetViewController: UIViewController, UITextFieldDelegate {
 
     @IBAction func buttonPressed(_ sender: UIButton) {
         
+        // TODO: Make sure the enteredName does not contain any characters that are bad to have in a file URL
+        
         if let name = self.enteredName.text, let funds = self.enteredFunds.text {
             if name != "" && funds != "" {
                 var parsedDollars: Int?

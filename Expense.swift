@@ -26,7 +26,7 @@ public class Expense: NSManagedObject {
             expense.date = NSDate()
             
             if enteredDescription != nil {
-                expense.humanDescription = enteredDescription
+                expense.humanDescription = enteredDescription!
             }
             else {
                 expense.humanDescription = ""
@@ -122,14 +122,15 @@ public class Expense: NSManagedObject {
     }
     
     override public var description: String {
-        let dollars = String(describing: costDollars)
-        let cents = String(describing: costCents)
-        
-        if cents.characters.count == 1 {
-            return dollars + "." + cents + "0"
+        return String.monetaryRepresentation(dollars: costDollars, cents: costCents)
+    }
+    
+    public var csvDescription: String {
+        if costCents.stringValue.characters.count == 1 {
+            return costDollars.stringValue + ".0" + costCents.stringValue
         }
         else {
-            return dollars + "." + cents
+            return costDollars.stringValue + "." + costCents.stringValue
         }
     }
     

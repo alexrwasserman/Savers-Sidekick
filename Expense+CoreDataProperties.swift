@@ -19,7 +19,7 @@ extension Expense {
     @NSManaged public var costCents: NSNumber
     @NSManaged public var costDollars: NSNumber
     @NSManaged public var date: NSDate
-    @NSManaged public var humanDescription: String?
+    @NSManaged public var humanDescription: String
     @NSManaged public var name: String
     @NSManaged public var parentCategory: Category
 

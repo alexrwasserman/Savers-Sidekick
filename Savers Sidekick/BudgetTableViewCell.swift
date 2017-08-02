@@ -21,7 +21,7 @@ class BudgetTableViewCell: UITableViewCell {
             
             if let budget = self.budget {
                 budgetName?.text = budget.name
-                budgetStatus?.text = "$\(budget.totalExpensesDescription)/$\(budget.totalFundsDescription)"
+                budgetStatus?.text = "\(budget.totalExpensesDescription)/\(budget.totalFundsDescription)"
                 
                 if let validDate = budget.mostRecentExpense {
                     let formatter = DateFormatter()

@@ -31,7 +31,7 @@ class CategoryTableViewCell: UITableViewCell {
                     numberOfEntries?.text = "1 expense:"
                 }
                 
-                categoryStatus?.text = "$\(category.totalExpensesDescription)/$\(category.totalFundsDescription)"
+                categoryStatus?.text = "\(category.totalExpensesDescription)/\(category.totalFundsDescription)"
                 
                 if let validDate = category.mostRecentExpense {
                     let formatter = DateFormatter()

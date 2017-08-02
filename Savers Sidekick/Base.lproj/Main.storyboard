@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="RWM-KQ-6t0">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="RWM-KQ-6t0">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -79,6 +79,12 @@
                         <barButtonItem systemItem="add" id="QTx-QJ-iW2">
                             <connections>
                                 <segue destination="nCq-lR-7Yt" kind="show" identifier="addBudget" id="068-kJ-Hk1"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="CtG-ec-NVp"/>
+                        <barButtonItem systemItem="action" id="OZr-Fw-aiX">
+                            <connections>
+                                <action selector="exportBudget:" destination="dgM-tI-YxI" id="pt6-Uj-wHX"/>
                             </connections>
                         </barButtonItem>
                     </toolbarItems>
@@ -571,7 +577,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="RWM-KQ-6t0" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="v2g-bx-7Uy">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="v2g-bx-7Uy">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

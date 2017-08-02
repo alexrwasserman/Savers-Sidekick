@@ -77,26 +77,28 @@ public class Category: NSManagedObject {
     }
     
     public var totalExpensesDescription: String {
-        let dollars = String(describing: totalExpensesDollars)
-        let cents = String(describing: totalExpensesCents)
-        
-        if cents.characters.count == 1 {
-            return dollars + "." + cents + "0"
-        }
-        else {
-            return dollars + "." + cents
-        }
+        return String.monetaryRepresentation(dollars: totalExpensesDollars, cents: totalExpensesCents)
     }
     
     public var totalFundsDescription: String {
-        let dollars = String(describing: totalFundsDollars)
-        let cents = String(describing: totalFundsCents)
-        
-        if cents.characters.count == 1 {
-            return dollars + "." + cents + "0"
+        return String.monetaryRepresentation(dollars: totalFundsDollars, cents: totalFundsCents)
+    }
+    
+    public var totalExpensesCSVDescription: String {
+        if totalExpensesCents.stringValue.characters.count == 1 {
+            return totalExpensesDollars.stringValue + ".0" + totalExpensesCents.stringValue
         }
         else {
-            return dollars + "." + cents
+            return totalExpensesDollars.stringValue + "." + totalExpensesCents.stringValue
+        }
+    }
+    
+    public var totalFundsCSVDescription: String {
+        if totalFundsCents.stringValue.characters.count == 1 {
+            return totalFundsDollars.stringValue + ".0" + totalFundsCents.stringValue
+        }
+        else {
+            return totalFundsDollars.stringValue + "." + totalFundsCents.stringValue
         }
     }
     
