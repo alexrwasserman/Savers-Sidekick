@@ -11,6 +11,8 @@ import CoreData
 
 class BudgetsTableViewController: CoreDataTableViewController {
     
+    var savedToolbarItems: [UIBarButtonItem]? = []
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -39,6 +41,10 @@ class BudgetsTableViewController: CoreDataTableViewController {
         if(!editing && tableView.allowsMultipleSelectionDuringEditing == true) {
             if tableView.indexPathsForSelectedRows == nil {
                 tableView.allowsMultipleSelectionDuringEditing = false
+                
+                self.navigationItem.leftBarButtonItem = nil
+                self.setToolbarItems(self.savedToolbarItems, animated: true)
+                
                 super.setEditing(editing, animated: animated)
                 return
             }
@@ -78,6 +84,8 @@ class BudgetsTableViewController: CoreDataTableViewController {
             present(activityVC, animated: true, completion: nil)
             
             tableView.allowsMultipleSelectionDuringEditing = false
+            self.navigationItem.leftBarButtonItem = nil
+            self.setToolbarItems(self.savedToolbarItems, animated: true)
         }
         
         super.setEditing(editing, animated: animated)
@@ -139,10 +147,46 @@ class BudgetsTableViewController: CoreDataTableViewController {
 
     // MARK: - CSV File Creation
     
-    @IBAction func exportBudget(_ sender: UIBarButtonItem) {
-        tableView.allowsMultipleSelectionDuringEditing = true
-        self.setEditing(true, animated: true)
-        self.editButtonItem.title = "Export"
+    @IBAction func budgetActions(_ sender: UIBarButtonItem) {
+        
+        let budgetAlertController = UIAlertController(title: "Budget Actions", message: nil, preferredStyle: .actionSheet)
+        
+        let exportCSVAction = UIAlertAction(title: "Export .csv Files", style: .default) { _ in
+            self.tableView.allowsMultipleSelectionDuringEditing = true
+            
+            self.setEditing(true, animated: true)
+            
+            self.editButtonItem.title = "Export"
+            
+            let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(self.cancelExport(_:)))
+            self.navigationItem.leftBarButtonItem = cancelButton
+            
+            self.savedToolbarItems = self.toolbarItems
+            self.setToolbarItems(nil, animated: true)
+        }
+        
+        let viewSummaryAction = UIAlertAction(title: "View Summary", style: .default) { _ in
+            
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+            
+        }
+        
+        budgetAlertController.addAction(exportCSVAction)
+        budgetAlertController.addAction(viewSummaryAction)
+        budgetAlertController.addAction(cancelAction)
+        
+        present(budgetAlertController, animated: true, completion: nil)
+    }
+    
+    @IBAction func cancelExport(_ sender: UIBarButtonItem) {
+        tableView.allowsMultipleSelectionDuringEditing = false
+        
+        self.setEditing(false, animated: true)
+        
+        self.navigationItem.leftBarButtonItem = nil
+        self.setToolbarItems(self.savedToolbarItems, animated: true)
     }
     
 }

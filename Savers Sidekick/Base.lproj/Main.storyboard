@@ -84,7 +84,7 @@
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="CtG-ec-NVp"/>
                         <barButtonItem systemItem="action" id="OZr-Fw-aiX">
                             <connections>
-                                <action selector="exportBudget:" destination="dgM-tI-YxI" id="pt6-Uj-wHX"/>
+                                <action selector="budgetActions:" destination="dgM-tI-YxI" id="tvP-Eq-3Tv"/>
                             </connections>
                         </barButtonItem>
                     </toolbarItems>
@@ -321,13 +321,13 @@
                                                     <rect key="frame" x="200.5" y="0.0" width="125.5" height="112"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="cost" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Keh-mZ-gzv">
-                                                            <rect key="frame" x="0.0" y="0.0" width="125.5" height="94"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="125.5" height="18"/>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="humanDescription" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7y6-yq-9Cs">
-                                                            <rect key="frame" x="0.0" y="94" width="125.5" height="18"/>
+                                                            <rect key="frame" x="0.0" y="18" width="125.5" height="94"/>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
