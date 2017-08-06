@@ -79,6 +79,13 @@ class ExpensesTableViewController: CoreDataTableViewController {
                 createExpenseController.currentCategory = currentCategory
             }
         }
+        else if segue.identifier == "displayExpense" {
+            if let displayExpenseController = segue.destination as? DisplayExpenseViewController {
+                let index = (tableView.indexPathsForSelectedRows?.first)!
+                let selectedExpenseCell = tableView.cellForRow(at: index) as! ExpenseTableViewCell
+                displayExpenseController.expense = selectedExpenseCell.expense
+            }
+        }
     }
 
 }

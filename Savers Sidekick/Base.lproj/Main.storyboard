@@ -321,13 +321,13 @@
                                                     <rect key="frame" x="200.5" y="0.0" width="125.5" height="112"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="cost" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Keh-mZ-gzv">
-                                                            <rect key="frame" x="0.0" y="0.0" width="125.5" height="18"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="125.5" height="94"/>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="humanDescription" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7y6-yq-9Cs">
-                                                            <rect key="frame" x="0.0" y="18" width="125.5" height="94"/>
+                                                            <rect key="frame" x="0.0" y="94" width="125.5" height="18"/>
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -349,6 +349,7 @@
                                     <outlet property="date" destination="ptP-SP-eyJ" id="rei-Rd-2QY"/>
                                     <outlet property="expenseName" destination="Nbz-s3-b1g" id="lWT-7l-rfv"/>
                                     <outlet property="humanDescription" destination="7y6-yq-9Cs" id="V3H-j0-p9f"/>
+                                    <segue destination="ekY-Mb-PqB" kind="show" identifier="displayExpense" id="oEZ-I5-h2V"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -380,6 +381,107 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2b8-Zg-Ggc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1714" y="867"/>
+        </scene>
+        <!--Expense Details-->
+        <scene sceneID="I9H-gd-yt7">
+            <objects>
+                <viewController title="Expense Details" id="ekY-Mb-PqB" customClass="DisplayExpenseViewController" customModule="Savers_Sidekick" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="arr-4W-YjY"/>
+                        <viewControllerLayoutGuide type="bottom" id="Q5V-fk-7BA"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3y6-q3-yIP">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="expenseName" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1CR-MN-MVN">
+                                <rect key="frame" x="16" y="72" width="343" height="20.5"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="zJs-mX-TdC">
+                                <rect key="frame" x="16" y="100.5" width="343" height="514.5"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="v0g-kd-1NK">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="20.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cost:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xgx-mF-mDs">
+                                                <rect key="frame" x="0.0" y="0.0" width="40.5" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="expenseCost" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hzp-6Z-sZz">
+                                                <rect key="frame" x="243" y="0.0" width="100" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="SjW-nc-9fH">
+                                        <rect key="frame" x="0.0" y="247" width="343" height="20.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GXm-EV-3kv">
+                                                <rect key="frame" x="0.0" y="0.0" width="41" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="expenseDate" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="62T-y6-YoH">
+                                                <rect key="frame" x="242.5" y="0.0" width="100.5" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="4d0-QP-r8j">
+                                        <rect key="frame" x="0.0" y="494" width="343" height="20.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jN7-6y-6nm">
+                                                <rect key="frame" x="0.0" y="0.0" width="92.5" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="expenseDescription" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YMv-Em-Mv4">
+                                                <rect key="frame" x="191" y="0.0" width="152" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="1CR-MN-MVN" firstAttribute="trailing" secondItem="3y6-q3-yIP" secondAttribute="trailingMargin" id="9Pq-JZ-wCp"/>
+                            <constraint firstItem="zJs-mX-TdC" firstAttribute="top" secondItem="1CR-MN-MVN" secondAttribute="bottom" constant="8" symbolic="YES" id="OvK-yI-2sa"/>
+                            <constraint firstItem="zJs-mX-TdC" firstAttribute="top" secondItem="1CR-MN-MVN" secondAttribute="bottom" constant="8" symbolic="YES" id="Wuc-R7-ccL"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="zJs-mX-TdC" secondAttribute="trailing" id="ZBy-Z5-ze6"/>
+                            <constraint firstItem="1CR-MN-MVN" firstAttribute="top" secondItem="arr-4W-YjY" secondAttribute="bottom" constant="8" symbolic="YES" id="emX-IC-11C"/>
+                            <constraint firstItem="zJs-mX-TdC" firstAttribute="leading" secondItem="3y6-q3-yIP" secondAttribute="leadingMargin" id="nXZ-6V-Oz5"/>
+                            <constraint firstItem="1CR-MN-MVN" firstAttribute="leading" secondItem="3y6-q3-yIP" secondAttribute="leadingMargin" id="vOb-fK-Lwz"/>
+                            <constraint firstItem="Q5V-fk-7BA" firstAttribute="top" secondItem="zJs-mX-TdC" secondAttribute="bottom" constant="8" symbolic="YES" id="xS4-t5-JgT"/>
+                        </constraints>
+                    </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="descriptionLabel" destination="jN7-6y-6nm" id="0ZS-rs-F3u"/>
+                        <outlet property="expenseCost" destination="Hzp-6Z-sZz" id="ahQ-wu-yRN"/>
+                        <outlet property="expenseDate" destination="62T-y6-YoH" id="qKG-BP-4Cb"/>
+                        <outlet property="expenseDescription" destination="YMv-Em-Mv4" id="WdI-NW-XzY"/>
+                        <outlet property="expenseName" destination="1CR-MN-MVN" id="Qb5-W8-uTp"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="i9b-g4-BlJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1712.8" y="1678.1109445277364"/>
         </scene>
         <!--Create Category-->
         <scene sceneID="kN1-5i-nsj">

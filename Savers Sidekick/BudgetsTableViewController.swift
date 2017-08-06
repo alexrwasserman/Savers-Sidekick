@@ -11,7 +11,7 @@ import CoreData
 
 class BudgetsTableViewController: CoreDataTableViewController {
     
-    var savedToolbarItems: [UIBarButtonItem]? = []
+    var savedToolbarItems: [UIBarButtonItem]?
     
     override func viewDidLoad() {
         
@@ -151,7 +151,11 @@ class BudgetsTableViewController: CoreDataTableViewController {
         
         let budgetAlertController = UIAlertController(title: "Budget Actions", message: nil, preferredStyle: .actionSheet)
         
-        let exportCSVAction = UIAlertAction(title: "Export .csv Files", style: .default) { _ in
+        let viewSummaryAction = UIAlertAction(title: "View Summary", style: .default) { _ in
+            
+        }
+        
+        let exportCSVAction = UIAlertAction(title: "Export As CSV File", style: .default) { _ in
             self.tableView.allowsMultipleSelectionDuringEditing = true
             
             self.setEditing(true, animated: true)
@@ -165,16 +169,10 @@ class BudgetsTableViewController: CoreDataTableViewController {
             self.setToolbarItems(nil, animated: true)
         }
         
-        let viewSummaryAction = UIAlertAction(title: "View Summary", style: .default) { _ in
-            
-        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in }
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
-            
-        }
-        
-        budgetAlertController.addAction(exportCSVAction)
         budgetAlertController.addAction(viewSummaryAction)
+        budgetAlertController.addAction(exportCSVAction)
         budgetAlertController.addAction(cancelAction)
         
         present(budgetAlertController, animated: true, completion: nil)
