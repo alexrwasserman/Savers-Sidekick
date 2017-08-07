@@ -1,6 +1,6 @@
 # Savers Sidekick
 
-Savers Sidekick is a simple and intuitive budgeting application for iOS devices. Its user-friendly interface makes it the perfect tool for entering expenses and maintaining a budget on the go. It is intended for users who prefer an easy and portable method of tracking expenses at the moment they are incurred, as opposed to setting aside time to update a budget on their computer. This lightweight application takes the complexity out of monitoring your costs.
+Savers Sidekick is a simple and intuitive budgeting application for iOS devices. Its user-friendly interface makes it the perfect tool for tracking expenses and maintaining a budget on the go. It is intended for users who prefer an easy and portable method of entering expenses at the moment they are incurred, as opposed to setting aside time to update a budget on their computer. This lightweight application takes the complexity out of monitoring your costs.
 
 ## Features
 * Create, delete, or edit a customized budget that is divided into categories
