@@ -15,10 +15,7 @@
 		493B2A441D73C04900179ED3 /* CreateNewExpenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493B2A431D73C04900179ED3 /* CreateNewExpenseViewController.swift */; };
 		493B2A461D73C17F00179ED3 /* ExpenseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493B2A451D73C17F00179ED3 /* ExpenseTableViewCell.swift */; };
 		4940017A1D623A2B00E21ADC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494001791D623A2B00E21ADC /* AppDelegate.swift */; };
-		4940017F1D623A2B00E21ADC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4940017D1D623A2B00E21ADC /* Main.storyboard */; };
-		494001821D623A2B00E21ADC /* Savers_Sidekick.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 494001801D623A2B00E21ADC /* Savers_Sidekick.xcdatamodeld */; };
 		494001841D623A2B00E21ADC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 494001831D623A2B00E21ADC /* Assets.xcassets */; };
-		494001871D623A2B00E21ADC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 494001851D623A2B00E21ADC /* LaunchScreen.storyboard */; };
 		4940019D1D624C2D00E21ADC /* BudgetsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4940019C1D624C2D00E21ADC /* BudgetsTableViewController.swift */; };
 		4940019F1D6252D900E21ADC /* BudgetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4940019E1D6252D900E21ADC /* BudgetTableViewCell.swift */; };
 		494001A11D626E9100E21ADC /* CreateNewBudgetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494001A01D626E9100E21ADC /* CreateNewBudgetViewController.swift */; };
@@ -29,25 +26,11 @@
 		9D2308AF1F1BC22F001130BB /* Budget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2308A91F1BC22F001130BB /* Budget.swift */; };
 		9D2308B01F1BC22F001130BB /* Budget+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2308AA1F1BC22F001130BB /* Budget+CoreDataProperties.swift */; };
 		9D25EEF21F1AE9DB00D4200C /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D25EEF11F1AE9DB00D4200C /* Utilities.swift */; };
+		9DA2E5711F392507002D72BB /* Savers_Sidekick.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9DA2E56F1F392507002D72BB /* Savers_Sidekick.xcdatamodeld */; };
+		9DA2E5741F39267D002D72BB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DA2E5731F39267D002D72BB /* LaunchScreen.storyboard */; };
+		9DA2E5771F3927E5002D72BB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DA2E5761F3927E5002D72BB /* Main.storyboard */; };
 		9DED2EAD1F34F048000DC3D6 /* DisplayExpenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DED2EAC1F34F048000DC3D6 /* DisplayExpenseViewController.swift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		9DD6FBE01F38231E005A735F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9DD6FBDB1F38231E005A735F /* Charts.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 06165F241D8110E600722320;
-			remoteInfo = Charts;
-		};
-		9DD6FBE21F38231E005A735F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9DD6FBDB1F38231E005A735F /* Charts.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 06165F2E1D8110E600722320;
-			remoteInfo = ChartsTests;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		9DED2EAB1F34E953000DC3D6 /* Embed Frameworks */ = {
@@ -72,10 +55,7 @@
 		493B2A451D73C17F00179ED3 /* ExpenseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpenseTableViewCell.swift; sourceTree = "<group>"; };
 		494001761D623A2A00E21ADC /* Savers Sidekick.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Savers Sidekick.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		494001791D623A2B00E21ADC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4940017E1D623A2B00E21ADC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		494001811D623A2B00E21ADC /* Savers_Sidekick.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Savers_Sidekick.xcdatamodel; sourceTree = "<group>"; };
 		494001831D623A2B00E21ADC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		494001861D623A2B00E21ADC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		494001881D623A2B00E21ADC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4940019C1D624C2D00E21ADC /* BudgetsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BudgetsTableViewController.swift; sourceTree = "<group>"; };
 		4940019E1D6252D900E21ADC /* BudgetTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BudgetTableViewCell.swift; sourceTree = "<group>"; };
@@ -87,7 +67,10 @@
 		9D2308A91F1BC22F001130BB /* Budget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Budget.swift; sourceTree = "<group>"; };
 		9D2308AA1F1BC22F001130BB /* Budget+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Budget+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		9D25EEF11F1AE9DB00D4200C /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
-		9DD6FBDB1F38231E005A735F /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Charts.xcodeproj; sourceTree = "<group>"; };
+		9DA2E5701F392507002D72BB /* Savers_Sidekick.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Savers_Sidekick.xcdatamodel; sourceTree = "<group>"; };
+		9DA2E5731F39267D002D72BB /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		9DA2E5761F3927E5002D72BB /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		9DA2E5781F3928B3002D72BB /* Savers Sidekick-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Savers Sidekick-Bridging-Header.h"; sourceTree = "<group>"; };
 		9DED2EAC1F34F048000DC3D6 /* DisplayExpenseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayExpenseViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -110,7 +93,7 @@
 				493B2A451D73C17F00179ED3 /* ExpenseTableViewCell.swift */,
 				9DED2EAC1F34F048000DC3D6 /* DisplayExpenseViewController.swift */,
 			);
-			name = "Expense UI";
+			path = "Expense UI";
 			sourceTree = "<group>";
 		};
 		493B2A481D73CE3E00179ED3 /* Budget UI */ = {
@@ -120,7 +103,7 @@
 				494001A01D626E9100E21ADC /* CreateNewBudgetViewController.swift */,
 				4940019E1D6252D900E21ADC /* BudgetTableViewCell.swift */,
 			);
-			name = "Budget UI";
+			path = "Budget UI";
 			sourceTree = "<group>";
 		};
 		493B2A491D73CE4B00179ED3 /* Category UI */ = {
@@ -130,13 +113,12 @@
 				492E7C6F1D6B8816002DF6B5 /* CreateNewCategoryViewController.swift */,
 				492C65531D696C0E007D42BE /* CategoryTableViewCell.swift */,
 			);
-			name = "Category UI";
+			path = "Category UI";
 			sourceTree = "<group>";
 		};
 		4940016D1D623A2A00E21ADC = {
 			isa = PBXGroup;
 			children = (
-				9DD6FBDB1F38231E005A735F /* Charts.xcodeproj */,
 				494001781D623A2B00E21ADC /* Savers Sidekick */,
 				494001771D623A2A00E21ADC /* Products */,
 			);
@@ -158,7 +140,6 @@
 				493B2A481D73CE3E00179ED3 /* Budget UI */,
 				493B2A491D73CE4B00179ED3 /* Category UI */,
 				493B2A471D73CDDA00179ED3 /* Expense UI */,
-				4940017D1D623A2B00E21ADC /* Main.storyboard */,
 			);
 			path = "Savers Sidekick";
 			sourceTree = "<group>";
@@ -168,11 +149,13 @@
 			children = (
 				494001791D623A2B00E21ADC /* AppDelegate.swift */,
 				494001831D623A2B00E21ADC /* Assets.xcassets */,
-				494001851D623A2B00E21ADC /* LaunchScreen.storyboard */,
 				494001881D623A2B00E21ADC /* Info.plist */,
+				9DA2E5731F39267D002D72BB /* LaunchScreen.storyboard */,
+				9DA2E5761F3927E5002D72BB /* Main.storyboard */,
+				9DA2E5781F3928B3002D72BB /* Savers Sidekick-Bridging-Header.h */,
 				9D25EEF11F1AE9DB00D4200C /* Utilities.swift */,
 			);
-			name = "Supporting Files";
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		4940019B1D62463700E21ADC /* Core Data */ = {
@@ -185,19 +168,9 @@
 				9D2308A51F1BC22F001130BB /* Category.swift */,
 				9D2308A81F1BC22F001130BB /* Expense+CoreDataProperties.swift */,
 				9D2308A71F1BC22F001130BB /* Expense.swift */,
-				494001801D623A2B00E21ADC /* Savers_Sidekick.xcdatamodeld */,
+				9DA2E56F1F392507002D72BB /* Savers_Sidekick.xcdatamodeld */,
 			);
-			name = "Core Data";
-			path = ..;
-			sourceTree = "<group>";
-		};
-		9DD6FBDC1F38231E005A735F /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				9DD6FBE11F38231E005A735F /* Charts.framework */,
-				9DD6FBE31F38231E005A735F /* ChartsTests.xctest */,
-			);
-			name = Products;
+			path = "Core Data";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -249,12 +222,6 @@
 			mainGroup = 4940016D1D623A2A00E21ADC;
 			productRefGroup = 494001771D623A2A00E21ADC /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 9DD6FBDC1F38231E005A735F /* Products */;
-					ProjectRef = 9DD6FBDB1F38231E005A735F /* Charts.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				494001751D623A2A00E21ADC /* Savers Sidekick */,
@@ -262,31 +229,14 @@
 		};
 /* End PBXProject section */
 
-/* Begin PBXReferenceProxy section */
-		9DD6FBE11F38231E005A735F /* Charts.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Charts.framework;
-			remoteRef = 9DD6FBE01F38231E005A735F /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		9DD6FBE31F38231E005A735F /* ChartsTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = ChartsTests.xctest;
-			remoteRef = 9DD6FBE21F38231E005A735F /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
-
 /* Begin PBXResourcesBuildPhase section */
 		494001741D623A2A00E21ADC /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				494001871D623A2B00E21ADC /* LaunchScreen.storyboard in Resources */,
+				9DA2E5771F3927E5002D72BB /* Main.storyboard in Resources */,
+				9DA2E5741F39267D002D72BB /* LaunchScreen.storyboard in Resources */,
 				494001841D623A2B00E21ADC /* Assets.xcassets in Resources */,
-				4940017F1D623A2B00E21ADC /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -304,7 +254,6 @@
 				492E7C6E1D6B75C5002DF6B5 /* CoreDataTableViewController.swift in Sources */,
 				4940017A1D623A2B00E21ADC /* AppDelegate.swift in Sources */,
 				9DED2EAD1F34F048000DC3D6 /* DisplayExpenseViewController.swift in Sources */,
-				494001821D623A2B00E21ADC /* Savers_Sidekick.xcdatamodeld in Sources */,
 				4940019D1D624C2D00E21ADC /* BudgetsTableViewController.swift in Sources */,
 				9D2308AC1F1BC22F001130BB /* Category+CoreDataProperties.swift in Sources */,
 				492C65521D6969B3007D42BE /* CategoriesTableViewController.swift in Sources */,
@@ -316,30 +265,12 @@
 				494001A11D626E9100E21ADC /* CreateNewBudgetViewController.swift in Sources */,
 				9D2308AB1F1BC22F001130BB /* Category.swift in Sources */,
 				9D25EEF21F1AE9DB00D4200C /* Utilities.swift in Sources */,
+				9DA2E5711F392507002D72BB /* Savers_Sidekick.xcdatamodeld in Sources */,
 				492C65541D696C0E007D42BE /* CategoryTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		4940017D1D623A2B00E21ADC /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4940017E1D623A2B00E21ADC /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		494001851D623A2B00E21ADC /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				494001861D623A2B00E21ADC /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		494001891D623A2B00E21ADC /* Debug */ = {
@@ -438,11 +369,11 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = 53N4GUERHD;
-				INFOPLIST_FILE = "Savers Sidekick/Info.plist";
+				INFOPLIST_FILE = "Savers Sidekick/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "edu.umich.alexwass.Savers-Sidekick";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Savers Sidekick-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Savers Sidekick/Supporting Files/Savers Sidekick-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
@@ -456,11 +387,11 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_TEAM = 53N4GUERHD;
-				INFOPLIST_FILE = "Savers Sidekick/Info.plist";
+				INFOPLIST_FILE = "Savers Sidekick/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "edu.umich.alexwass.Savers-Sidekick";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Savers Sidekick-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Savers Sidekick/Supporting Files/Savers Sidekick-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
@@ -489,14 +420,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		494001801D623A2B00E21ADC /* Savers_Sidekick.xcdatamodeld */ = {
+		9DA2E56F1F392507002D72BB /* Savers_Sidekick.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				494001811D623A2B00E21ADC /* Savers_Sidekick.xcdatamodel */,
+				9DA2E5701F392507002D72BB /* Savers_Sidekick.xcdatamodel */,
 			);
-			currentVersion = 494001811D623A2B00E21ADC /* Savers_Sidekick.xcdatamodel */;
-			name = Savers_Sidekick.xcdatamodeld;
-			path = "Savers Sidekick/Savers_Sidekick.xcdatamodeld";
+			currentVersion = 9DA2E5701F392507002D72BB /* Savers_Sidekick.xcdatamodel */;
+			path = Savers_Sidekick.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

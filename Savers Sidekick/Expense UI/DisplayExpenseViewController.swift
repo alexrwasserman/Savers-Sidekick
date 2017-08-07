@@ -25,7 +25,7 @@ class DisplayExpenseViewController: UIViewController {
         let formatter = DateFormatter()
         formatter.dateStyle = .long
         formatter.timeStyle = .medium
-        expenseDate.text = formatter.string(from: expense?.date as! Date)
+        expenseDate.text = formatter.string(from: expense?.date! as Date)
         
         if expense?.humanDescription != "" {
             descriptionLabel.text = "Description:"
