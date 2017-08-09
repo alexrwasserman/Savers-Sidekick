@@ -1,0 +1,6 @@
+framework module Pods_Savers_Sidekick {
+  umbrella header "Pods-Savers Sidekick-umbrella.h"
+
+  export *
+  module * { export * }
+}

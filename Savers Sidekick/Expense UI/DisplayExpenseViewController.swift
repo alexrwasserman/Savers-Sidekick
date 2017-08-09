@@ -19,21 +19,31 @@ class DisplayExpenseViewController: UIViewController {
     var expense: Expense?
     
     override func viewDidLoad() {
-        expenseName.text = expense?.name
-        expenseCost.text = expense?.description
-        
-        let formatter = DateFormatter()
-        formatter.dateStyle = .long
-        formatter.timeStyle = .medium
-        expenseDate.text = formatter.string(from: expense?.date! as Date)
-        
-        if expense?.humanDescription != "" {
-            descriptionLabel.text = "Description:"
-            expenseDescription.text = expense?.humanDescription
+        if let unwrappedExpense = expense {
+            expenseName.text = unwrappedExpense.name
+            expenseCost.text = unwrappedExpense.description
+            
+            let formatter = DateFormatter()
+            formatter.dateStyle = .long
+            formatter.timeStyle = .medium
+            expenseDate.text = formatter.string(from: unwrappedExpense.date as Date)
+            
+            if unwrappedExpense.humanDescription != "" {
+                descriptionLabel.text = "Description:"
+                expenseDescription.text = unwrappedExpense.humanDescription
+            }
+            else {
+                descriptionLabel.text = nil
+                expenseDescription.text = nil
+            }
         }
         else {
-            descriptionLabel.text = nil
+            NSLog("Encountered nil when displaying expense")
+            expenseName.text = nil
+            expenseCost.text = nil
+            expenseDate.text = nil
             expenseDescription.text = nil
+            descriptionLabel.text = nil
         }
     }
     

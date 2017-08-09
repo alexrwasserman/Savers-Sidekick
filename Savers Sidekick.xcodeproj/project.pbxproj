@@ -19,6 +19,7 @@
 		4940019D1D624C2D00E21ADC /* BudgetsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4940019C1D624C2D00E21ADC /* BudgetsTableViewController.swift */; };
 		4940019F1D6252D900E21ADC /* BudgetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4940019E1D6252D900E21ADC /* BudgetTableViewCell.swift */; };
 		494001A11D626E9100E21ADC /* CreateNewBudgetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494001A01D626E9100E21ADC /* CreateNewBudgetViewController.swift */; };
+		7D4BF4FE14D375570F68C6A4 /* Pods_Savers_Sidekick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9EF0A2E6337C44907FDD4C8 /* Pods_Savers_Sidekick.framework */; };
 		9D2308AB1F1BC22F001130BB /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2308A51F1BC22F001130BB /* Category.swift */; };
 		9D2308AC1F1BC22F001130BB /* Category+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2308A61F1BC22F001130BB /* Category+CoreDataProperties.swift */; };
 		9D2308AD1F1BC22F001130BB /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2308A71F1BC22F001130BB /* Expense.swift */; };
@@ -72,6 +73,9 @@
 		9DA2E5761F3927E5002D72BB /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		9DA2E5781F3928B3002D72BB /* Savers Sidekick-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Savers Sidekick-Bridging-Header.h"; sourceTree = "<group>"; };
 		9DED2EAC1F34F048000DC3D6 /* DisplayExpenseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayExpenseViewController.swift; sourceTree = "<group>"; };
+		D70941EE5D43FA307EBE6DA4 /* Pods-Savers Sidekick.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Savers Sidekick.release.xcconfig"; path = "Pods/Target Support Files/Pods-Savers Sidekick/Pods-Savers Sidekick.release.xcconfig"; sourceTree = "<group>"; };
+		E61A6CCEA631DAA14D87446E /* Pods-Savers Sidekick.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Savers Sidekick.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Savers Sidekick/Pods-Savers Sidekick.debug.xcconfig"; sourceTree = "<group>"; };
+		E9EF0A2E6337C44907FDD4C8 /* Pods_Savers_Sidekick.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Savers_Sidekick.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D4BF4FE14D375570F68C6A4 /* Pods_Savers_Sidekick.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -121,6 +126,8 @@
 			children = (
 				494001781D623A2B00E21ADC /* Savers Sidekick */,
 				494001771D623A2A00E21ADC /* Products */,
+				6ADB329E25321CC4B506C670 /* Pods */,
+				ABCD7E842E915BBDBF629059 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -173,6 +180,23 @@
 			path = "Core Data";
 			sourceTree = "<group>";
 		};
+		6ADB329E25321CC4B506C670 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E61A6CCEA631DAA14D87446E /* Pods-Savers Sidekick.debug.xcconfig */,
+				D70941EE5D43FA307EBE6DA4 /* Pods-Savers Sidekick.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		ABCD7E842E915BBDBF629059 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E9EF0A2E6337C44907FDD4C8 /* Pods_Savers_Sidekick.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -180,10 +204,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4940018B1D623A2B00E21ADC /* Build configuration list for PBXNativeTarget "Savers Sidekick" */;
 			buildPhases = (
+				1B6AEE3108CDA8B0AAE0442A /* [CP] Check Pods Manifest.lock */,
 				494001721D623A2A00E21ADC /* Sources */,
 				494001731D623A2A00E21ADC /* Frameworks */,
 				494001741D623A2A00E21ADC /* Resources */,
 				9DED2EAB1F34E953000DC3D6 /* Embed Frameworks */,
+				944EAB5D01F2533899E10AFA /* [CP] Embed Pods Frameworks */,
+				6318348A343780D3E2C7AFB3 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -241,6 +268,60 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1B6AEE3108CDA8B0AAE0442A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Savers Sidekick-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6318348A343780D3E2C7AFB3 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Savers Sidekick/Pods-Savers Sidekick-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		944EAB5D01F2533899E10AFA /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Savers Sidekick/Pods-Savers Sidekick-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Savers Sidekick/Pods-Savers Sidekick-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		494001721D623A2A00E21ADC /* Sources */ = {
@@ -363,8 +444,9 @@
 		};
 		4940018C1D623A2B00E21ADC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E61A6CCEA631DAA14D87446E /* Pods-Savers Sidekick.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -381,8 +463,9 @@
 		};
 		4940018D1D623A2B00E21ADC /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D70941EE5D43FA307EBE6DA4 /* Pods-Savers Sidekick.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
