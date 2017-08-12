@@ -23,21 +23,29 @@ class CategoriesTableViewController: CoreDataTableViewController {
         tableView.estimatedRowHeight = tableView.rowHeight
         tableView.rowHeight = UITableViewAutomaticDimension
         
-        if let currentContext = CoreDataTableViewController.context {
-            if let validBudget = currentBudget {
-                let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Category")
-                request.predicate = NSPredicate(format: "parentBudget.name = %@", validBudget.name)
-                request.sortDescriptors = [NSSortDescriptor(key: "name",
-                                                            ascending: true,
-                                                            selector: #selector(NSString.localizedCaseInsensitiveCompare(_:)))]
-                fetchedResultsController = NSFetchedResultsController(fetchRequest: request,
-                                                                      managedObjectContext: currentContext,
-                                                                      sectionNameKeyPath: nil,
-                                                                      cacheName: nil)
-            }
+        if let currentContext = CoreDataTableViewController.context, let currentBudget = currentBudget {
+            let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Category")
+            
+            request.predicate = NSPredicate(format: "parentBudget.name = %@", currentBudget.name)
+            request.sortDescriptors = [
+                NSSortDescriptor(
+                    key: "name",
+                    ascending: true,
+                    selector: #selector(NSString.localizedCaseInsensitiveCompare(_:))
+                )
+                
+            ]
+            
+            fetchedResultsController = NSFetchedResultsController(
+                fetchRequest: request,
+                managedObjectContext: currentContext,
+                sectionNameKeyPath: nil,
+                cacheName: nil
+            )
         }
         else {
             fetchedResultsController = nil
+            NSLog("Unable to unwrap context or budget in CategoriesTableViewController")
         }
     }
     

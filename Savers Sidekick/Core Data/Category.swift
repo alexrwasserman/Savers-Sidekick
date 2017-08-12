@@ -11,34 +11,35 @@ import CoreData
 
 
 public class Category: NSManagedObject {
-    
-    class func categoryWithInfo(name enteredName: String,
-                                totalFundsDollars enteredFundsDollars: NSNumber,
-                                totalFundsCents enteredFundsCents: NSNumber,
-                                inBudget budget: Budget,
-                                inContext context: NSManagedObjectContext) -> Category {
+        
+    class func categoryWithInfo(
+        name enteredName: String,
+        totalFunds enteredFunds: Double,
+        inBudget budget: Budget,
+        inContext context: NSManagedObjectContext
+    ) -> Category {
         
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Category")
-        request.predicate = NSPredicate(format: "name = %@ AND parentBudget.name = %@ AND totalFundsDollars = %@ AND totalFundsCents = %@",
-                                        enteredName,
-                                        budget.name,
-                                        enteredFundsDollars,
-                                        enteredFundsCents)
+        request.predicate = NSPredicate(
+            format: "name = %@ AND parentBudget.name = %@ AND totalFunds.description = %@",
+            enteredName,
+            budget.name,
+            enteredFunds.description
+        )
         
         if let category = (try? context.fetch(request))?.first as? Category {
             return category
         }
         else if let category = NSEntityDescription.insertNewObject(forEntityName: "Category", into: context) as? Category {
             category.name = enteredName
-            category.totalFundsDollars = enteredFundsDollars
-            category.totalFundsCents = enteredFundsCents
+            category.totalFunds = enteredFunds
             category.mostRecentExpense = nil
-            category.totalExpensesDollars = 0
-            category.totalExpensesCents = 0
-            category.parentBudget = Budget.budgetWithInfo(name: budget.name,
-                                                          totalFundsDollars: budget.totalFundsDollars,
-                                                          totalFundsCents: budget.totalFundsCents,
-                                                          inContext: context)
+            category.totalExpenses = 0.00
+            category.parentBudget = Budget.budgetWithInfo(
+                name: budget.name,
+                totalFunds: budget.totalFunds,
+                inContext: context
+            )
             return category
         }
         else {
@@ -48,13 +49,7 @@ public class Category: NSManagedObject {
     
     override public func prepareForDeletion() {
         // Update total expenses of parent budget
-        let updatedParentBudgetExpenses = performArithmetic(firstTermDollars: parentBudget.totalExpensesDollars,
-                                                            firstTermCents: parentBudget.totalExpensesCents,
-                                                            secondTermDollars: totalExpensesDollars,
-                                                            secondTermCents: totalExpensesCents,
-                                                            operation: Operation.subtraction)
-        parentBudget.totalExpensesDollars = updatedParentBudgetExpenses.0
-        parentBudget.totalExpensesCents = updatedParentBudgetExpenses.1
+        parentBudget.totalExpenses -= totalExpenses
         
         // Update mostRecentExpense for parent budget if necessary
         if mostRecentExpense == parentBudget.mostRecentExpense {
@@ -76,30 +71,20 @@ public class Category: NSManagedObject {
         }
     }
     
-    public var totalExpensesDescription: String {
-        return String.monetaryRepresentation(dollars: totalExpensesDollars, cents: totalExpensesCents)
+    public var totalExpensesCurrencyDescription: String {
+        return Utilities.currencyFormatter.stringForValue(totalExpenses)
     }
     
-    public var totalFundsDescription: String {
-        return String.monetaryRepresentation(dollars: totalFundsDollars, cents: totalFundsCents)
+    public var totalFundsCurrencyDescription: String {
+        return Utilities.currencyFormatter.stringForValue(totalFunds)
     }
     
-    public var totalExpensesCSVDescription: String {
-        if totalExpensesCents.stringValue.characters.count == 1 {
-            return totalExpensesDollars.stringValue + ".0" + totalExpensesCents.stringValue
-        }
-        else {
-            return totalExpensesDollars.stringValue + "." + totalExpensesCents.stringValue
-        }
+    public var totalExpensesDecimalDescription: String {
+        return Utilities.decimalFormatter.stringForValue(totalExpenses)
     }
     
-    public var totalFundsCSVDescription: String {
-        if totalFundsCents.stringValue.characters.count == 1 {
-            return totalFundsDollars.stringValue + ".0" + totalFundsCents.stringValue
-        }
-        else {
-            return totalFundsDollars.stringValue + "." + totalFundsCents.stringValue
-        }
+    public var totalFundsDecimalDescription: String {
+        return Utilities.decimalFormatter.stringForValue(totalFunds)
     }
     
 }

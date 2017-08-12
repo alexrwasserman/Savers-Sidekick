@@ -23,21 +23,28 @@ class ExpensesTableViewController: CoreDataTableViewController {
         tableView.estimatedRowHeight = tableView.rowHeight
         tableView.rowHeight = UITableViewAutomaticDimension
         
-        if let currentContext = CoreDataTableViewController.context {
-            if let validCategory = currentCategory {
-                let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Expense")
-                request.predicate = NSPredicate(format: "parentCategory.name = %@", validCategory.name)
-                request.sortDescriptors = [NSSortDescriptor(key: "name",
-                                                            ascending: true,
-                                                            selector: #selector(NSString.localizedCaseInsensitiveCompare(_:)))]
-                fetchedResultsController = NSFetchedResultsController(fetchRequest: request,
-                                                                      managedObjectContext: currentContext,
-                                                                      sectionNameKeyPath: nil,
-                                                                      cacheName: nil)
-            }
+        if let currentContext = CoreDataTableViewController.context, let currentCategory = currentCategory {
+            let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Expense")
+            
+            request.predicate = NSPredicate(format: "parentCategory.name = %@", currentCategory.name)
+            request.sortDescriptors = [
+                NSSortDescriptor(
+                    key: "name",
+                    ascending: true,
+                    selector: #selector(NSString.localizedCaseInsensitiveCompare(_:))
+                )
+            ]
+            
+            fetchedResultsController = NSFetchedResultsController(
+                fetchRequest: request,
+                managedObjectContext: currentContext,
+                sectionNameKeyPath: nil,
+                cacheName: nil
+            )
         }
         else {
             fetchedResultsController = nil
+            NSLog("Unable to unwrap context or category in ExpensesTableViewController")
         }
     }
     

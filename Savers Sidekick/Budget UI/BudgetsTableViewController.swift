@@ -12,10 +12,9 @@ import CoreData
 class BudgetsTableViewController: CoreDataTableViewController {
     
     var savedToolbarItems: [UIBarButtonItem]?
-    var viewSummaryHasBeenSelected: Bool = false
+    var viewSummaryHasBeenSelected = false
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         
         self.navigationItem.rightBarButtonItem = self.editButtonItem
@@ -25,16 +24,25 @@ class BudgetsTableViewController: CoreDataTableViewController {
         
         if let currentContext = CoreDataTableViewController.context {
             let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Budget")
-            request.sortDescriptors = [NSSortDescriptor(key: "name",
-                                                        ascending: true,
-                                                        selector: #selector(NSString.localizedCaseInsensitiveCompare(_:)))]
-            fetchedResultsController = NSFetchedResultsController(fetchRequest: request,
-                                                                  managedObjectContext: currentContext,
-                                                                  sectionNameKeyPath: nil,
-                                                                  cacheName: nil)
+            
+            request.sortDescriptors = [
+                NSSortDescriptor(
+                    key: "name",
+                    ascending: true,
+                    selector: #selector(NSString.localizedCaseInsensitiveCompare(_:))
+                )
+            ]
+            
+            fetchedResultsController = NSFetchedResultsController(
+                fetchRequest: request,
+                managedObjectContext: currentContext,
+                sectionNameKeyPath: nil,
+                cacheName: nil
+            )
         }
         else {
             fetchedResultsController = nil
+            NSLog("Unable to unwrap context in BudgetsTableViewController")
         }
     }
     
@@ -120,6 +128,7 @@ class BudgetsTableViewController: CoreDataTableViewController {
                 }
             }
         }
+        
     }
     
     
@@ -164,6 +173,11 @@ class BudgetsTableViewController: CoreDataTableViewController {
 
 
     // MARK: - Budget Actions
+    
+    private enum ActionType {
+        case exportCSV
+        case viewSummary
+    }
     
     @IBAction func budgetActions(_ sender: UIBarButtonItem) {
         
@@ -224,11 +238,6 @@ class BudgetsTableViewController: CoreDataTableViewController {
     private func removeCancelButtonAndRestoreToolbar() {
         self.navigationItem.setLeftBarButton(nil, animated: true)
         self.setToolbarItems(self.savedToolbarItems, animated: true)
-    }
-    
-    private enum ActionType {
-        case exportCSV
-        case viewSummary
     }
     
 }

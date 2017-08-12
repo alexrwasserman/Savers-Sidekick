@@ -19,56 +19,20 @@ class CreateNewCategoryViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var enteredFunds: UITextField!
     
     @IBAction func buttonPressed(_ sender: UIButton) {
+        validateInput(name: self.enteredName.text, funds: self.enteredFunds.text)
+        
         if let name = self.enteredName.text, let funds = self.enteredFunds.text {
-            if name != "" && funds != "" {
-                let parsedDollars: Int?
-                let parsedCents: Int?
-                let components = funds.components(separatedBy: ".")
-                
-                if components.count == 2 {
-                    let wasRounded: Bool
-                    
-                    parsedDollars = Int(components[0])
-                    (parsedCents, wasRounded) = roundCents(components[1])
-                    
-                    if parsedDollars == nil || parsedCents == nil {
-                        invalidInput()
-                    }
-                    
-                    if wasRounded {
-                        parsedDollars! += 1
-                    }
-                }
-                else if components.count == 1 {
-                    parsedDollars = Int(components[0])
-                    parsedCents = 0
-                    
-                    if parsedDollars == nil {
-                        invalidInput()
-                    }
-                }
-                else {
-                    parsedDollars = nil
-                    parsedCents = nil
-                    invalidInput()
-                }
-
-                let dollars = NSNumber(value: parsedDollars!)
-                let cents = NSNumber(value: parsedCents!)
-                
-                context?.performAndWait {
-                    _ = Category.categoryWithInfo(name: name,
-                                                  totalFundsDollars: dollars,
-                                                  totalFundsCents: cents,
-                                                  inBudget: self.currentBudget!,
-                                                  inContext: self.context!)
-                    try? self.context!.save()
-                }
-                dismissView()
+            context?.performAndWait {
+                _ = Category.categoryWithInfo(
+                    name: name,
+                    totalFunds: Double(funds)!.roundToTwoDecimalPlaces(),
+                    inBudget: self.currentBudget!,
+                    inContext: self.context!
+                )
+                try? self.context!.save()
             }
-            else {
-                invalidInput()
-            }
+            
+            dismissView()
         }
     }
     
@@ -100,7 +64,7 @@ class CreateNewCategoryViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: - Input validation
     
-    fileprivate func invalidInput() {
+    fileprivate func validateInput(name: String?, funds: String?) {
         //TODO: implement this function, should trigger an alert to the user
         //      that they either left required fields blank or passed a value
         //      that doesn't parse to a valid number. Create an enum and pass

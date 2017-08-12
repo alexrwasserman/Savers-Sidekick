@@ -25,7 +25,7 @@ class ExpenseTableViewCell: UITableViewCell {
             if let expense = self.expense {
                 expenseName?.text = expense.name
                 
-                cost?.text = "\(expense.description)"
+                cost?.text = "\(expense.currencyDescription)"
                 
                 humanDescription?.text = expense.humanDescription
                 
@@ -37,6 +37,9 @@ class ExpenseTableViewCell: UITableViewCell {
                     formatter.timeStyle = DateFormatter.Style.short
                 }
                 date?.text = "\(formatter.string(from: expense.date as Date))"
+            }
+            else {
+                NSLog("Unable to unwrap expense when updating ExpenseTableViewCell")
             }
         }
     }

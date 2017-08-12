@@ -2,7 +2,7 @@
 //  Category+CoreDataProperties.swift
 //  Savers Sidekick
 //
-//  Created by Alex Wasserman on 7/16/17.
+//  Created by Alex Wasserman on 8/11/17.
 //  Copyright © 2017 Alex Wasserman. All rights reserved.
 //
 
@@ -18,10 +18,8 @@ extension Category {
 
     @NSManaged public var mostRecentExpense: NSDate?
     @NSManaged public var name: String
-    @NSManaged public var totalExpensesCents: NSNumber
-    @NSManaged public var totalExpensesDollars: NSNumber
-    @NSManaged public var totalFundsCents: NSNumber
-    @NSManaged public var totalFundsDollars: NSNumber
+    @NSManaged public var totalExpenses: Double
+    @NSManaged public var totalFunds: Double
     @NSManaged public var expenses: NSSet
     @NSManaged public var parentBudget: Budget
 

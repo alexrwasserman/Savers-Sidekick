@@ -31,7 +31,7 @@ class CategoryTableViewCell: UITableViewCell {
                     numberOfEntries?.text = "1 expense:"
                 }
                 
-                categoryStatus?.text = "\(category.totalExpensesDescription)/\(category.totalFundsDescription)"
+                categoryStatus?.text = "\(category.totalExpensesCurrencyDescription)/\(category.totalFundsCurrencyDescription)"
                 
                 if let validDate = category.mostRecentExpense {
                     let formatter = DateFormatter()
@@ -43,9 +43,9 @@ class CategoryTableViewCell: UITableViewCell {
                     }
                     mostRecentEntry?.text = "Most recent entry: \(formatter.string(from: validDate as Date))"
                 }
-                else {
-                    mostRecentEntry?.text = nil
-                }
+            }
+            else {
+                NSLog("Unable to unwrap category when updating CategoryTableViewCell")
             }
         }
     }

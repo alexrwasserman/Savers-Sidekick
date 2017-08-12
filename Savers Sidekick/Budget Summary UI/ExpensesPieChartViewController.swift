@@ -28,7 +28,7 @@ class ExpensesPieChartViewController: UIViewController {
             
             for item in budget.categories {
                 if let category = item as? Category {
-                    let amountSpent = Double(category.totalExpensesCSVDescription)!
+                    let amountSpent = Double(category.totalExpensesDecimalDescription)!
                     chartData.append(PieChartDataEntry(value: amountSpent, label: category.name))
                 }
             }
@@ -47,8 +47,8 @@ class ExpensesPieChartViewController: UIViewController {
         }
         
         var foundExpense = false
-        for item in categories {
-            if let category = item as? Category {
+        for category in categories {
+            if let category = category as? Category {
                 if category.expenses.count != 0 {
                     foundExpense = true
                     break

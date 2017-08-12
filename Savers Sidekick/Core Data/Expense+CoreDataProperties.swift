@@ -2,7 +2,7 @@
 //  Expense+CoreDataProperties.swift
 //  Savers Sidekick
 //
-//  Created by Alex Wasserman on 7/16/17.
+//  Created by Alex Wasserman on 8/11/17.
 //  Copyright © 2017 Alex Wasserman. All rights reserved.
 //
 
@@ -16,8 +16,7 @@ extension Expense {
         return NSFetchRequest<Expense>(entityName: "Expense")
     }
 
-    @NSManaged public var costCents: NSNumber
-    @NSManaged public var costDollars: NSNumber
+    @NSManaged public var cost: Double
     @NSManaged public var date: NSDate
     @NSManaged public var humanDescription: String
     @NSManaged public var name: String

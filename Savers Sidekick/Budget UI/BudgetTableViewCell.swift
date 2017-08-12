@@ -21,7 +21,7 @@ class BudgetTableViewCell: UITableViewCell {
             
             if let budget = self.budget {
                 budgetName?.text = budget.name
-                budgetStatus?.text = "\(budget.totalExpensesDescription)/\(budget.totalFundsDescription)"
+                budgetStatus?.text = "\(budget.totalExpensesCurrencyDescription)/\(budget.totalFundsCurrencyDescription)"
                 
                 if let validDate = budget.mostRecentExpense {
                     let formatter = DateFormatter()
@@ -33,9 +33,9 @@ class BudgetTableViewCell: UITableViewCell {
                     }
                     mostRecentEntry?.text = "Most recent entry: \(formatter.string(from: validDate as Date))"
                 }
-                else {
-                    mostRecentEntry?.text = nil
-                }
+            }
+            else {
+                NSLog("Unable to unwrap budget when updating BudgetTableViewCell")
             }
         }
     }

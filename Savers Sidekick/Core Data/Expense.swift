@@ -11,18 +11,18 @@ import CoreData
 
 
 public class Expense: NSManagedObject {
-
-    class func expenseWithInfo(name enteredName: String,
-                               costDollars enteredCostDollars: NSNumber,
-                               costCents enteredCostCents: NSNumber,
-                               description enteredDescription: String?,
-                               inCategory category: Category,
-                               inContext context: NSManagedObjectContext) -> Expense {
+    
+    class func expenseWithInfo(
+        name enteredName: String,
+        cost enteredCost: Double,
+        description enteredDescription: String?,
+        inCategory category: Category,
+        inContext context: NSManagedObjectContext
+    ) -> Expense {
         
         if let expense = NSEntityDescription.insertNewObject(forEntityName: "Expense", into: context) as? Expense {
             expense.name = enteredName
-            expense.costDollars = enteredCostDollars
-            expense.costCents = enteredCostCents
+            expense.cost = enteredCost
             expense.date = NSDate()
             
             if enteredDescription != nil {
@@ -32,29 +32,15 @@ public class Expense: NSManagedObject {
                 expense.humanDescription = ""
             }
             
-            expense.parentCategory = Category.categoryWithInfo(name: category.name,
-                                                               totalFundsDollars: category.totalFundsDollars,
-                                                               totalFundsCents: category.totalFundsCents,
-                                                               inBudget: category.parentBudget,
-                                                               inContext: context)
+            expense.parentCategory = Category.categoryWithInfo(
+                name: category.name,
+                totalFunds: category.totalFunds,
+                inBudget: category.parentBudget,
+                inContext: context
+            )
             
-            let updatedParentCategoryExpenses = performArithmetic(firstTermDollars: enteredCostDollars,
-                                                                  firstTermCents: enteredCostCents,
-                                                                  secondTermDollars: expense.parentCategory.totalExpensesDollars,
-                                                                  secondTermCents: expense.parentCategory.totalExpensesCents,
-                                                                  operation: Operation.addition)
-            
-            expense.parentCategory.totalExpensesDollars = updatedParentCategoryExpenses.0
-            expense.parentCategory.totalExpensesCents = updatedParentCategoryExpenses.1
-            
-            let updatedParentBudgetExpenses = performArithmetic(firstTermDollars: enteredCostDollars,
-                                                                firstTermCents: enteredCostCents,
-                                                                secondTermDollars: expense.parentCategory.parentBudget.totalExpensesDollars,
-                                                                secondTermCents: expense.parentCategory.parentBudget.totalExpensesCents,
-                                                                operation: Operation.addition)
-            
-            expense.parentCategory.parentBudget.totalExpensesDollars = updatedParentBudgetExpenses.0
-            expense.parentCategory.parentBudget.totalExpensesCents = updatedParentBudgetExpenses.1
+            expense.parentCategory.totalExpenses += enteredCost
+            expense.parentCategory.parentBudget.totalExpenses += enteredCost
             
             expense.parentCategory.mostRecentExpense = expense.date
             expense.parentCategory.parentBudget.mostRecentExpense = expense.date
@@ -68,23 +54,8 @@ public class Expense: NSManagedObject {
     
     override public func prepareForDeletion() {
         // Update total expenses of parent category and budget
-        let updatedParentCategoryExpenses = performArithmetic(firstTermDollars: costDollars,
-                                                              firstTermCents: costCents,
-                                                              secondTermDollars: parentCategory.totalExpensesDollars,
-                                                              secondTermCents: parentCategory.totalExpensesCents,
-                                                              operation: Operation.subtraction)
-        
-        parentCategory.totalExpensesDollars = updatedParentCategoryExpenses.0
-        parentCategory.totalExpensesCents = updatedParentCategoryExpenses.1
-        
-        let updatedParentBudgetExpenses = performArithmetic(firstTermDollars: costDollars,
-                                                            firstTermCents: costCents,
-                                                            secondTermDollars: parentCategory.parentBudget.totalExpensesDollars,
-                                                            secondTermCents: parentCategory.parentBudget.totalExpensesCents,
-                                                            operation: Operation.addition)
-        
-        parentCategory.parentBudget.totalExpensesDollars = updatedParentBudgetExpenses.0
-        parentCategory.parentBudget.totalExpensesCents = updatedParentBudgetExpenses.1
+        parentCategory.totalExpenses -= cost
+        parentCategory.parentBudget.totalExpenses -= cost
         
         // Update mostRecentExpense for parent category and budget if necessary
         if date == parentCategory.mostRecentExpense {
@@ -121,17 +92,12 @@ public class Expense: NSManagedObject {
         }
     }
     
-    override public var description: String {
-        return String.monetaryRepresentation(dollars: costDollars, cents: costCents)
+    public var currencyDescription: String {
+        return Utilities.currencyFormatter.stringForValue(cost)
     }
     
-    public var csvDescription: String {
-        if costCents.stringValue.characters.count == 1 {
-            return costDollars.stringValue + ".0" + costCents.stringValue
-        }
-        else {
-            return costDollars.stringValue + "." + costCents.stringValue
-        }
+    public var decimalDescription: String {
+        return Utilities.decimalFormatter.stringForValue(cost)
     }
     
 }

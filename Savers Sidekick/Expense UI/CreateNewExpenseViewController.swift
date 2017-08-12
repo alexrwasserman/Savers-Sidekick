@@ -20,57 +20,21 @@ class CreateNewExpenseViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var enteredDescription: UITextField!
     
     @IBAction func buttonPressed(_ sender: UIButton) {
+        validateInput(name: self.enteredName.text, cost: self.enteredCost.text)
+        
         if let name = self.enteredName.text, let cost = self.enteredCost.text {
-            if name != "" && cost != "" {
-                let parsedDollars: Int?
-                let parsedCents: Int?
-                let components = cost.components(separatedBy: ".")
-                
-                if components.count == 2 {
-                    let wasRounded: Bool
-                    
-                    parsedDollars = Int(components[0])
-                    (parsedCents, wasRounded) = roundCents(components[1])
-                    
-                    if parsedDollars == nil || parsedCents == nil {
-                        invalidInput()
-                    }
-                    
-                    if wasRounded {
-                        parsedDollars! += 1
-                    }
-                }
-                else if components.count == 1 {
-                    parsedDollars = Int(components[0])
-                    parsedCents = 0
-                    
-                    if parsedDollars == nil {
-                        invalidInput()
-                    }
-                }
-                else {
-                    parsedDollars = nil
-                    parsedCents = nil
-                    invalidInput()
-                }
-                
-                let dollars = NSNumber(value: parsedDollars!)
-                let cents = NSNumber(value: parsedCents!)
-                
-                context?.performAndWait {
-                    _ = Expense.expenseWithInfo(name: name,
-                                                costDollars: dollars,
-                                                costCents: cents,
-                                                description: self.enteredDescription.text,
-                                                inCategory: self.currentCategory!,
-                                                inContext: self.context!)
-                    try? self.context!.save()
-                }
-                dismissView()
+            context?.performAndWait {
+                _ = Expense.expenseWithInfo(
+                    name: name,
+                    cost: Double(cost)!.roundToTwoDecimalPlaces(),
+                    description: self.enteredDescription.text,
+                    inCategory: self.currentCategory!,
+                    inContext: self.context!
+                )
+                try? self.context!.save()
             }
-            else {
-                invalidInput()
-            }
+            
+            dismissView()
         }
     }
     
@@ -106,7 +70,7 @@ class CreateNewExpenseViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: - Input validation
     
-    fileprivate func invalidInput() {
+    fileprivate func validateInput(name: String?, cost: String?) {
         //TODO: implement this function, should trigger an alert to the user
         //      that they either left required fields blank or passed a value
         //      that doesn't parse to a valid number. Create an enum and pass
