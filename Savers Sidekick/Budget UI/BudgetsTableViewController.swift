@@ -12,6 +12,7 @@ import CoreData
 class BudgetsTableViewController: CoreDataTableViewController {
     
     var savedToolbarItems: [UIBarButtonItem]?
+    var viewSummaryHasBeenSelected: Bool = false
     
     override func viewDidLoad() {
         
@@ -138,35 +139,48 @@ class BudgetsTableViewController: CoreDataTableViewController {
                 }
             }
         }
+        else if segue.identifier == "expensesPieChart" {
+            if let expensesPieChartController = segue.destination as? ExpensesPieChartViewController {
+                if let budgetSelected = sender as? BudgetTableViewCell {
+                    expensesPieChartController.budget = budgetSelected.budget!
+                }
+            }
+        }
     }
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         return !tableView.allowsMultipleSelectionDuringEditing
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if self.viewSummaryHasBeenSelected {
+            cancelSummary(UIBarButtonItem())
+            performSegue(withIdentifier: "expensesPieChart", sender: tableView.cellForRow(at: indexPath))
+        }
+        else {
+            performSegue(withIdentifier: "categoriesOfSelectedBudget", sender: tableView.cellForRow(at: indexPath))
+        }
+    }
 
 
-    // MARK: - CSV File Creation
+    // MARK: - Budget Actions
     
     @IBAction func budgetActions(_ sender: UIBarButtonItem) {
         
         let budgetAlertController = UIAlertController(title: "Budget Actions", message: nil, preferredStyle: .actionSheet)
         
         let viewSummaryAction = UIAlertAction(title: "View Summary", style: .default) { _ in
-            
+            self.viewSummaryHasBeenSelected = true
+            self.title = "Select Budget"
+            self.navigationItem.setRightBarButton(nil, animated: true)
+            self.displayCancelButtonAndSaveToolbar(actionType: .viewSummary)
         }
         
         let exportCSVAction = UIAlertAction(title: "Export As CSV File", style: .default) { _ in
             self.tableView.allowsMultipleSelectionDuringEditing = true
-            
             self.setEditing(true, animated: true)
-            
             self.editButtonItem.title = "Export"
-            
-            let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(self.cancelExport(_:)))
-            self.navigationItem.leftBarButtonItem = cancelButton
-            
-            self.savedToolbarItems = self.toolbarItems
-            self.setToolbarItems(nil, animated: true)
+            self.displayCancelButtonAndSaveToolbar(actionType: .exportCSV)
         }
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in }
@@ -180,11 +194,41 @@ class BudgetsTableViewController: CoreDataTableViewController {
     
     @IBAction func cancelExport(_ sender: UIBarButtonItem) {
         tableView.allowsMultipleSelectionDuringEditing = false
-        
         self.setEditing(false, animated: true)
+        self.removeCancelButtonAndRestoreToolbar()
+    }
+    
+    @IBAction func cancelSummary(_ sender: UIBarButtonItem) {
+        self.viewSummaryHasBeenSelected = false
+        self.title = "Budgets"
+        self.navigationItem.setRightBarButton(self.editButtonItem, animated: true)
+        self.removeCancelButtonAndRestoreToolbar()
+    }
+    
+    private func displayCancelButtonAndSaveToolbar(actionType: ActionType) {
+        let cancelButton: UIBarButtonItem
         
-        self.navigationItem.leftBarButtonItem = nil
+        switch actionType {
+        case .exportCSV:
+            cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(self.cancelExport(_:)))
+        case .viewSummary:
+            cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(self.cancelSummary(_:)))
+        }
+        
+        self.navigationItem.setLeftBarButton(cancelButton, animated: true)
+        
+        self.savedToolbarItems = self.toolbarItems
+        self.setToolbarItems(nil, animated: true)
+    }
+    
+    private func removeCancelButtonAndRestoreToolbar() {
+        self.navigationItem.setLeftBarButton(nil, animated: true)
         self.setToolbarItems(self.savedToolbarItems, animated: true)
+    }
+    
+    private enum ActionType {
+        case exportCSV
+        case viewSummary
     }
     
 }

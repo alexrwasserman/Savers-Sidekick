@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Charts
 
 public enum Operation {
     case addition
@@ -77,6 +78,23 @@ public func roundCents(_ cents: String) -> (Int?, Bool) {
     }
     else {
         return (nil, false)
+    }
+}
+
+class CurrencyFormatter: NumberFormatter, IValueFormatter {
+    override init() {
+        super.init()
+        
+        self.numberStyle = .currency
+        self.locale = NSLocale.current
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    func stringForValue(_ value: Double, entry: ChartDataEntry, dataSetIndex: Int, viewPortHandler: ViewPortHandler?) -> String {
+        return self.string(from: value as NSNumber)!
     }
 }
 

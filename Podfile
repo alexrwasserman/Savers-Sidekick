@@ -10,4 +10,4 @@ target 'Savers Sidekick' do
 
 end
 
-workspace 'project'
+workspace 'Savers Sidekick'
