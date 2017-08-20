@@ -10,10 +10,30 @@ import UIKit
 
 class BudgetSummaryPageViewController: UIPageViewController, UIPageViewControllerDataSource {
     
+    var budget = Budget()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         dataSource = self
+        
+        var summaryControllers: [UIViewController]? = []
+        
+        let expensesPieChartViewController = UIStoryboard(name: "Main", bundle: nil)
+            .instantiateViewController(withIdentifier: "ExpensesPieChartViewController")
+        
+        if let expensesPieChartViewController = expensesPieChartViewController as? ExpensesPieChartViewController {
+            expensesPieChartViewController.budget = budget
+            summaryControllers?.append(expensesPieChartViewController)
+        }
+        else {
+            NSLog("Unable to cast UIViewController to ExpensesPieChartViewController")
+        }
+        
+        setViewControllers(summaryControllers, direction: .forward, animated: true, completion: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
     }
     
     
@@ -27,11 +47,11 @@ class BudgetSummaryPageViewController: UIPageViewController, UIPageViewControlle
         return nil
     }
     
-    func presentationCount(for pageViewController: UIPageViewController) -> Int {
-        return 1
-    }
-    
-    func presentationIndex(for pageViewController: UIPageViewController) -> Int {
-        return 1
-    }
+//    func presentationCount(for pageViewController: UIPageViewController) -> Int {
+//        return 1
+//    }
+//    
+//    func presentationIndex(for pageViewController: UIPageViewController) -> Int {
+//        return 0
+//    }
 }

@@ -148,10 +148,10 @@ class BudgetsTableViewController: CoreDataTableViewController {
                 }
             }
         }
-        else if segue.identifier == "expensesPieChart" {
-            if let expensesPieChartController = segue.destination as? ExpensesPieChartViewController {
+        else if segue.identifier == "viewSummary" {
+            if let budgetSummaryController = segue.destination as? BudgetSummaryPageViewController {
                 if let budgetSelected = sender as? BudgetTableViewCell {
-                    expensesPieChartController.budget = budgetSelected.budget!
+                    budgetSummaryController.budget = budgetSelected.budget!
                 }
             }
         }
@@ -164,7 +164,7 @@ class BudgetsTableViewController: CoreDataTableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if self.viewSummaryHasBeenSelected {
             cancelSummary(UIBarButtonItem())
-            performSegue(withIdentifier: "expensesPieChart", sender: tableView.cellForRow(at: indexPath))
+            performSegue(withIdentifier: "viewSummary", sender: tableView.cellForRow(at: indexPath))
         }
         else {
             performSegue(withIdentifier: "categoriesOfSelectedBudget", sender: tableView.cellForRow(at: indexPath))

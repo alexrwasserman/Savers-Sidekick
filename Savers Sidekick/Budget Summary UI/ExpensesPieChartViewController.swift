@@ -10,8 +10,9 @@ import Charts
 import UIKit
 
 class ExpensesPieChartViewController: UIViewController {
+    
     @IBOutlet weak var pieChartView: PieChartView!
-    var budget: Budget = Budget()
+    var budget = Budget()
     
     override func viewDidLoad() {
         pieChartView.noDataText = "No expenses have been recorded."
