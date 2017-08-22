@@ -149,7 +149,7 @@ class BudgetsTableViewController: CoreDataTableViewController {
             }
         }
         else if segue.identifier == "viewSummary" {
-            if let budgetSummaryController = segue.destination as? BudgetSummaryPageViewController {
+            if let budgetSummaryController = segue.destination as? BudgetPieChartViewController {
                 if let budgetSelected = sender as? BudgetTableViewCell {
                     budgetSummaryController.budget = budgetSelected.budget!
                 }

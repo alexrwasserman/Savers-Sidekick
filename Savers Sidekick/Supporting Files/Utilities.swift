@@ -14,6 +14,30 @@ import Charts
 class Utilities {
     static var currencyFormatter = CurrencyFormatter()
     static var decimalFormatter = DecimalFormatter()
+    
+    static var mediumSeaGreen = NSUIColor(red: 46/255.0, green: 204/255.0, blue: 113/255.0, alpha: 1.0)
+    static var dandelion = NSUIColor(red: 240/255.0, green: 225/255.0, blue: 48/255.0, alpha: 1.0)
+    static var cinnabar = NSUIColor(red: 231/255.0, green: 76/255.0, blue: 60/255.0, alpha: 1.0)
+    static var skyBlue = NSUIColor(red: 135/255.0, green: 206/255.0, blue: 250/255.0, alpha: 1.0)
+    static var darkOrange = NSUIColor(red: 255/255.0, green: 140/255.0, blue: 0/255.0, alpha: 1.0)
+    static var lightViolet = NSUIColor(red: 184/255.0, green: 77/255.0, blue: 255/255.0, alpha: 1.0)
+    static var dijonYellow = NSUIColor(red: 176/255.0, green: 131/255.0, blue: 11/255.0, alpha: 1.0)
+    static var seaGreen = NSUIColor(red: 46/255.0, green: 140/255.0, blue: 87/255.0, alpha: 1.0)
+    static var deepPeach = NSUIColor(red: 255/255.0, green: 203/255.0, blue: 164/255.0, alpha: 1.0)
+    static var royalBlue = NSUIColor(red: 65/255.0, green: 105/255.0, blue: 225/255.0, alpha: 1.0)
+    
+    static var pieChartColors: [NSUIColor] = [
+        Utilities.mediumSeaGreen,
+        Utilities.dandelion,
+        Utilities.cinnabar,
+        Utilities.skyBlue,
+        Utilities.darkOrange,
+        Utilities.lightViolet,
+        Utilities.dijonYellow,
+        Utilities.seaGreen,
+        Utilities.deepPeach,
+        Utilities.royalBlue
+    ]
 }
 
 class CurrencyFormatter: NumberFormatter, IValueFormatter {

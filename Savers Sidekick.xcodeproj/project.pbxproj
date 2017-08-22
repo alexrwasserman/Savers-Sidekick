@@ -27,8 +27,9 @@
 		9D2308AF1F1BC22F001130BB /* Budget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2308A91F1BC22F001130BB /* Budget.swift */; };
 		9D2308B01F1BC22F001130BB /* Budget+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2308AA1F1BC22F001130BB /* Budget+CoreDataProperties.swift */; };
 		9D25EEF21F1AE9DB00D4200C /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D25EEF11F1AE9DB00D4200C /* Utilities.swift */; };
+		9D2ADC8E1F4BDC73007A6F55 /* SidekickPieChartRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2ADC8D1F4BDC73007A6F55 /* SidekickPieChartRenderer.swift */; };
 		9D9EC9651F3D1BD1001CA260 /* BudgetSummaryPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9EC9641F3D1BD1001CA260 /* BudgetSummaryPageViewController.swift */; };
-		9D9EC9671F3D2713001CA260 /* ExpensesPieChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9EC9661F3D2713001CA260 /* ExpensesPieChartViewController.swift */; };
+		9D9EC9671F3D2713001CA260 /* BudgetPieChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9EC9661F3D2713001CA260 /* BudgetPieChartViewController.swift */; };
 		9DA2E5711F392507002D72BB /* Savers_Sidekick.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9DA2E56F1F392507002D72BB /* Savers_Sidekick.xcdatamodeld */; };
 		9DA2E5741F39267D002D72BB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DA2E5731F39267D002D72BB /* LaunchScreen.storyboard */; };
 		9DA2E5771F3927E5002D72BB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DA2E5761F3927E5002D72BB /* Main.storyboard */; };
@@ -70,8 +71,9 @@
 		9D2308A91F1BC22F001130BB /* Budget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Budget.swift; sourceTree = "<group>"; };
 		9D2308AA1F1BC22F001130BB /* Budget+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Budget+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		9D25EEF11F1AE9DB00D4200C /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		9D2ADC8D1F4BDC73007A6F55 /* SidekickPieChartRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SidekickPieChartRenderer.swift; sourceTree = "<group>"; };
 		9D9EC9641F3D1BD1001CA260 /* BudgetSummaryPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BudgetSummaryPageViewController.swift; sourceTree = "<group>"; };
-		9D9EC9661F3D2713001CA260 /* ExpensesPieChartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpensesPieChartViewController.swift; sourceTree = "<group>"; };
+		9D9EC9661F3D2713001CA260 /* BudgetPieChartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BudgetPieChartViewController.swift; sourceTree = "<group>"; };
 		9DA2E5701F392507002D72BB /* Savers_Sidekick.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Savers_Sidekick.xcdatamodel; sourceTree = "<group>"; };
 		9DA2E5731F39267D002D72BB /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9DA2E5761F3927E5002D72BB /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -198,7 +200,8 @@
 			isa = PBXGroup;
 			children = (
 				9D9EC9641F3D1BD1001CA260 /* BudgetSummaryPageViewController.swift */,
-				9D9EC9661F3D2713001CA260 /* ExpensesPieChartViewController.swift */,
+				9D9EC9661F3D2713001CA260 /* BudgetPieChartViewController.swift */,
+				9D2ADC8D1F4BDC73007A6F55 /* SidekickPieChartRenderer.swift */,
 			);
 			path = "Budget Summary UI";
 			sourceTree = "<group>";
@@ -342,6 +345,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D2ADC8E1F4BDC73007A6F55 /* SidekickPieChartRenderer.swift in Sources */,
 				9D9EC9651F3D1BD1001CA260 /* BudgetSummaryPageViewController.swift in Sources */,
 				9D2308B01F1BC22F001130BB /* Budget+CoreDataProperties.swift in Sources */,
 				9D2308AD1F1BC22F001130BB /* Expense.swift in Sources */,
@@ -354,7 +358,7 @@
 				9D2308AC1F1BC22F001130BB /* Category+CoreDataProperties.swift in Sources */,
 				492C65521D6969B3007D42BE /* CategoriesTableViewController.swift in Sources */,
 				493B2A441D73C04900179ED3 /* CreateNewExpenseViewController.swift in Sources */,
-				9D9EC9671F3D2713001CA260 /* ExpensesPieChartViewController.swift in Sources */,
+				9D9EC9671F3D2713001CA260 /* BudgetPieChartViewController.swift in Sources */,
 				9D2308AE1F1BC22F001130BB /* Expense+CoreDataProperties.swift in Sources */,
 				4940019F1D6252D900E21ADC /* BudgetTableViewCell.swift in Sources */,
 				493B2A421D73BF2100179ED3 /* ExpensesTableViewController.swift in Sources */,
@@ -475,7 +479,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "Savers Sidekick/Supporting Files/Savers Sidekick-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -495,7 +499,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Savers Sidekick/Supporting Files/Savers Sidekick-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
