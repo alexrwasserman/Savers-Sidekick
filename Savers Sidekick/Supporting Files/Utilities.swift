@@ -25,21 +25,9 @@ class Utilities {
     static var seaGreen = NSUIColor(red: 46/255.0, green: 140/255.0, blue: 87/255.0, alpha: 1.0)
     static var deepPeach = NSUIColor(red: 255/255.0, green: 203/255.0, blue: 164/255.0, alpha: 1.0)
     static var royalBlue = NSUIColor(red: 65/255.0, green: 105/255.0, blue: 225/255.0, alpha: 1.0)
-    
-    static var pieChartColors: [NSUIColor] = [
-        Utilities.mediumSeaGreen,
-        Utilities.dandelion,
-        Utilities.cinnabar,
-        Utilities.skyBlue,
-        Utilities.darkOrange,
-        Utilities.lightViolet,
-        Utilities.dijonYellow,
-        Utilities.seaGreen,
-        Utilities.deepPeach,
-        Utilities.royalBlue
-    ]
 }
 
+/// Formatter for displaying currency values
 class CurrencyFormatter: NumberFormatter, IValueFormatter {
     override init() {
         super.init()
@@ -61,6 +49,7 @@ class CurrencyFormatter: NumberFormatter, IValueFormatter {
     }
 }
 
+/// Formatter for displaying double values with exactly two decimal places
 class DecimalFormatter: NumberFormatter {
     override init() {
         super.init()

@@ -53,6 +53,14 @@
                             <constraint firstItem="8GX-aE-ao5" firstAttribute="leading" secondItem="H2V-bY-U0Y" secondAttribute="leadingMargin" id="cw5-1M-ggj"/>
                         </constraints>
                     </view>
+                    <toolbarItems>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="JQ2-Xa-ue8"/>
+                        <barButtonItem systemItem="action" id="jcy-qf-blN">
+                            <connections>
+                                <action selector="summaryActions:" destination="nnP-qM-nGv" id="R7T-t3-1R4"/>
+                            </connections>
+                        </barButtonItem>
+                    </toolbarItems>
                     <connections>
                         <outlet property="pieChartView" destination="8GX-aE-ao5" id="BM1-d1-7Qs"/>
                     </connections>
@@ -212,7 +220,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                         <state key="normal" title="Create"/>
                                         <connections>
-                                            <action selector="buttonPressed:" destination="nCq-lR-7Yt" eventType="touchUpInside" id="j2F-FQ-rma"/>
+                                            <action selector="createButtonPressed:" destination="nCq-lR-7Yt" eventType="touchUpInside" id="829-qr-bGi"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -588,7 +596,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                         <state key="normal" title="Create"/>
                                         <connections>
-                                            <action selector="buttonPressed:" destination="cFq-y4-4ZL" eventType="touchUpInside" id="wiV-Xj-4zU"/>
+                                            <action selector="createButtonPressed:" destination="cFq-y4-4ZL" eventType="touchUpInside" id="bVZ-PR-7aT"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -691,7 +699,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                         <state key="normal" title="Create"/>
                                         <connections>
-                                            <action selector="buttonPressed:" destination="r7c-z2-88F" eventType="touchUpInside" id="gfA-qG-zCh"/>
+                                            <action selector="createButtonPressed:" destination="r7c-z2-88F" eventType="touchUpInside" id="uF2-Bq-ohT"/>
                                         </connections>
                                     </button>
                                 </subviews>

@@ -12,6 +12,12 @@ import CoreData
 
 public class Expense: NSManagedObject {
     
+    /// A function for obtaining an instance of an Expense. A new instance with the specified information is always created.
+    /// - parameter name: Name of the Expense.
+    /// - parameter cost: The cost of the Expense.
+    /// - parameter description: The description of the Expense entered by the user.
+    /// - parameter inCategory: The Category that the Expense is contained in.
+    /// - parameter inContext: The context containing the data store in which the Expense is saved.
     class func expenseWithInfo(
         name enteredName: String,
         cost enteredCost: Double,

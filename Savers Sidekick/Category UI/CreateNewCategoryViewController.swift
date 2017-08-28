@@ -18,7 +18,7 @@ class CreateNewCategoryViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var enteredName: UITextField!
     @IBOutlet weak var enteredFunds: UITextField!
     
-    @IBAction func buttonPressed(_ sender: UIButton) {
+    @IBAction func createButtonPressed(_ sender: UIButton) {
         validateInput(name: self.enteredName.text, funds: self.enteredFunds.text)
         
         if let name = self.enteredName.text, let funds = self.enteredFunds.text {

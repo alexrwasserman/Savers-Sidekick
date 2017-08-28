@@ -11,7 +11,14 @@ import CoreData
 
 
 public class Category: NSManagedObject {
-        
+    
+    /// A function for obtaining an instance of a Category. If there is an existing instance with the same name and totalfunds
+    /// and is contained in the same Budget as what is passed to this function, that instance is returned.
+    /// Otherwise, a new instance is created with the specified information.
+    /// - parameter name: Name of the Category.
+    /// - parameter totalFunds: The total funds allocated to this Category.
+    /// - parameter inBudget: The Budget that this Category is contained in.
+    /// - parameter inContext: The context containing the data store in which the Category is saved.
     class func categoryWithInfo(
         name enteredName: String,
         totalFunds enteredFunds: Double,

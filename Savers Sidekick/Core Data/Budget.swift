@@ -12,6 +12,12 @@ import CoreData
 
 public class Budget: NSManagedObject {
     
+    /// A function for obtaining an instance of a Budget. If there is an existing instance with the same name and totalfunds
+    /// as what is passed to this function, that instance is returned. Otherwise, a new instance is created
+    /// with the specified information.
+    /// - parameter name: Name of the Budget.
+    /// - parameter totalFunds: The total funds allocated to this Budget.
+    /// - parameter inContext: The context containing the data store in which the Budget is saved.
     class func budgetWithInfo(
         name enteredName: String,
         totalFunds enteredFunds: Double,
@@ -52,18 +58,20 @@ public class Budget: NSManagedObject {
         return Utilities.decimalFormatter.stringForValue(totalFunds)
     }
     
+    /// Creates a CSV file summarizing this budget.
+    /// - parameter path: The full path, including filename, where the CSV file will be written.
     public func createCSVFile(path: URL) -> Bool {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM dd yyyy 'at' h:mm:ss a"
         
         var fileContent = "Category,Expense,Amount,Date,Description\n"
         
-        for categoryItem in categories {
-            if let category = categoryItem as? Category {
+        for category in categories {
+            if let category = category as? Category {
                 fileContent += "\(category.name),,,,\n"
                 
-                for expenseItem in category.expenses {
-                    if let expense = expenseItem as? Expense {
+                for expense in category.expenses {
+                    if let expense = expense as? Expense {
                         fileContent += ",\(expense.name),\(expense.decimalDescription),"
                         fileContent += "\(formatter.string(from: expense.date as Date)),\(expense.humanDescription)\n"
                     }

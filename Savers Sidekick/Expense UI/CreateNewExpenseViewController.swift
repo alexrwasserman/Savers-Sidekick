@@ -19,7 +19,7 @@ class CreateNewExpenseViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var enteredCost: UITextField!
     @IBOutlet weak var enteredDescription: UITextField!
     
-    @IBAction func buttonPressed(_ sender: UIButton) {
+    @IBAction func createButtonPressed(_ sender: UIButton) {
         validateInput(name: self.enteredName.text, cost: self.enteredCost.text)
         
         if let name = self.enteredName.text, let cost = self.enteredCost.text {
