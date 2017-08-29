@@ -95,7 +95,7 @@ class CreateNewBudgetViewController: UIViewController, UITextFieldDelegate {
         
         let errorAlertController = UIAlertController(title: "Input Error", message: message, preferredStyle: .alert)
         
-        let dismissAction = UIAlertAction(title: "Dismiss", style: .cancel) { _ in }
+        let dismissAction = UIAlertAction(title: "Dismiss", style: .cancel)
         errorAlertController.addAction(dismissAction)
         
         present(errorAlertController, animated: true, completion: nil)

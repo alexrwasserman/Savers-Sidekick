@@ -136,7 +136,7 @@ class BudgetsTableViewController: CoreDataTableViewController {
             self.displayNavigationItemsAndSaveToolbar(actionType: .exportCSV)
         }
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
         
         budgetAlertController.addAction(viewSummaryAction)
         budgetAlertController.addAction(exportCSVAction)
@@ -183,7 +183,8 @@ class BudgetsTableViewController: CoreDataTableViewController {
         // Check if any budgets were selected
         if tableView.indexPathsForSelectedRows != nil {
             // Attempt to create CSV files for each selected budget
-            var fileURLs: [URL] = []
+            var successfulURLs: [URL] = []
+            var errorURLs: [URL] = []
             
             for index in tableView.indexPathsForSelectedRows! {
                 let selectedCell = tableView.cellForRow(at: index)
@@ -194,7 +195,10 @@ class BudgetsTableViewController: CoreDataTableViewController {
                     let path = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(fileName, isDirectory: false)
                     
                     if budget.createCSVFile(path: path) {
-                        fileURLs.append(path)
+                        successfulURLs.append(path)
+                    }
+                    else {
+                        errorURLs.append(path)
                     }
                 }
                 else {
@@ -203,25 +207,64 @@ class BudgetsTableViewController: CoreDataTableViewController {
                 }
             }
             
-            // Display activity view controller for user to use the created CSV files
-            let activityVC = UIActivityViewController(activityItems: fileURLs, applicationActivities: nil)
-            activityVC.completionWithItemsHandler = { activityType, completed, returnedItems, activityError in
-                for fileURL in fileURLs {
-                    do {
-                        try FileManager.default.removeItem(at: fileURL)
-                        NSLog("Successfully deleted file: %@", fileURL.lastPathComponent)
-                    }
-                    catch {
-                        NSLog("Failed to delete file: %@", fileURL.lastPathComponent)
-                        NSLog("%@", "\(error)")
-                    }
+            if errorURLs.count > 0 && successfulURLs.count > 0 {
+                let message = createErrorMessage(fileURLs: errorURLs)
+                let errorAlertController = UIAlertController(title: "File Creation Error", message: message, preferredStyle: .alert)
+                
+                let dismissAction = UIAlertAction(title: "Dismiss", style: .cancel) { _ in
+                    self.presentSuccessfulFilesActivityVC(fileURLs: successfulURLs)
                 }
+                
+                errorAlertController.addAction(dismissAction)
+                
+                present(errorAlertController, animated: true, completion: nil)
             }
-            
-            present(activityVC, animated: true, completion: nil)
+            else if errorURLs.count > 0 {
+                let message = createErrorMessage(fileURLs: errorURLs)
+                let errorAlertController = UIAlertController(title: "File Creation Error", message: message, preferredStyle: .alert)
+                
+                let dismissAction = UIAlertAction(title: "Dismiss", style: .cancel)
+                errorAlertController.addAction(dismissAction)
+                
+                present(errorAlertController, animated: true, completion: nil)
+            }
+            else {
+                presentSuccessfulFilesActivityVC(fileURLs: successfulURLs)
+            }
         }
 
         finishExport()
+    }
+    
+    private func presentSuccessfulFilesActivityVC(fileURLs: [URL]) {
+        let activityVC = UIActivityViewController(activityItems: fileURLs, applicationActivities: nil)
+        
+        activityVC.completionWithItemsHandler = { activityType, completed, returnedItems, activityError in
+            for fileURL in fileURLs {
+                do {
+                    try FileManager.default.removeItem(at: fileURL)
+                    NSLog("Successfully deleted file: %@", fileURL.lastPathComponent)
+                }
+                catch {
+                    NSLog("Failed to delete file: %@", fileURL.lastPathComponent)
+                    NSLog("%@", "\(error)")
+                }
+            }
+        }
+        
+        present(activityVC, animated: true, completion: nil)
+    }
+    
+    private func createErrorMessage(fileURLs: [URL]) -> String {
+        var message = "Unable to create CSV files for the following budgets:\n"
+        
+        for fileURL in fileURLs {
+            let filename = fileURL.lastPathComponent
+            let indexOfFileExtension = filename.index(filename.endIndex, offsetBy: -4)
+            message += (filename.substring(to: indexOfFileExtension) + "\n")
+        }
+        
+        return message.trimmingCharacters(in: .newlines)
     }
     
     @IBAction func finishExport(_ sender: UIBarButtonItem) { finishExport() }

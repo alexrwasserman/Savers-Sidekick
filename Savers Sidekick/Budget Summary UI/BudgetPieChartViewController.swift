@@ -119,7 +119,7 @@ class BudgetPieChartViewController: UIViewController {
             
         }
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
         
         summaryAlertController.addAction(saveChartAction)
         summaryAlertController.addAction(cancelAction)
