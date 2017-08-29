@@ -19,7 +19,11 @@ class CreateNewCategoryViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var enteredFunds: UITextField!
     
     @IBAction func createButtonPressed(_ sender: UIButton) {
-        validateInput(name: self.enteredName.text, funds: self.enteredFunds.text)
+        enteredFunds.text = enteredFunds.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        if !validateInput() {
+            return
+        }
         
         if let name = self.enteredName.text, let funds = self.enteredFunds.text {
             context?.performAndWait {
@@ -64,11 +68,42 @@ class CreateNewCategoryViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: - Input validation
     
-    fileprivate func validateInput(name: String?, funds: String?) {
-        //TODO: implement this function, should trigger an alert to the user
-        //      that they either left required fields blank or passed a value
-        //      that doesn't parse to a valid number. Create an enum and pass
-        //      it to this function to determine which kind of error it was
+    // Returns true if the input is valid, false if it is invalid
+    private func validateInput() -> Bool {
+        if enteredName.text == "" {
+            displayErrorMessage(.emptyName)
+            return false
+        }
+        else if enteredFunds.text == "" {
+            displayErrorMessage(.emptyFunds)
+            return false
+        }
+        else if Utilities.decimalFormatter.number(from: enteredFunds.text!) == nil {
+            displayErrorMessage(.malformedFunds)
+            return false
+        }
+        
+        return true
+    }
+    
+    private func displayErrorMessage(_ error: ErrorType) {
+        let message: String
+        
+        switch error {
+        case .emptyName: message = "\"Name\" field cannot be left blank"
+        case .emptyFunds: message = "\"Funds For Category\" field cannot be left blank"
+        case .malformedName:
+            NSLog("Encountered .malformedName during input validation when creating a Category")
+            message = ""
+        case .malformedFunds: message = "\"Funds For Category\" field must be a valid number"
+        }
+        
+        let errorAlertController = UIAlertController(title: "Input Error", message: message, preferredStyle: .alert)
+        
+        let dismissAction = UIAlertAction(title: "Dismiss", style: .cancel) { _ in }
+        errorAlertController.addAction(dismissAction)
+        
+        present(errorAlertController, animated: true, completion: nil)
     }
 
 }

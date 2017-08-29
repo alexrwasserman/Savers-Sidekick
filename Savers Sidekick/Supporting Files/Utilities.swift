@@ -76,3 +76,11 @@ extension Double {
         return (self * 100).rounded() / 100
     }
 }
+
+/// Enum for input validation when user is creating a Budget/Category/Expense
+enum ErrorType {
+    case emptyName
+    case emptyFunds
+    case malformedName
+    case malformedFunds
+}

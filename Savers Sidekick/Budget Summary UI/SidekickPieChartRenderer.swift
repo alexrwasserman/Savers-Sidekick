@@ -11,6 +11,7 @@ import CoreGraphics
 import UIKit
 import Charts
 
+// A class to add special behavior to the pie chart. Specifically, to not display the label/value of small slices.
 class SidekickPieChartRenderer: PieChartRenderer {
     
     struct Math {

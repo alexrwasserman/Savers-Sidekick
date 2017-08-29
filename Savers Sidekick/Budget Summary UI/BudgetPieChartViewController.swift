@@ -86,7 +86,7 @@ class BudgetPieChartViewController: UIViewController {
             let chartDataSet = PieChartDataSet(values: chartData, label: nil)
             
             chartDataSet.colors = BudgetPieChartViewController.pieChartColors
-            chartDataSet.sliceSpace = 2.0
+            chartDataSet.sliceSpace = 5.0
             chartDataSet.automaticallyDisableSliceSpacing = true
             
             pieChartView.data = PieChartData(dataSet: chartDataSet)
