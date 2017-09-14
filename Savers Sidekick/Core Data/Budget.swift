@@ -80,7 +80,7 @@ public class Budget: NSManagedObject {
                 fileContent += ",,,,\n"
                 fileContent += ",TOTAL:,\(category.totalExpensesDecimalDescription),,\n"
                 fileContent += ",ALLOTTED:,\(category.totalFundsDecimalDescription),,\n"
-                fileContent += ",DIFFERENCE:,\(category.totalFunds - category.totalExpenses),,\n"
+                fileContent += ",DIFFERENCE:,\(Utilities.decimalFormatter.stringForValue(category.totalFunds - category.totalExpenses)),,\n"
                 fileContent += ",,,,\n"
             }
         }
@@ -96,6 +96,24 @@ public class Budget: NSManagedObject {
         }
         
         return true
+    }
+    
+    public func noDataToDisplay() -> Bool {
+        if categories.count == 0 {
+            return true
+        }
+        
+        var foundExpense = false
+        for category in categories {
+            if let category = category as? Category {
+                if category.totalExpenses.roundToTwoDecimalPlaces() > 0.00 {
+                    foundExpense = true
+                    break
+                }
+            }
+        }
+        
+        return !foundExpense
     }
     
 }

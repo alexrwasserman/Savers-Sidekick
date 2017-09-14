@@ -92,7 +92,7 @@ class BudgetsTableViewController: CoreDataTableViewController {
             }
         }
         else if segue.identifier == "viewSummary" {
-            if let budgetSummaryController = segue.destination as? BudgetPieChartViewController {
+            if let budgetSummaryController = segue.destination as? BudgetSummaryPageViewController {
                 if let budgetSelected = sender as? BudgetTableViewCell {
                     budgetSummaryController.budget = budgetSelected.budget!
                 }
@@ -105,10 +105,8 @@ class BudgetsTableViewController: CoreDataTableViewController {
             finishSummary()
             performSegue(withIdentifier: "viewSummary", sender: tableView.cellForRow(at: indexPath))
         }
-        else {
-            if !tableView.allowsMultipleSelectionDuringEditing {
-                performSegue(withIdentifier: "categoriesOfSelectedBudget", sender: tableView.cellForRow(at: indexPath))
-            }
+        else if !tableView.allowsMultipleSelectionDuringEditing {
+            performSegue(withIdentifier: "categoriesOfSelectedBudget", sender: tableView.cellForRow(at: indexPath))
         }
     }
 

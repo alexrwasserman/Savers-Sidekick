@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Summary-->
         <scene sceneID="SBw-1e-bj3">
             <objects>
-                <viewController id="A29-IP-HRy" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BudgetLineChartViewController" title="Summary" useStoryboardIdentifierAsRestorationIdentifier="YES" id="A29-IP-HRy" customClass="BudgetLineChartViewController" customModule="Savers_Sidekick" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="aG2-Dd-kUG"/>
                         <viewControllerLayoutGuide type="bottom" id="wHJ-vZ-g89"/>
@@ -21,12 +21,27 @@
                     <view key="view" contentMode="scaleToFill" id="u5m-p9-cdn">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4JF-ft-ybQ" customClass="LineChartView" customModule="Charts">
+                                <rect key="frame" x="16" y="28" width="343" height="639"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="4JF-ft-ybQ" firstAttribute="top" secondItem="aG2-Dd-kUG" secondAttribute="bottom" constant="8" symbolic="YES" id="5Kc-AT-LkM"/>
+                            <constraint firstItem="4JF-ft-ybQ" firstAttribute="bottom" secondItem="wHJ-vZ-g89" secondAttribute="top" id="i7Q-yW-68B"/>
+                            <constraint firstItem="4JF-ft-ybQ" firstAttribute="trailing" secondItem="u5m-p9-cdn" secondAttribute="trailingMargin" id="lVp-Ru-xwG"/>
+                            <constraint firstItem="4JF-ft-ybQ" firstAttribute="leading" secondItem="u5m-p9-cdn" secondAttribute="leadingMargin" id="wM5-fa-nq4"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="lineChartView" destination="4JF-ft-ybQ" id="Ymx-gb-xQY"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2st-YR-iQ4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="934" y="-2283"/>
+            <point key="canvasLocation" x="933.60000000000002" y="-2283.5082458770617"/>
         </scene>
         <!--Summary-->
         <scene sceneID="r85-Jw-5I5">
@@ -41,7 +56,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8GX-aE-ao5" customClass="PieChartView" customModule="Charts">
-                                <rect key="frame" x="16" y="64" width="343" height="559"/>
+                                <rect key="frame" x="16" y="20" width="343" height="647"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
@@ -53,14 +68,7 @@
                             <constraint firstItem="8GX-aE-ao5" firstAttribute="leading" secondItem="H2V-bY-U0Y" secondAttribute="leadingMargin" id="cw5-1M-ggj"/>
                         </constraints>
                     </view>
-                    <toolbarItems>
-                        <barButtonItem style="plain" systemItem="flexibleSpace" id="JQ2-Xa-ue8"/>
-                        <barButtonItem systemItem="action" id="jcy-qf-blN">
-                            <connections>
-                                <action selector="summaryActions:" destination="nnP-qM-nGv" id="R7T-t3-1R4"/>
-                            </connections>
-                        </barButtonItem>
-                    </toolbarItems>
+                    <toolbarItems/>
                     <connections>
                         <outlet property="pieChartView" destination="8GX-aE-ao5" id="BM1-d1-7Qs"/>
                     </connections>
@@ -72,7 +80,16 @@
         <!--Budget Summary-->
         <scene sceneID="P5R-VO-mED">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" title="Budget Summary" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="Yt9-eY-bP0" customClass="BudgetSummaryPageViewController" customModule="Savers_Sidekick" customModuleProvider="target" sceneMemberID="viewController"/>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" title="Budget Summary" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="Yt9-eY-bP0" customClass="BudgetSummaryPageViewController" customModule="Savers_Sidekick" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="Tmr-jg-4lv"/>
+                        <barButtonItem systemItem="action" id="ClZ-gw-wze">
+                            <connections>
+                                <action selector="summaryActions:" destination="Yt9-eY-bP0" id="R4h-fh-Acw"/>
+                            </connections>
+                        </barButtonItem>
+                    </toolbarItems>
+                </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6KT-T9-iP2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1713" y="-1522"/>
@@ -161,7 +178,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <segue destination="gNo-5N-ap2" kind="show" identifier="categoriesOfSelectedBudget" id="3pE-Kx-MSJ"/>
-                        <segue destination="nnP-qM-nGv" kind="show" identifier="viewSummary" id="Rz2-wr-qwb"/>
+                        <segue destination="Yt9-eY-bP0" kind="show" identifier="viewSummary" id="mvy-dw-Fr3"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BFl-R9-4IV" userLabel="First Responder" sceneMemberID="firstResponder"/>

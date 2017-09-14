@@ -25,6 +25,19 @@ class Utilities {
     static var seaGreen = NSUIColor(red: 46/255.0, green: 140/255.0, blue: 87/255.0, alpha: 1.0)
     static var deepPeach = NSUIColor(red: 255/255.0, green: 203/255.0, blue: 164/255.0, alpha: 1.0)
     static var royalBlue = NSUIColor(red: 65/255.0, green: 105/255.0, blue: 225/255.0, alpha: 1.0)
+    
+    static var chartColors: [NSUIColor] = [
+        mediumSeaGreen,
+        dandelion,
+        cinnabar,
+        skyBlue,
+        darkOrange,
+        lightViolet,
+        dijonYellow,
+        seaGreen,
+        deepPeach,
+        royalBlue
+    ]
 }
 
 /// Formatter for displaying currency values
@@ -46,6 +59,24 @@ class CurrencyFormatter: NumberFormatter, IValueFormatter {
     
     func stringForValue(_ value: Double) -> String {
         return self.string(from: value as NSNumber)!
+    }
+}
+
+/// Formatter for displaying dates on the XAxis of the line chart
+class ChartDateFormatter: DateFormatter, IAxisValueFormatter {
+    override init() {
+        super.init()
+        
+        self.dateStyle = .short
+        self.locale = NSLocale.current
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    func stringForValue(_ value: Double, axis: AxisBase?) -> String {
+        return self.string(from: Date(timeIntervalSince1970: value))
     }
 }
 

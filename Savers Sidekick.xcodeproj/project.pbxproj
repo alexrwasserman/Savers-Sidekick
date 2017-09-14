@@ -34,6 +34,7 @@
 		9DA2E5741F39267D002D72BB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DA2E5731F39267D002D72BB /* LaunchScreen.storyboard */; };
 		9DA2E5771F3927E5002D72BB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DA2E5761F3927E5002D72BB /* Main.storyboard */; };
 		9DED2EAD1F34F048000DC3D6 /* DisplayExpenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DED2EAC1F34F048000DC3D6 /* DisplayExpenseViewController.swift */; };
+		9DF54D571F55F720005C61DA /* BudgetLineChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF54D561F55F720005C61DA /* BudgetLineChartViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -79,6 +80,7 @@
 		9DA2E5761F3927E5002D72BB /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		9DA2E5781F3928B3002D72BB /* Savers Sidekick-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Savers Sidekick-Bridging-Header.h"; sourceTree = "<group>"; };
 		9DED2EAC1F34F048000DC3D6 /* DisplayExpenseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayExpenseViewController.swift; sourceTree = "<group>"; };
+		9DF54D561F55F720005C61DA /* BudgetLineChartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BudgetLineChartViewController.swift; sourceTree = "<group>"; };
 		D70941EE5D43FA307EBE6DA4 /* Pods-Savers Sidekick.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Savers Sidekick.release.xcconfig"; path = "Pods/Target Support Files/Pods-Savers Sidekick/Pods-Savers Sidekick.release.xcconfig"; sourceTree = "<group>"; };
 		E61A6CCEA631DAA14D87446E /* Pods-Savers Sidekick.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Savers Sidekick.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Savers Sidekick/Pods-Savers Sidekick.debug.xcconfig"; sourceTree = "<group>"; };
 		E9EF0A2E6337C44907FDD4C8 /* Pods_Savers_Sidekick.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Savers_Sidekick.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -201,6 +203,7 @@
 			children = (
 				9D9EC9641F3D1BD1001CA260 /* BudgetSummaryPageViewController.swift */,
 				9D9EC9661F3D2713001CA260 /* BudgetPieChartViewController.swift */,
+				9DF54D561F55F720005C61DA /* BudgetLineChartViewController.swift */,
 				9D2ADC8D1F4BDC73007A6F55 /* SidekickPieChartRenderer.swift */,
 			);
 			path = "Budget Summary UI";
@@ -347,6 +350,7 @@
 			files = (
 				9D2ADC8E1F4BDC73007A6F55 /* SidekickPieChartRenderer.swift in Sources */,
 				9D9EC9651F3D1BD1001CA260 /* BudgetSummaryPageViewController.swift in Sources */,
+				9DF54D571F55F720005C61DA /* BudgetLineChartViewController.swift in Sources */,
 				9D2308B01F1BC22F001130BB /* Budget+CoreDataProperties.swift in Sources */,
 				9D2308AD1F1BC22F001130BB /* Expense.swift in Sources */,
 				492E7C701D6B8816002DF6B5 /* CreateNewCategoryViewController.swift in Sources */,

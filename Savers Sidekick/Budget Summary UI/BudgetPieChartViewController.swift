@@ -11,19 +11,6 @@ import UIKit
 
 class BudgetPieChartViewController: UIViewController {
     
-    static var pieChartColors: [NSUIColor] = [
-        Utilities.mediumSeaGreen,
-        Utilities.dandelion,
-        Utilities.cinnabar,
-        Utilities.skyBlue,
-        Utilities.darkOrange,
-        Utilities.lightViolet,
-        Utilities.dijonYellow,
-        Utilities.seaGreen,
-        Utilities.deepPeach,
-        Utilities.royalBlue
-    ]
-    
     @IBOutlet weak var pieChartView: PieChartView!
     
     var budget: Budget?
@@ -70,14 +57,14 @@ class BudgetPieChartViewController: UIViewController {
     }
     
     private func loadChartData() {
-        if noDataToDisplay(budget!.categories) {
+        if budget!.noDataToDisplay() {
             pieChartView.data = nil
         }
         else {
             var chartData: [PieChartDataEntry] = []
             
-            for item in budget!.categories {
-                if let category = item as? Category {
+            for category in budget!.categories {
+                if let category = category as? Category {
                     let amountSpent = Double(category.totalExpensesDecimalDescription)!
                     chartData.append(PieChartDataEntry(value: amountSpent, label: category.name))
                 }
@@ -85,46 +72,13 @@ class BudgetPieChartViewController: UIViewController {
             
             let chartDataSet = PieChartDataSet(values: chartData, label: nil)
             
-            chartDataSet.colors = BudgetPieChartViewController.pieChartColors
+            chartDataSet.colors = Utilities.chartColors
             chartDataSet.sliceSpace = 5.0
             chartDataSet.automaticallyDisableSliceSpacing = true
             
             pieChartView.data = PieChartData(dataSet: chartDataSet)
             pieChartView.data?.setValueFormatter(CurrencyFormatter())
         }
-    }
-    
-    private func noDataToDisplay(_ categories: NSSet) -> Bool {
-        if categories.count == 0 {
-            return true
-        }
-        
-        var foundExpense = false
-        for category in categories {
-            if let category = category as? Category {
-                if category.totalExpenses.roundToTwoDecimalPlaces() > 0.00 {
-                    foundExpense = true
-                    break
-                }
-            }
-        }
-        
-        return !foundExpense
-    }
-    
-    @IBAction func summaryActions(_ sender: UIBarButtonItem) {
-        let summaryAlertController = UIAlertController(title: "Summary Actions", message: nil, preferredStyle: .actionSheet)
-        
-        let saveChartAction = UIAlertAction(title: "Save Chart", style: .default) { _ in
-            
-        }
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-        
-        summaryAlertController.addAction(saveChartAction)
-        summaryAlertController.addAction(cancelAction)
-        
-        present(summaryAlertController, animated: true, completion: nil)
     }
     
 }
