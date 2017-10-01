@@ -60,7 +60,7 @@ public class Category: NSManagedObject {
         
         // Update mostRecentExpense for parent budget if necessary
         if mostRecentExpense == parentBudget.mostRecentExpense {
-            let budgetIterator = parentBudget.categories.makeIterator()
+            var budgetIterator = parentBudget.categories.makeIterator()
             var updatedMostRecentExpense = NSDate(timeIntervalSince1970: 0)
             
             var foundAReplacement = false

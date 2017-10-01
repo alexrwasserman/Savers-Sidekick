@@ -65,7 +65,7 @@ public class Expense: NSManagedObject {
         
         // Update mostRecentExpense for parent category and budget if necessary
         if date == parentCategory.mostRecentExpense {
-            let categoryIterator = parentCategory.expenses.makeIterator()
+            var categoryIterator = parentCategory.expenses.makeIterator()
             var mostRecentExpense = NSDate(timeIntervalSinceReferenceDate: 0)
             
             var foundAReplacement = false
@@ -80,7 +80,7 @@ public class Expense: NSManagedObject {
             parentCategory.mostRecentExpense = foundAReplacement ? mostRecentExpense : nil
             
             if date == parentCategory.parentBudget.mostRecentExpense {
-                let budgetIterator = parentCategory.parentBudget.categories.makeIterator()
+                var budgetIterator = parentCategory.parentBudget.categories.makeIterator()
                 mostRecentExpense = NSDate(timeIntervalSinceReferenceDate: 0)
                 
                 foundAReplacement = false
