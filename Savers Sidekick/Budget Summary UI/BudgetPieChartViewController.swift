@@ -39,9 +39,9 @@ class BudgetPieChartViewController: UIViewController {
         paragraphStyle.alignment = .center
         
         let centerTextAttributes = [
-            NSForegroundColorAttributeName: Utilities.seaGreen,
-            NSFontAttributeName: UIFont.systemFont(ofSize: 18),
-            NSParagraphStyleAttributeName: paragraphStyle
+            NSAttributedStringKey.foregroundColor: Utilities.seaGreen,
+            NSAttributedStringKey.font: UIFont.systemFont(ofSize: 18),
+            NSAttributedStringKey.paragraphStyle: paragraphStyle
         ]
         
         centerText.setAttributes(centerTextAttributes, range: NSMakeRange(0, (plainText as NSString).length))

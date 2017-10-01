@@ -206,7 +206,7 @@ class SidekickPieChartRenderer: PieChartRenderer {
                             text: valueText,
                             point: labelPoint,
                             align: align,
-                            attributes: [NSFontAttributeName: valueFont, NSForegroundColorAttributeName: valueTextColor]
+                            attributes: [NSAttributedStringKey.font.rawValue: valueFont, NSAttributedStringKey.foregroundColor.rawValue: valueTextColor]
                         )
                         
                         if j < data.entryCount && pe?.label != nil
@@ -217,8 +217,8 @@ class SidekickPieChartRenderer: PieChartRenderer {
                                 point: CGPoint(x: labelPoint.x, y: labelPoint.y + lineHeight),
                                 align: align,
                                 attributes: [
-                                    NSFontAttributeName: entryLabelFont ?? valueFont,
-                                    NSForegroundColorAttributeName: entryLabelColor ?? valueTextColor]
+                                    NSAttributedStringKey.font.rawValue: entryLabelFont ?? valueFont,
+                                    NSAttributedStringKey.foregroundColor.rawValue: entryLabelColor ?? valueTextColor]
                             )
                         }
                     }
@@ -232,8 +232,8 @@ class SidekickPieChartRenderer: PieChartRenderer {
                                 point: CGPoint(x: labelPoint.x, y: labelPoint.y + lineHeight / 2.0),
                                 align: align,
                                 attributes: [
-                                    NSFontAttributeName: entryLabelFont ?? valueFont,
-                                    NSForegroundColorAttributeName: entryLabelColor ?? valueTextColor]
+                                    NSAttributedStringKey.font.rawValue: entryLabelFont ?? valueFont,
+                                    NSAttributedStringKey.foregroundColor.rawValue: entryLabelColor ?? valueTextColor]
                             )
                         }
                     }
@@ -244,7 +244,7 @@ class SidekickPieChartRenderer: PieChartRenderer {
                             text: valueText,
                             point: CGPoint(x: labelPoint.x, y: labelPoint.y + lineHeight / 2.0),
                             align: align,
-                            attributes: [NSFontAttributeName: valueFont, NSForegroundColorAttributeName: valueTextColor]
+                            attributes: [NSAttributedStringKey.font.rawValue: valueFont, NSAttributedStringKey.foregroundColor.rawValue: valueTextColor]
                         )
                     }
                 }
@@ -262,7 +262,7 @@ class SidekickPieChartRenderer: PieChartRenderer {
                             text: valueText,
                             point: CGPoint(x: x, y: y),
                             align: .center,
-                            attributes: [NSFontAttributeName: valueFont, NSForegroundColorAttributeName: valueTextColor]
+                            attributes: [NSAttributedStringKey.font.rawValue: valueFont, NSAttributedStringKey.foregroundColor.rawValue: valueTextColor]
                         )
                         
                         if j < data.entryCount && pe?.label != nil
@@ -273,8 +273,8 @@ class SidekickPieChartRenderer: PieChartRenderer {
                                 point: CGPoint(x: x, y: y + lineHeight),
                                 align: .center,
                                 attributes: [
-                                    NSFontAttributeName: entryLabelFont ?? valueFont,
-                                    NSForegroundColorAttributeName: entryLabelColor ?? valueTextColor]
+                                    NSAttributedStringKey.font.rawValue: entryLabelFont ?? valueFont,
+                                    NSAttributedStringKey.foregroundColor.rawValue: entryLabelColor ?? valueTextColor]
                             )
                         }
                     }
@@ -288,8 +288,8 @@ class SidekickPieChartRenderer: PieChartRenderer {
                                 point: CGPoint(x: x, y: y + lineHeight / 2.0),
                                 align: .center,
                                 attributes: [
-                                    NSFontAttributeName: entryLabelFont ?? valueFont,
-                                    NSForegroundColorAttributeName: entryLabelColor ?? valueTextColor]
+                                    NSAttributedStringKey.font.rawValue: entryLabelFont ?? valueFont,
+                                    NSAttributedStringKey.foregroundColor.rawValue: entryLabelColor ?? valueTextColor]
                             )
                         }
                     }
@@ -300,7 +300,7 @@ class SidekickPieChartRenderer: PieChartRenderer {
                             text: valueText,
                             point: CGPoint(x: x, y: y + lineHeight / 2.0),
                             align: .center,
-                            attributes: [NSFontAttributeName: valueFont, NSForegroundColorAttributeName: valueTextColor]
+                            attributes: [NSAttributedStringKey.font.rawValue: valueFont, NSAttributedStringKey.foregroundColor.rawValue: valueTextColor]
                         )
                     }
                 }
