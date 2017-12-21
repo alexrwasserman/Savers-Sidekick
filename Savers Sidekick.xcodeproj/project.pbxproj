@@ -98,7 +98,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		493B2A471D73CDDA00179ED3 /* Expense UI */ = {
+		493B2A471D73CDDA00179ED3 /* Expense */ = {
 			isa = PBXGroup;
 			children = (
 				493B2A411D73BF2100179ED3 /* ExpensesTableViewController.swift */,
@@ -106,27 +106,27 @@
 				493B2A451D73C17F00179ED3 /* ExpenseTableViewCell.swift */,
 				9DED2EAC1F34F048000DC3D6 /* DisplayExpenseViewController.swift */,
 			);
-			path = "Expense UI";
+			path = Expense;
 			sourceTree = "<group>";
 		};
-		493B2A481D73CE3E00179ED3 /* Budget UI */ = {
+		493B2A481D73CE3E00179ED3 /* Budget */ = {
 			isa = PBXGroup;
 			children = (
 				4940019C1D624C2D00E21ADC /* BudgetsTableViewController.swift */,
 				494001A01D626E9100E21ADC /* CreateNewBudgetViewController.swift */,
 				4940019E1D6252D900E21ADC /* BudgetTableViewCell.swift */,
 			);
-			path = "Budget UI";
+			path = Budget;
 			sourceTree = "<group>";
 		};
-		493B2A491D73CE4B00179ED3 /* Category UI */ = {
+		493B2A491D73CE4B00179ED3 /* Category */ = {
 			isa = PBXGroup;
 			children = (
 				492C65511D6969B3007D42BE /* CategoriesTableViewController.swift */,
 				492E7C6F1D6B8816002DF6B5 /* CreateNewCategoryViewController.swift */,
 				492C65531D696C0E007D42BE /* CategoryTableViewCell.swift */,
 			);
-			path = "Category UI";
+			path = Category;
 			sourceTree = "<group>";
 		};
 		4940016D1D623A2A00E21ADC = {
@@ -152,10 +152,10 @@
 			children = (
 				4940018E1D623AD200E21ADC /* Supporting Files */,
 				4940019B1D62463700E21ADC /* Core Data */,
-				493B2A481D73CE3E00179ED3 /* Budget UI */,
-				493B2A491D73CE4B00179ED3 /* Category UI */,
-				493B2A471D73CDDA00179ED3 /* Expense UI */,
-				9D9EC9611F3D1AEF001CA260 /* Budget Summary UI */,
+				493B2A481D73CE3E00179ED3 /* Budget */,
+				493B2A491D73CE4B00179ED3 /* Category */,
+				493B2A471D73CDDA00179ED3 /* Expense */,
+				9D9EC9611F3D1AEF001CA260 /* Budget Summary */,
 			);
 			path = "Savers Sidekick";
 			sourceTree = "<group>";
@@ -198,7 +198,7 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		9D9EC9611F3D1AEF001CA260 /* Budget Summary UI */ = {
+		9D9EC9611F3D1AEF001CA260 /* Budget Summary */ = {
 			isa = PBXGroup;
 			children = (
 				9D9EC9641F3D1BD1001CA260 /* BudgetSummaryPageViewController.swift */,
@@ -206,7 +206,7 @@
 				9DF54D561F55F720005C61DA /* BudgetLineChartViewController.swift */,
 				9D2ADC8D1F4BDC73007A6F55 /* SidekickPieChartRenderer.swift */,
 			);
-			path = "Budget Summary UI";
+			path = "Budget Summary";
 			sourceTree = "<group>";
 		};
 		ABCD7E842E915BBDBF629059 /* Frameworks */ = {
